@@ -1,4 +1,5 @@
 
+import { useNavigate } from 'react-router-dom';
 import trialNewsImage from '../assets/news.jpeg';
 import userpng from '../assets/user.png';
 
@@ -10,9 +11,11 @@ function PostCard({
     likesCount,
     reads,
     title,
-    coverImage
+    coverImage,
 
 }) {
+
+    const navigate = useNavigate();
 
     return (
         <>
@@ -22,7 +25,7 @@ function PostCard({
             >
                 <div
                     id="author-info"
-                    className="flex justify-start bg-white self-start"
+                    className="flex justify-start self-start bg-transparent"
                     data-user_id={authorDetails._id}
                 >
                     <div className="size-14 ring-blue-600 flex justify-center items-center overflow-hidden">
@@ -42,7 +45,11 @@ function PostCard({
                     </div>
                 </div>
                 <hr />
-                <div id="post-field" data-post_id={_id} className="w-full">
+                <div 
+                    id="post-field" 
+                    data-post_id={_id} className="w-full"
+                    onClick={() => navigate(`/post/${_id}`)}
+                    >
                     <div className="ml-0 w-full">
                         <h1
                             role="heading"

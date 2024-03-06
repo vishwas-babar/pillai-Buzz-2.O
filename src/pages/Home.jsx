@@ -1,7 +1,10 @@
-import PostCard from "./PostCard";
+import PostCard from "../components/PostCard";
 
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import PostSkeleton from "../components/PostSkeleton";
+import {ErrorComp} from "../components/index.js";
+
 
 
 function Home(params) {
@@ -9,7 +12,9 @@ function Home(params) {
     const [page, setPage] = useState(0);
     const [postsPerPage, setPostsPerPage] = useState(5);
     const [postsForHomePage, setPostForHomePage] = useState([]);
+    const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         loadMorePostForHomePage();
@@ -18,7 +23,8 @@ function Home(params) {
     function loadMorePostForHomePage() {
 
         console.log('getting the data from backend')
-        axios.get(`http://127.0.0.1:8000/api/post/load?page=${page}&postsPerPage=${postsPerPage}`)
+        setError(false);
+        axios.get(`api/post/load?page=${page}&postsPerPage=${postsPerPage}`)
             .then((res) => {
                 console.log(res.data);
                 setPage(page + 1);
@@ -40,13 +46,23 @@ function Home(params) {
             .catch((error) => {
                 console.log('error occured');
                 console.log(error);
+                setError(error)
             })
     }
 
 
-    if (loading) {
-        return <div className=" mt-44 bg-red text-white">Loading...</div>
+    // if (loading) {
+    //     return <div className=" h-screen w-full items-center justify-center">Loading...</div>
+    // }
+
+    if (error) {
+        return (
+            <div className=" h-screen w-full flex items-center justify-center">
+                <ErrorComp statusCode={500} />
+            </div>
+        )
     }
+
 
     return (
         <>
@@ -54,10 +70,16 @@ function Home(params) {
     smm:w-[70%] sm:w-[60%] md:w-[55%] lg:w-[40%]  px-6 ">
                 <div id="post-container" className=" h-fit rounded-sm mx-auto flex flex-col items-center gap-4
         w-full pt-4">
-                
-                    {postsForHomePage.map((post) => {
 
-                        return <PostCard
+                    {loading ? (
+                        <div className=" w-full h-fit">
+                            <PostSkeleton />
+                            <PostSkeleton />
+                            <PostSkeleton />
+                            <PostSkeleton />
+                        </div>
+                    ) : postsForHomePage.map((post) => (
+                        <PostCard
                             key={post._id}
                             authorDetails={post.authorDetails}
                             _id={post._id}
@@ -67,7 +89,8 @@ function Home(params) {
                             reads={post.reads}
                             title={post.title}
                         />
-                    })}
+                    )
+                    )}
                 </div>
             </main>
         </>

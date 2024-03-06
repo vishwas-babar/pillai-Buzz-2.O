@@ -1,4 +1,4 @@
-import pillaibuzzlogo from '../assets/Pillaipo.png';
+import pillaibuzzlogo from '../../assets/Pillaipo.png';
 import { Link, NavLink } from 'react-router-dom';
 
 function SideNav({ viewStatus, closeSideNav }) {

@@ -1,6 +1,6 @@
 
 
-function LikeCmtShrBkmr(params) {
+function LikeCmtShrBkmr({ postContent, likesCount }) {
 
 
     return (
@@ -10,7 +10,7 @@ function LikeCmtShrBkmr(params) {
                 className="size-10 rounded-md cursor-pointer  flex items-center justify-center transition-all duration-300 ease-in-out active:bg-custom-primary "
             >
                 <i className="bx bx-like text-[25px]" />
-                <span />
+                <span> {likesCount} </span>
             </a>
             <a
                 id="comment-btn"

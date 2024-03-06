@@ -1,5 +1,5 @@
-import Pillaipo from '../assets/Pillaipo.png';
-import userpng from '../assets/user.png';
+import Pillaipo from '../../assets/Pillaipo.png';
+import userpng from '../../assets/user.png';
 import { Link, NavLink } from 'react-router-dom';
 import ProfileShowModal from './ProfileShowModal';
 import SideNav from './SideNav';
@@ -10,27 +10,27 @@ function TopNavBar({
 
 }) {
 
-    const [profileModalHiddenStatus, setProfileModalHiddenStatus] = useState('hidden');
+    const [isProfileModalOpen, setisProfileModalOpen] = useState(false);
     const [overlayStatus, setOverlayStatus] = useState('hidden');
 
     function showProfileModal() {
         const profile_modal = document.querySelector('#profile-modal');
         const overlay = document.querySelector('#overlay-for-profilemodal')
-        setProfileModalHiddenStatus('flex');
+        setisProfileModalOpen(!isProfileModalOpen);
 
 
         if (window.innerWidth <= 600) {
             setOverlayStatus('flex');
 
             overlay.addEventListener('click', () => {
-                setProfileModalHiddenStatus('hidden')
+                setisProfileModalOpen(false)
                 setOverlayStatus('hidden');
             })
         } else {
 
             // set timeout to close the modal, if cursor is not hovered on modal then close it
             let modalTimeOut = setTimeout(() => {
-                setProfileModalHiddenStatus('hidden');
+                setisProfileModalOpen(false);
             }, 3000);
 
             // if cursor is hovered on modal then clear the timeout
@@ -41,7 +41,7 @@ function TopNavBar({
             // if cursor is leaved from modal then set the timeout again for 1s and close it
             profile_modal.addEventListener('mouseleave', () => {
                 modalTimeOut = setTimeout(() => {
-                    setProfileModalHiddenStatus('hidden');
+                    setisProfileModalOpen(false);
                     setOverlayStatus('hidden');
                 }, 1000);
             });
@@ -143,7 +143,7 @@ function TopNavBar({
                 </div>
             </nav>
 
-            <ProfileShowModal profileModalHiddenStatus={profileModalHiddenStatus} />
+            <ProfileShowModal isProfileModalOpen={isProfileModalOpen} />
             <div id="overlay-for-profilemodal" className={`w-full h-full absolute bg-black opacity-50 z-10 ${overlayStatus}`}></div>
 
             <SideNav viewStatus={viewStatus} closeSideNav={closeSideNav} />

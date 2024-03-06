@@ -1,13 +1,25 @@
-import userpng from '../assets/user.png';
+import { motion } from 'framer-motion';
+import userpng from '../../assets/user.png';
+import { useState } from 'react';
 
-function ProfileShowModal({ profileModalHiddenStatus }) {
+
+function ProfileShowModal({ isProfileModalOpen }) {
 
 
+    const variants = {
+        open: { x: 0, scale: 1, borderRadius: "6px", y: 0, opacity: 1 },
+        closed: { x: 70, scale: 0.2, borderRadius: "100%", y: -200, opacity: 1 },
+      };
     return (
         <>
-            <div
+            <motion.div 
+            // initial="closed"
+            // animate={isProfileModalOpen ? "open" : "closed"}
+            // exit={"closed"}
+            // variants={variants}
+            // transition={{ duration: 0.5 }}
                 id="profile-modal"
-                className={profileModalHiddenStatus + " w-60 h-fit overflow-hidden rounded-md absolute right-5 top-24 bg-white z-20 shadow-custom-shadow-2 flex flex-col"}
+                className={(isProfileModalOpen ? "flex " : "hidden ") + "  w-60 h-fit overflow-hidden rounded-md absolute right-5 top-24 bg-white z-20 shadow-custom-shadow-2 flex flex-col"}
             >
                 <a
                     href="/myprofile"
@@ -48,7 +60,7 @@ function ProfileShowModal({ profileModalHiddenStatus }) {
                         <span>Sign out</span>
                     </a>
                 </div>
-            </div>
+            </motion.div>
 
         </>
     )
