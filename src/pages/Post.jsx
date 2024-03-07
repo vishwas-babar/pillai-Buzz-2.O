@@ -5,8 +5,9 @@ import axios from "axios";
 import { ErrorComp } from '../components/index.js'
 
 
-function Post(params) {
+function Post() {
 
+    
     const { id: postId } = useParams();
     // const { data: post, isLoading, error } = useCustomQuery(`post/${postId}`);
 

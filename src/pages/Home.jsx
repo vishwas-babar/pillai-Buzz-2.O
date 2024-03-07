@@ -1,59 +1,51 @@
 import PostCard from "../components/PostCard";
 
-import { useEffect, useState } from "react";
-import axios from 'axios';
+import { useEffect, useState,  } from "react";
 import PostSkeleton from "../components/PostSkeleton";
-import {ErrorComp} from "../components/index.js";
-
+import { ErrorComp } from "../components/index.js";
+import postService from "../services/PostService.js";
+import { Button } from '../components/index.js';
+import { useDispatch, useSelector } from "react-redux";
+import { addArrOfPosts, removeAllPosts } from '../store/PostsSlice.js';
 
 
 function Home(params) {
 
-    const [page, setPage] = useState(0);
-    const [postsPerPage, setPostsPerPage] = useState(5);
-    const [postsForHomePage, setPostForHomePage] = useState([]);
+    const [page, setPage] = useState(1);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
 
 
+    const dispatch = useDispatch();
+
+    const { posts } = useSelector(state => state.post)
+
+
     useEffect(() => {
-        loadMorePostForHomePage();
-    }, [])
+        dispatch(removeAllPosts()) // :todo
+        setLoading(true)
+        setTimeout(() => {
+            loadMorePostForHomePage();
+        }, 2000);
+    }, [page])
 
     function loadMorePostForHomePage() {
 
-        console.log('getting the data from backend')
         setError(false);
-        axios.get(`api/post/load?page=${page}&postsPerPage=${postsPerPage}`)
-            .then((res) => {
-                console.log(res.data);
-                setPage(page + 1);
-                const posts = res.data.posts;
-                setPostForHomePage(posts);
-                setLoading(false);
-                // removePostLoadingSkeleton();
-
-
-                // add post data to page
-                // posts.forEach(post => {
-                //     // addPostToPage(post);
-                // });
-
-                // set the event listeners to all profile field and post field 
-                // setEventListenersToPosts(document.querySelectorAll('#post'));
-
+        setLoading(true)
+        postService.getPostForHomePage(page)
+            .then(res => {
+                console.log(res);
+                // setPage(page + 1) // i think its wrong review it later
+                setLoading(false)
+                dispatch(addArrOfPosts(res.posts))
             })
-            .catch((error) => {
-                console.log('error occured');
-                console.log(error);
-                setError(error)
+            .catch(error => {
+                console.log(error)
+                setError(true)
             })
     }
 
-
-    // if (loading) {
-    //     return <div className=" h-screen w-full items-center justify-center">Loading...</div>
-    // }
 
     if (error) {
         return (
@@ -71,27 +63,39 @@ function Home(params) {
                 <div id="post-container" className=" h-fit rounded-sm mx-auto flex flex-col items-center gap-4
         w-full pt-4">
 
+                    {posts &&
+                        posts.map((post) => (
+                            <PostCard
+                                key={post._id}
+                                authorDetails={post.authorDetails}
+                                _id={post._id}
+                                commentsCount={post.commentsCount}
+                                likesCount={post.likesCount}
+                                coverImage={post.coverImage}
+                                reads={post.reads}
+                                title={post.title}
+                            />
+                        ))}
+
+
                     {loading ? (
                         <div className=" w-full h-fit">
                             <PostSkeleton />
                             <PostSkeleton />
                             <PostSkeleton />
-                            <PostSkeleton />
                         </div>
-                    ) : postsForHomePage.map((post) => (
-                        <PostCard
-                            key={post._id}
-                            authorDetails={post.authorDetails}
-                            _id={post._id}
-                            commentsCount={post.commentsCount}
-                            likesCount={post.likesCount}
-                            coverImage={post.coverImage}
-                            reads={post.reads}
-                            title={post.title}
-                        />
-                    )
-                    )}
+                    ) : null}
+
+
                 </div>
+                <Button
+                    type="button"
+                    className=" mb-20 sm:mb-12"
+                    onClick={() => {
+                        setPage(page + 1)
+                    }}
+                    children="load more"
+                />
             </main>
         </>
     )

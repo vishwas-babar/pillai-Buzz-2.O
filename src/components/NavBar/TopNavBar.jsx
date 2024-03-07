@@ -4,14 +4,15 @@ import { Link, NavLink } from 'react-router-dom';
 import ProfileShowModal from './ProfileShowModal';
 import SideNav from './SideNav';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 
-function TopNavBar({
 
-}) {
+function TopNavBar() {
 
     const [isProfileModalOpen, setisProfileModalOpen] = useState(false);
     const [overlayStatus, setOverlayStatus] = useState('hidden');
+    const userData = useSelector(state => state.user.userData);
 
     function showProfileModal() {
         const profile_modal = document.querySelector('#profile-modal');

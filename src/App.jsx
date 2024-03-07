@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Layout from './components/Layout.jsx'
 import {
   createBrowserRouter,
@@ -8,8 +8,10 @@ import {
 } from 'react-router-dom';
 
 import { Home, Bookmarks, TopNavBar, Post, Profile, Login } from './components/index.js';
-import SideNav from './components/NavBar/SideNav.jsx';
-import UserContextProvider from './context/UserContextProvider.jsx';
+import { removeAllPosts } from './store/PostsSlice.js';
+import { useDispatch } from 'react-redux';
+import userService from './services/UserService.js';
+import { loginUser, getUserStart, getUserFailure, getUserSuccess } from './store/userSlice.js'
 
 
 const router = createBrowserRouter(
@@ -19,7 +21,7 @@ const router = createBrowserRouter(
         <Route path='/' element={<Home />} />
         <Route path='/bookmarks' element={<Bookmarks />} />
         <Route path='/post' element={<Post />} />
-        <Route path='/myprofile' element={<Profile />} />
+        <Route path='/user/:user_id' element={<Profile />} />
         <Route path='/post/:id' element={<Post />} />
       </Route>
       <Route path='/vishwas' element={<TopNavBar />} />
@@ -31,11 +33,28 @@ const router = createBrowserRouter(
 
 function App() {
 
+  const dispatch = useDispatch();
+  dispatch(removeAllPosts())
+
+  useEffect(() => {
+    dispatch(getUserStart)
+    userService.getCurrentUser()
+      .then(res => {
+        dispatch(loginUser(res.data?.data))
+        dispatch(getUserSuccess())
+      })
+      .catch(error => {
+        console.log('error occured, ', error)
+        dispatch(getUserFailure(error.message))
+      })
+  }, [])
+
+
   return (
     <>
-      <UserContextProvider>
+  
         <RouterProvider router={router} />
-      </UserContextProvider>
+     
     </>
   )
 }

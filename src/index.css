@@ -182,3 +182,29 @@ body {
 #comment-like-btn:active .scale-on-click {
   transform: scale(1.2);
 }
+
+.inner-form-container {
+  @apply relative h-full w-full transition-transform duration-[1s] bg-[white] shadow-[0px_0px_1px_1px] rounded-[5px];
+  transform-style: preserve-3d;
+  transform: rotateY(180deg);
+}
+
+.signup-form-container {
+  @apply absolute h-full w-full p-2.5;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* login form side */
+.login-form-container {
+  @apply absolute h-full w-full p-2.5;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  perspective: 1000px;
+}
+
+#pillai-buzz-logo-font{
+  font-family: "Rubik Doodle Shadow", system-ui;
+}

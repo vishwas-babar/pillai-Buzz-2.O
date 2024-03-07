@@ -27,6 +27,7 @@ function PostCard({
                     id="author-info"
                     className="flex justify-start self-start bg-transparent"
                     data-user_id={authorDetails._id}
+                    onClick={() => navigate(`/user/${authorDetails._id}`)}
                 >
                     <div className="size-14 ring-blue-600 flex justify-center items-center overflow-hidden">
                         <img

@@ -9,7 +9,9 @@ import Profile from "../pages/profile.jsx";
 import PostReadComp from "./post compo/PostReadComp.jsx";
 import LikeCmtShrBkmr from "./post compo/LikeCmtShrBkmr.jsx";
 import ErrorComp from './Error.jsx'
-
+import Button from "./Button.jsx";
+import ProfileCard from "./ProfileCard.jsx";
+import ProfileSkeleton from "./ProfileSkeleton.jsx";
 
 export {
     Layout,
@@ -23,5 +25,7 @@ export {
     PostReadComp,
     LikeCmtShrBkmr,
     ErrorComp,
-    
+    Button,
+    ProfileCard,
+    ProfileSkeleton,
 }
