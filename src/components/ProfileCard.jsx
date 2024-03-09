@@ -23,13 +23,13 @@ function ProfileCard({ name, userId, profilePhoto, _id, role, followersCount, fo
                             id="user-name"
                             className="text-[22px] sm:mt-0 font-serif leading-4 mb-0 text-nowrap"
                         >{name}</h2>
-                        <span id="user-id" className="text-[14px] mt-0 text-nowrap" >{userId}</span>
+                        <span id="user-id" className="text-[14px] mt-0 text-nowrap" >@{userId}</span>
                         <p id="role" className="text-[18px] leading-7">
                             {role}
                         </p>
                         <div className="flex gap-5 mt-2 sm:mt-11">
-                            <p className="">{followersCount} Followers</p>
-                            <p>{followingCount} Following</p>
+                            <p className=" text-nowrap">{followersCount} Followers</p>
+                            <p className=' text-nowrap'>{followingCount} Following</p>
                         </div>
                     </div>
                     <div>

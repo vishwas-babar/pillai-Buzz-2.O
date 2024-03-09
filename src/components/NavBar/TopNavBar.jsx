@@ -113,14 +113,14 @@ function TopNavBar() {
                     >
                         <i className="bx bx-search text-[25px]" />
                     </div>
-                    <a
+                    <Link
                         className="btn-primary flex items-center justify-center gap-1"
                         id="write-btn"
-                        href="/editor"
+                        to="/create"
                     >
                         <i className="bx bx-edit-alt text-[20px]" />
                         <p>Write</p>
-                    </a>
+                    </Link>
                     <div
                         id="dark-mode-ic"
                         className="flex items-center cursor-pointer justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1"

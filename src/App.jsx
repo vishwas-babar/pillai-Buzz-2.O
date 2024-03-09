@@ -8,10 +8,12 @@ import {
 } from 'react-router-dom';
 
 import { Home, Bookmarks, TopNavBar, Post, Profile, Login } from './components/index.js';
+import { PostEditor } from './pages/index.js'
 import { removeAllPosts } from './store/PostsSlice.js';
 import { useDispatch } from 'react-redux';
 import userService from './services/UserService.js';
 import { loginUser, getUserStart, getUserFailure, getUserSuccess } from './store/userSlice.js'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 
 const router = createBrowserRouter(
@@ -21,6 +23,7 @@ const router = createBrowserRouter(
         <Route path='/' element={<Home />} />
         <Route path='/bookmarks' element={<Bookmarks />} />
         <Route path='/post' element={<Post />} />
+        <Route path='/create' element={<PostEditor />} />
         <Route path='/user/:user_id' element={<Profile />} />
         <Route path='/post/:id' element={<Post />} />
       </Route>
@@ -30,6 +33,7 @@ const router = createBrowserRouter(
   )
 )
 
+const queryClient = new QueryClient();
 
 function App() {
 
@@ -52,8 +56,9 @@ function App() {
 
   return (
     <>
-  
+      <QueryClientProvider client={queryClient} >
         <RouterProvider router={router} />
+      </QueryClientProvider>
      
     </>
   )

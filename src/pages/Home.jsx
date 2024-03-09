@@ -14,6 +14,7 @@ function Home(params) {
     const [page, setPage] = useState(1);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [isEnd, setIsEnd] = useState(false); 
 
 
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function Home(params) {
 
 
     useEffect(() => {
-        dispatch(removeAllPosts()) // :todo
+        // dispatch(removeAllPosts()) // :todo
         setLoading(true)
         setTimeout(() => {
             loadMorePostForHomePage();
@@ -36,9 +37,12 @@ function Home(params) {
         postService.getPostForHomePage(page)
             .then(res => {
                 console.log(res);
-                // setPage(page + 1) // i think its wrong review it later
                 setLoading(false)
                 dispatch(addArrOfPosts(res.posts))
+
+                if (res.posts?.length === 0) {
+                    setIsEnd(true);
+                }
             })
             .catch(error => {
                 console.log(error)
@@ -88,14 +92,19 @@ function Home(params) {
 
 
                 </div>
-                <Button
+                {isEnd ? (
+                    <div className="mb-20 mt-4 sm:mb-8 w-full flex items-center justify-center">
+                    <p className="text-lg text-center w-2/3" >Finished scrolling? Now, go out and create your own story</p>
+                  </div>
+                  
+                ) : (<Button
                     type="button"
                     className=" mb-20 sm:mb-12"
                     onClick={() => {
                         setPage(page + 1)
                     }}
                     children="load more"
-                />
+                />)}
             </main>
         </>
     )

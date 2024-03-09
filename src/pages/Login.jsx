@@ -3,11 +3,14 @@ import { useForm } from "react-hook-form";
 import userDesignPng from "../assets/user_design.png"
 import Button from "../components/Button.jsx";
 import userService from "../services/UserService.js";
+import { useNavigate } from "react-router-dom";
+
 
 
 function Login() {
 
     const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
 
     const loginSubmit = async (data) => {
         try {
@@ -15,6 +18,7 @@ function Login() {
             const response = await userService.loginUserAccount(data)
             console.log('this is status code');
             console.log(response.status)
+            navigate('/')
         } catch (error) {
             console.log('this is status code');
             console.log(error.response.status)

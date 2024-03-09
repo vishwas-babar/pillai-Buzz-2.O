@@ -7,11 +7,15 @@ import Post from "../pages/Post.jsx";
 import Login from "../pages/Login.jsx";
 import Profile from "../pages/profile.jsx";
 import PostReadComp from "./post compo/PostReadComp.jsx";
+import PostCard from "./PostCard.jsx";
 import LikeCmtShrBkmr from "./post compo/LikeCmtShrBkmr.jsx";
 import ErrorComp from './Error.jsx'
 import Button from "./Button.jsx";
 import ProfileCard from "./ProfileCard.jsx";
 import ProfileSkeleton from "./ProfileSkeleton.jsx";
+import TmceEditor from "./TmceEditor.jsx";
+import PostForm from "./PostForm.jsx";
+
 
 export {
     Layout,
@@ -28,4 +32,7 @@ export {
     Button,
     ProfileCard,
     ProfileSkeleton,
+    PostCard,
+    TmceEditor,
+    PostForm
 }

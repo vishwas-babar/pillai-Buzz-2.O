@@ -34,10 +34,10 @@ class UserService {
 
     getUserDetails = async (_id) => {
         try {
-            const res = await axios.get(`/api/user/${_id}`)
+            const res = await axios.get(`/api/user/${_id}/get-details`)
 
             if (res) {
-                console.log(data)
+                console.log(res.data)
                 return res;
             }
         } catch (error) {
