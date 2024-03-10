@@ -34,5 +34,5 @@ export {
     ProfileSkeleton,
     PostCard,
     TmceEditor,
-    PostForm
+    PostForm,
 }

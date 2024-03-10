@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 
 import { Home, Bookmarks, TopNavBar, Post, Profile, Login } from './components/index.js';
-import { PostEditor } from './pages/index.js'
+import { PostEditor, EditPost } from './pages/index.js'
 import { removeAllPosts } from './store/PostsSlice.js';
 import { useDispatch } from 'react-redux';
 import userService from './services/UserService.js';
@@ -26,6 +26,7 @@ const router = createBrowserRouter(
         <Route path='/create' element={<PostEditor />} />
         <Route path='/user/:user_id' element={<Profile />} />
         <Route path='/post/:id' element={<Post />} />
+        <Route path='/edit-post/:id' element={<EditPost />} />
       </Route>
       <Route path='/vishwas' element={<TopNavBar />} />
       <Route path='/login' element={<Login />} />

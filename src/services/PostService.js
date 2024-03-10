@@ -1,11 +1,11 @@
 import axios from "axios";
 
 
-class PostService{
+class PostService {
 
 
     // add your all fetching methods here for
-    getPostForHomePage = async (page, postsPerPage=5) => {
+    getPostForHomePage = async (page, postsPerPage = 5) => {
         try {
             const response = await axios.get(`api/post/load?page=${page}&postsPerPage=${postsPerPage}`)
             if (response) {
@@ -18,11 +18,17 @@ class PostService{
 
     getSinglePost = async (postId) => {
         try {
+            console.log("getting the single post")
             const response = await axios.get(`/api/post/${postId}`)
-            if (response) {
+            console.log(response)
+            if (response && response.data)  {
                 return response.data;
+            }else{
+                throw new Error("response data is undefined")
             }
+
         } catch (error) {
+            console.error(error)
             throw error;
         }
     }
@@ -61,10 +67,56 @@ class PostService{
         }
     }
 
+    updateThePost = async (id, { title, content, coverImage }) => {
+        console.log("updating the post...")
+        console.log(content, coverImage)
+
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("content", content);
+        formData.append("coverImage", coverImage[0] || coverImage)
+
+        try {
+            const res = await axios.post(`/api/post/update/${id}`, formData, {
+                headers: {
+                    'Content-Type': "multipart/form-data"
+                }
+            })
+
+            if (res.data) {
+                return res.data
+            }
+        } catch (error) {
+            console.log("failed to update post!", error)
+            throw error;
+        }
+    }
+
     // uploadFileToCloudinary = async (coverImage) => {
     //     console.log(coverImage)
     //     const res = await axios.post('/api/images/add')
     // }
+
+    uploadSingleImageToClodianry = async (blobInfo) => {
+        const formData = new FormData();
+
+        formData.append('upload', blobInfo.blob(), blobInfo.filename())
+
+        try {
+            const res = await axios.post('/api/post/create/uploadimage', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            if (res) {
+                console.log(res)
+                return res.data;
+            }
+        } catch (error) {
+            console.log("failed to upload the iamge to cloudinary, ", error)
+            throw error
+        }
+    }
 }
 
 const postService = new PostService();

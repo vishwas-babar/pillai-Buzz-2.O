@@ -6,6 +6,8 @@ import TmceEditor from './TmceEditor';
 import Button from './Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import HTMLReactParser from 'html-react-parser';
+
 
 
 function PostForm({ post }) {
@@ -13,26 +15,41 @@ function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, getValues, control } = useForm({
         defaultValues: {
             title: post?.title || "",
-            content: post?.title || "",
+            content: post?.discription || "",
+            coverImage: post?.coverImage || "",
         }
     })
 
     const [image, setImage] = useState("")
-    const [imageBlob, setImageBlob] = useState("")
+    const [imageBlob, setImageBlob] = useState(post?.coverImage)
     const navigate = useNavigate();
 
     const submit = async (data) => {
-    
-        try {
-            const res = await postService.createNewPost(data)
-            console.log(res)
-            if (res) {
-                navigate(`/post/${res.postId}`)
+
+        if (post) {
+            try {
+                const res = await postService.updateThePost(post._id, data)
+                console.log(res._id)
+                if(res) {
+                    console.log("after update - ")
+                    console.log(res)
+                    navigate(`/post/${res.data._id}`);
+                }
+            } catch (error) {
+                console.log('failed to update the post!', error)
             }
-        } catch (error) {
-            
+        }else{
+            try {
+                const res = await postService.createNewPost(data)
+                
+                if (res) {
+                    navigate(`/post/${res.postId}`)
+                    // alert("post updated")
+                }
+            } catch (error) {
+    
+            }
         }
-        
     }
 
     const handleImageChange = (e) => {
@@ -70,12 +87,12 @@ function PostForm({ post }) {
                         <div className="aspect-video border border-spacing-1 overflow-hidden flex justify-center items-center">
                             <img id="coverImage" className="object-contain max-w-full max-h-full" src={imageBlob} alt="" />
                         </div>
-                        <input {...register("coverImage", { required: true })} name='coverImage' onChange={handleImageChange} type="file" />
+                        <input {...register("coverImage", { required: post ? false : true })} accept='image/*' name='coverImage' onChange={handleImageChange} type="file" />
                     </div>
 
                     <div className='w-full display flex justify-end'>
-                        {/* <Button className='mt-4 ' type="submit" children="Create Post" /> */}
-                        <button type='submit'>submit</button>
+                        <Button className='mt-4 ' type="submit" children={post ? "UPDATE POST" : "CREATE POST"} />
+                        {/* <button type='submit'>submit</button> */}
                     </div>
                 </div>
             </form>
