@@ -20,10 +20,10 @@ class PostService {
         try {
             console.log("getting the single post")
             const response = await axios.get(`/api/post/${postId}`)
-            console.log(response)
-            if (response && response.data)  {
+            console.log(response.data)
+            if (response && response.data) {
                 return response.data;
-            }else{
+            } else {
                 throw new Error("response data is undefined")
             }
 
@@ -115,6 +115,17 @@ class PostService {
         } catch (error) {
             console.log("failed to upload the iamge to cloudinary, ", error)
             throw error
+        }
+    }
+
+    likeThePost = async (postId) => {
+        try {
+            const res = await axios.post(`/api/post/${postId}/like`)
+            if (res.data) {
+                return res.data;
+            }
+        } catch (error) {
+            throw error;
         }
     }
 }

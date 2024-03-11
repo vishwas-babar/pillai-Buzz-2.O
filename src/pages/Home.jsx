@@ -9,46 +9,50 @@ import { useDispatch, useSelector } from "react-redux";
 import { addArrOfPosts, removeAllPosts } from '../store/PostsSlice.js';
 
 
-function Home(params) {
+function Home({ error, loading, isEnd, incrementPage }) {
 
-    const [page, setPage] = useState(1);
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(true);
-    const [isEnd, setIsEnd] = useState(false); 
+    // const [page, setPage] = useState(1);
+    // const [error, setError] = useState(false);
+    // const [loading, setLoading] = useState(true);
+    // const [isEnd, setIsEnd] = useState(false); 
+
 
 
     const dispatch = useDispatch();
-
+    // dispatch(removeAllPosts())
     const { posts } = useSelector(state => state.post)
 
+    // useEffect(() => { // when components mount first time then clear the post state
+    //     console.log("clearing the all post from state")    
+    //     // dispatch(removeAllPosts())
+    // }, [])
 
-    useEffect(() => {
-        // dispatch(removeAllPosts()) // :todo
-        setLoading(true)
-        setTimeout(() => {
-            loadMorePostForHomePage();
-        }, 2000);
-    }, [page])
+    // useEffect(() => {
+    //     setLoading(true)
+    //     setTimeout(() => {
+    //         loadMorePostForHomePage();
+    //     }, 2000); // :todo
+    // }, [page])
 
-    function loadMorePostForHomePage() {
+    // function loadMorePostForHomePage() {
 
-        setError(false);
-        setLoading(true)
-        postService.getPostForHomePage(page)
-            .then(res => {
-                console.log(res);
-                setLoading(false)
-                dispatch(addArrOfPosts(res.posts))
+    //     setError(false);
+    //     setLoading(true)
+    //     postService.getPostForHomePage(page)
+    //         .then(res => {
+    //             console.log(res);
+    //             setLoading(false)
+    //             dispatch(addArrOfPosts(res.posts))
 
-                if (res.posts?.length === 0) {
-                    setIsEnd(true);
-                }
-            })
-            .catch(error => {
-                console.log(error)
-                setError(true)
-            })
-    }
+    //             if (res.posts?.length === 0) {
+    //                 setIsEnd(true);
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //             setError(true)
+    //         })
+    // }
 
 
     if (error) {
@@ -100,9 +104,7 @@ function Home(params) {
                 ) : (<Button
                     type="button"
                     className=" mb-20 sm:mb-12"
-                    onClick={() => {
-                        setPage(page + 1)
-                    }}
+                    onClick={incrementPage}
                     children="load more"
                 />)}
             </main>

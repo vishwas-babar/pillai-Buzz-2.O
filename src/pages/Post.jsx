@@ -1,44 +1,75 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { LikeCmtShrBkmr, PostReadComp } from "../components/index.js"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ErrorComp } from '../components/index.js'
+import { Button } from "../components/index.js";
+import { useSelector } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
+import postService from "../services/PostService.js";
+
 
 
 function Post() {
 
-    
+
     const { id: postId } = useParams();
-    // const { data: post, isLoading, error } = useCustomQuery(`post/${postId}`);
 
-    const [post, setPost] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const navigate = useNavigate()
+    const userData = useSelector(state => state.user.userData)
 
-    useEffect(() => {
+    const [likesCount, setLikesCount] = useState(10);
 
-        ; (async () => {
-            try {
-                setError(false);
-                setIsLoading(true);
-                const response = await axios.get(`/api/post/${postId}`)
+    // useEffect(() => {
 
-                if (response) {
-                    console.log(response.data)
-                    setPost(response.data);
-                    setIsLoading(false);
-                }
+    //     ; (async () => {
+    //         try {
+    //             setError(false);
+    //             setIsLoading(true);
+    //             const response = await axios.get(`/api/post/${postId}`)
 
-            } catch (error) {
-                console.log(error)
-                setError(true);
-                setIsLoading(false);
-            }
-        })()
+    //             if (response) {
+    //                 console.log(response.data)
+    //                 setPost(response.data);
+    //                 setIsLoading(false);
+    //             }
 
-    }, [postId])
+    //         } catch (error) {
+    //             console.log(error)
+    //             setError(true);
+    //             setIsLoading(false);
+    //         }
+    //     })()
 
-    if (error) {
+    // }, [postId])
+
+
+   
+    const { isError, error, data: post, isLoading } = useQuery({
+        queryKey: ["post"],
+        queryFn: () => postService.getSinglePost(postId)
+            .then(res => {
+                setLikesCount(res.likesCount)
+                return res;
+            })
+            .catch(error => {
+                throw error;
+            })
+    });
+
+    const likePost = () => {
+        setLikesCount(prev => prev + 1);
+        postService.likeThePost(postId)
+            .then(res => {
+                // setLikesCount(prev => prev - 1);
+            })
+            .catch(error => {
+                console.log("error when liking the post: ", error)
+                setLikesCount(prev => prev - 1);
+            })
+    }
+
+    if (isError) {
         return (
             <div>
                 <ErrorComp statusCode={500} />
@@ -54,17 +85,18 @@ function Post() {
         )
     }
 
-    if (post) {
-        
-    }
     return (
         <>
+            {(userData?._id === post?.author?._id) ? <Button
+                className="absolute mt-4 rounded-md right-6"
+                children="Edit"
+                onClick={() => navigate(`/edit-post/${postId}`)}
+            /> : null}
             <PostReadComp author={post?.author} postContent={post?.postContent} />
-            <LikeCmtShrBkmr postContent={post?.postContent} likesCount={post?.likesCount} />
+            <LikeCmtShrBkmr postContent={post?.postContent} likesCount={likesCount} likePost={likePost} />
         </>
     )
 }
-
 
 // this is custom query for fetching the api it gives the state of api request error/ loading/ data
 export const useCustomQuery = async (pathUrl) => {

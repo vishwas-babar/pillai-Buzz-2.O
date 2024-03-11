@@ -1,12 +1,13 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { Input, InputGroup, MaskedInput, Uploader } from 'rsuite';
+import { Input } from 'rsuite';
 import postService from '../services/PostService.js'
 import TmceEditor from './TmceEditor';
 import Button from './Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import HTMLReactParser from 'html-react-parser';
+import { useDispatch } from 'react-redux';
+import { updateThePost } from '../store/PostsSlice.js';
 
 
 
@@ -20,6 +21,8 @@ function PostForm({ post }) {
         }
     })
 
+    const dispatch = useDispatch();
+
     const [image, setImage] = useState("")
     const [imageBlob, setImageBlob] = useState(post?.coverImage)
     const navigate = useNavigate();
@@ -32,7 +35,8 @@ function PostForm({ post }) {
                 console.log(res._id)
                 if(res) {
                     console.log("after update - ")
-                    console.log(res)
+                    console.log(res.data)
+                    dispatch(updateThePost(res.data)) // provided the post _id, title, coverImage
                     navigate(`/post/${res.data._id}`);
                 }
             } catch (error) {
