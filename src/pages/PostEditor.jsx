@@ -1,16 +1,12 @@
-import React from 'react'
-import { PostForm, TmceEditor } from '../components/index.js'
-
-
-
+import React from "react";
+import { PostForm, TmceEditor } from "../components/index.js";
 
 function PostEditor() {
-    return (
-        <div className=' h-screen w-full flex items-center justify-center'>
-            <PostForm />
-        </div>
-
-    )
+  return (
+    <div className=" h-screen w-full flex items-center justify-center">
+      <PostForm />
+    </div>
+  );
 }
 
-export default PostEditor
+export default PostEditor;
