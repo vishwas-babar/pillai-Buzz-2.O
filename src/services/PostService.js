@@ -169,6 +169,30 @@ class PostService {
       throw error;
     }
   };
+
+  bookmarkThePost = async (postId) => {
+    try {
+      const res = await axios.post(`/api/post/${postId}/bookmark`);
+      if (!res.data) {
+        throw new Error("failed to bookmark the post");
+      }
+      return res.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  getAllBookmarks = async () => {
+    try {
+      const res = await axios.get("/api/post/get-bookmarks");
+      if (!res.data) {
+        throw new Error("res.data cant be undefined");
+      }
+      return res.data;
+    } catch (error) {
+      throw error;
+    }
+  };
 }
 
 const postService = new PostService();

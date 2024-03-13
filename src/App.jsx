@@ -56,6 +56,7 @@ function App() {
           />
           <Route path="/post" element={<Post />} />
           <Route path="/create" element={<PostEditor />} />
+          <Route path="/bookmarks" element={<Bookmarks />} />
           <Route path="/user/:user_id" element={<Profile />} />
           <Route path="/post/:id" element={<Post />} />
           <Route path="/edit-post/:id" element={<EditPost />} />

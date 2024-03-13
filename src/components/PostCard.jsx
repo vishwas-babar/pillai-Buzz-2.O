@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import trialNewsImage from "../assets/news.jpeg";
 import userpng from "../assets/user.png";
+import { useEffect, useState } from "react";
+import postService from "../services/PostService";
+import { toast, Slide } from "react-toastify";
 
 function PostCard({
   authorDetails,
@@ -12,6 +15,47 @@ function PostCard({
   coverImage,
 }) {
   const navigate = useNavigate();
+  const [postBookmarked, setPostBookmarkd] = useState(false);
+
+  const bookmarkPost = async () => {
+    setPostBookmarkd((prev) => !prev);
+    postService
+      .bookmarkThePost(_id)
+      .then((res) => {
+        console.log(res.status);
+        toast.success("added to bookmarks.", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Slide,
+        });
+      })
+      .catch((error) => {
+        console.log("failed to bookmark the post", error.response?.status);
+        if (error.response.status === 409) {
+          // that means this post is already bookmarked
+          setPostBookmarkd(true);
+          toast.info("post is already bookmarked!", {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Slide,
+          });
+        } else {
+          setPostBookmarkd((prev) => !prev);
+        }
+      });
+  };
 
   return (
     <>
@@ -71,7 +115,13 @@ function PostCard({
                 <i className="bx bx-heart" />
                 <span>{likesCount}</span>
               </a>
-              <a className="bookmark-btn">
+              <a
+                onClick={(e) => {
+                  e.stopPropagation();
+                  bookmarkPost();
+                }}
+                className={`bookmark-btn ml-4 ${postBookmarked ? " bg-custom-primary text-white" : ""}`}
+              >
                 <i className="bx bx-bookmark" />
               </a>
               <a className="reads-counts">{reads} reads</a>
