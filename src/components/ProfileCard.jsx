@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import userService from "../services/UserService";
 
 function ProfileCard({
   name,
@@ -8,8 +10,35 @@ function ProfileCard({
   role,
   followersCount,
   followingCount,
+  subscribers = [],
   loadStatus,
 }) {
+
+  const userData = useSelector(state => state.user.userData);
+  const [isAuthor, setIsAuthor] = useState(false);
+  const [isSubscriber, setIsSubscriber] = useState(false)
+
+  useEffect(() => {
+    if (userData._id === _id) {
+      setIsAuthor(true);
+    }
+
+    if (subscribers.includes(userData._id)) {
+      setIsSubscriber(true);
+    }
+  }, [_id, userData])
+
+  const toggleNotification = () => {
+    setIsSubscriber(prev => !prev);
+    userService.notificationToggle(_id)
+      .then(res => {
+        // 
+      })
+      .catch(error => {
+        setIsSubscriber(prev => !prev)
+      })
+  }
+
   return (
     <>
       {/* profile container */}
@@ -43,10 +72,18 @@ function ProfileCard({
           </div>
           <div>
             <div>
-              <button className="btn-primary flex flex-nowrap items-center gap-1">
-                <i className="bx bx-edit-alt text-[17px]" />
-                <span className="hidden md:inline-block">Edit</span>
-              </button>
+              {
+                isAuthor ? (
+                  <button className="btn-primary flex flex-nowrap items-center gap-1">
+                    <i className="bx bx-edit-alt text-[17px]" />
+                    <span className="hidden md:inline-block">Edit</span>
+                  </button>
+                ) : (
+                  <button onClick={toggleNotification} className={` flex-nowrap size-10 flex justify-center aspect-square rounded-full items-center gap-1 ${isSubscriber ? 'bg-custom-primary text-white' : 'border border-gray-500'}`}>
+                    <i className='bx bx-bell text-[23px]'></i>
+                  </button>
+                )
+              }
             </div>
           </div>
         </div>

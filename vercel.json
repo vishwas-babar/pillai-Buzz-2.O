@@ -1,0 +1,5 @@
+{
+    "rewrites": [
+        { "source": "/api/(.*)", "destination": "https://pillai-buzz.onrender.com/api/$1" }
+    ]
+}

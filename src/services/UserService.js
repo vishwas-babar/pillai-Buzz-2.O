@@ -42,6 +42,23 @@ class UserService {
       throw error;
     }
   };
+
+  notificationToggle = async (author_id) => {
+    try {
+      const res = await axios.post(`/api/user/notification-toggle`, {
+        author_id
+      })
+  
+      if (!res) {
+        throw new Error("reponse for the notification toggle cant be null or undefined")
+      }
+      console.log("this is the response got from notification toggle: ", res.data)
+      return res.data;
+    } catch (error) {
+      console.log("failed to toggle the notificaion for the user: ", error)
+      throw error;
+    }
+  }
 }
 
 const userService = new UserService();

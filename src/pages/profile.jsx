@@ -18,17 +18,6 @@ function Profile() {
   const [profile, setProfile] = useState(null);
   const [posts, setPosts] = useState(null);
 
-  // useEffect(() => {
-  //   userService.getUserDetails(user_id)
-  //     .then(res => {
-  //       console.log("got this following data for current user: ", res.data)
-  //       setProfile(res.data?.data)
-  //     })
-  //     .catch(error => {
-  //       console.log("error occured when fetching the user data", error);
-  //     })
-  // }, [user_id])
-
   const { isPending, error, data, isLoading, isError } = useQuery({
     queryKey: ["profile"],
     queryFn: () =>
@@ -96,6 +85,7 @@ function Profile() {
           role={"full stack developer"}
           followersCount={profile?.followers.length}
           followingCount={profile?.following.length}
+          subscribers={profile?.subscribers}
         />
       ) : (
         <ProfileSkeleton />
