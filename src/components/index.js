@@ -16,6 +16,8 @@ import ProfileSkeleton from "./ProfileSkeleton.jsx";
 import TmceEditor from "./TmceEditor.jsx";
 import PostForm from "./PostForm.jsx";
 import CommentsModal from "./post compo/CommentsModal.jsx";
+import NotificationComp from "./NotificationComp.jsx";
+
 
 export {
   Layout,
@@ -36,4 +38,5 @@ export {
   TmceEditor,
   PostForm,
   CommentsModal,
+  NotificationComp,
 };

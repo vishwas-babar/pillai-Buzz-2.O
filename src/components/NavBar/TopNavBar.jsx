@@ -5,8 +5,9 @@ import ProfileShowModal from "./ProfileShowModal";
 import SideNav from "./SideNav";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { NotificationComp } from "../index.js"
 
-function TopNavBar() {
+function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
   const [isProfileModalOpen, setisProfileModalOpen] = useState(false);
   const [overlayStatus, setOverlayStatus] = useState("hidden");
   const userData = useSelector((state) => state.user.userData);
@@ -125,8 +126,10 @@ function TopNavBar() {
             <i className="bx bx-moon text-[25px]" />
           </div>
           <div
+            onClick={toggleNotificationComp}
             id="bell-ic"
-            className="sm:flex hidden cursor-pointer items-center justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1"
+            className={`sm:flex hidden cursor-pointer items-center justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1 ${isNotificationCompOpen ? "bg-custom-primary text-white" : ""}`}
+            
           >
             <i className="bx bx-bell text-[25px]" />
           </div>
@@ -157,6 +160,8 @@ function TopNavBar() {
         id="side-nav-overlay"
         className="w-full h-full fixed left-0 top-0 bg-black opacity-50 z-20 hidden"
       ></div>
+
+      <NotificationComp isNotificationCompOpen={isNotificationCompOpen} className=" "/>
     </>
   );
 }

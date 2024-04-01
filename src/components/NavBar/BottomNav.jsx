@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
+import {NotificationComp} from "../index.js";
 
-function BottomNav(params) {
+function BottomNav({ toggleNotificationComp, isNotificationCompOpen }) {
   return (
     <div
       id="bottom-nav"
@@ -37,14 +38,16 @@ function BottomNav(params) {
       </NavLink>
 
       <NavLink
-        to="/notifications"
         id="notification"
+        onClick={toggleNotificationComp}
         className={({ isActive }) =>
-          `active:bg-custom-primary ${isActive ? "bg-custom-primary text-white" : ""} active:text-white`
+          `active:bg-custom-primary ${isNotificationCompOpen ? "bg-custom-primary text-white" : ""} active:text-white`
         }
       >
         <i className="bx bx-bell text-[23px]" />
       </NavLink>
+
+      <NotificationComp isNotificationCompOpen={isNotificationCompOpen} className="w-full" />
     </div>
   );
 }
