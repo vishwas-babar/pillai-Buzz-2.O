@@ -161,7 +161,7 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
         className="w-full h-full fixed left-0 top-0 bg-black opacity-50 z-20 hidden"
       ></div>
 
-      <NotificationComp isNotificationCompOpen={isNotificationCompOpen} className=" "/>
+      <NotificationComp isNotificationCompOpen={isNotificationCompOpen} toggleNotificationComp={toggleNotificationComp} className=" "/>
     </>
   );
 }

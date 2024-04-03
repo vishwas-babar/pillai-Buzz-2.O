@@ -47,7 +47,7 @@ function BottomNav({ toggleNotificationComp, isNotificationCompOpen }) {
         <i className="bx bx-bell text-[23px]" />
       </NavLink>
 
-      <NotificationComp isNotificationCompOpen={isNotificationCompOpen} className="w-full" />
+      <NotificationComp isNotificationCompOpen={isNotificationCompOpen} className="w-full" toggleNotificationComp={toggleNotificationComp} />
     </div>
   );
 }
