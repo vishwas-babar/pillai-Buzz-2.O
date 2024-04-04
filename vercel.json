@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://pillai-buzz-goo4.vercel.app/"
+      "destination": "https://pillai-buzz-goo4.vercel.app/api/$1"
     },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
