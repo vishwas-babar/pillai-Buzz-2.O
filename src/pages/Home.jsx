@@ -25,7 +25,7 @@ function Home({ error, loading, isEnd, incrementPage }) {
   return (
     <>
       <main
-        className=" flex flex-col items-center mt-2 h-fit shadow-md shadow-black mx-auto rounded-lg
+        className=" flex flex-col items-center mt-24 h-fit shadow-md shadow-black mx-auto rounded-lg
     smm:w-[70%] sm:w-[60%] md:w-[55%] lg:w-[40%]  px-6 "
       >
         <div

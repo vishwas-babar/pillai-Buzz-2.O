@@ -1,16 +1,32 @@
 import Pillaipo from "../../assets/Pillaipo.png";
 import userpng from "../../assets/user.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import ProfileShowModal from "./ProfileShowModal";
 import SideNav from "./SideNav";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { NotificationComp } from "../index.js"
+import { useEffect, useState } from "react";
+import { NotificationComp } from "../index.js";
+import useDetectScroll, { Axis } from "@smakss/react-scroll-direction";
 
 function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
   const [isProfileModalOpen, setisProfileModalOpen] = useState(false);
   const [overlayStatus, setOverlayStatus] = useState("hidden");
-  const userData = useSelector((state) => state.user.userData);
+  const location = useLocation();
+  const [navDisplay, setNavDisplay] = useState(true);
+
+  const { scrollDir, scrollPosition } = useDetectScroll({
+    axis: Axis.Y,
+    thr: 100,
+  });
+
+  useEffect(() => {
+    console.log(scrollDir);
+
+    if (scrollDir === "down") {
+      setNavDisplay(false);
+    } else if (scrollDir === "up") {
+      setNavDisplay(true);
+    }
+  }, [scrollPosition, scrollDir]);
 
   function showProfileModal() {
     const profile_modal = document.querySelector("#profile-modal");
@@ -60,7 +76,7 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
     <>
       <nav
         id="top-nav"
-        className="flex items-center justify-between w-full h-20 overflow-hidden bg-custom-gray transition-all duration-500 ease-linear"
+        className={`flex items-center justify-between w-full h-20 overflow-hidden bg-custom-gray transition-all duration-500 ease-linear fixed top-0 z-30 ${navDisplay ? "" : "top-[-100%]"}`}
         type="button"
         data-drawer-target="drawer-navigation"
         data-drawer-show="drawer-navigation"
@@ -104,21 +120,28 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
             Bookmarks
           </NavLink>
         </div>
+
         <div className="flex items-center justify-center ml-[10px] gap-[10px]">
-          <div
-            id="search-ic"
-            className="sm:flex hidden cursor-pointer items-center justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1"
-          >
-            <i className="bx bx-search text-[25px]" />
-          </div>
-          <Link
-            className="btn-primary flex items-center justify-center gap-1"
-            id="write-btn"
-            to="/create"
-          >
-            <i className="bx bx-edit-alt text-[20px]" />
-            <p>Write</p>
-          </Link>
+          {location.pathname.includes("/post") ||
+          location.pathname.includes("/create") ? null : (
+            <NavLink
+              to={"/search"}
+              id="search-ic"
+              className="sm:flex hidden cursor-pointer items-center justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1"
+            >
+              <i className="bx bx-search text-[25px]" />
+            </NavLink>
+          )}
+          {location.pathname.includes("/create") ? null : (
+            <Link
+              className="btn-primary flex items-center justify-center gap-1"
+              id="write-btn"
+              to="/create"
+            >
+              <i className="bx bx-edit-alt text-[20px]" />
+              <p>Write</p>
+            </Link>
+          )}
           <div
             id="dark-mode-ic"
             className="flex items-center cursor-pointer justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1"
@@ -129,7 +152,6 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
             onClick={toggleNotificationComp}
             id="bell-ic"
             className={`sm:flex hidden cursor-pointer items-center justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1 ${isNotificationCompOpen ? "bg-custom-primary text-white" : ""}`}
-            
           >
             <i className="bx bx-bell text-[25px]" />
           </div>
@@ -161,7 +183,11 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
         className="w-full h-full fixed left-0 top-0 bg-black opacity-50 z-20 hidden"
       ></div>
 
-      <NotificationComp isNotificationCompOpen={isNotificationCompOpen} className=" "/>
+      <NotificationComp
+        isNotificationCompOpen={isNotificationCompOpen}
+        toggleNotificationComp={toggleNotificationComp}
+        className=" "
+      />
     </>
   );
 }

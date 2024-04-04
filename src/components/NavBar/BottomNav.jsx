@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import {NotificationComp} from "../index.js";
+import { NotificationComp } from "../index.js";
 
 function BottomNav({ toggleNotificationComp, isNotificationCompOpen }) {
   return (
@@ -47,7 +47,11 @@ function BottomNav({ toggleNotificationComp, isNotificationCompOpen }) {
         <i className="bx bx-bell text-[23px]" />
       </NavLink>
 
-      <NotificationComp isNotificationCompOpen={isNotificationCompOpen} className="w-full" />
+      <NotificationComp
+        isNotificationCompOpen={isNotificationCompOpen}
+        className="w-full"
+        toggleNotificationComp={toggleNotificationComp}
+      />
     </div>
   );
 }

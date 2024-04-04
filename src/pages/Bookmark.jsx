@@ -40,7 +40,7 @@ function Bookmarks(params) {
   }
 
   return (
-    <main className=" flex flex-col items-center mt-2 h-fit shadow-md shadow-black mx-auto rounded-lg smm:w-[70%] sm:w-[60%] md:w-[55%] lg:w-[40%]  px-6 ">
+    <main className=" flex flex-col items-center mt-24 h-fit shadow-md shadow-black mx-auto rounded-lg smm:w-[70%] sm:w-[60%] md:w-[55%] lg:w-[40%]  px-6 ">
       <div
         id="post-container"
         className=" h-fit rounded-sm mx-auto flex flex-col items-center gap-4

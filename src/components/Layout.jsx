@@ -4,18 +4,23 @@ import { useState } from "react";
 import { set } from "rsuite/esm/utils/dateUtils.js";
 
 function Layout() {
-
   const [isNotificationCompOpen, setIsNotificationCompOpen] = useState(false);
 
   function toggleNotificationComp() {
-    setIsNotificationCompOpen(prev => !prev)
+    setIsNotificationCompOpen((prev) => !prev);
   }
 
   return (
     <>
-      <TopNavBar toggleNotificationComp={toggleNotificationComp} isNotificationCompOpen={isNotificationCompOpen}/>
+      <TopNavBar
+        toggleNotificationComp={toggleNotificationComp}
+        isNotificationCompOpen={isNotificationCompOpen}
+      />
       <Outlet />
-      <BottomNav toggleNotificationComp={toggleNotificationComp} isNotificationCompOpen={isNotificationCompOpen} />
+      <BottomNav
+        toggleNotificationComp={toggleNotificationComp}
+        isNotificationCompOpen={isNotificationCompOpen}
+      />
     </>
   );
 }

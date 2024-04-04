@@ -73,7 +73,7 @@ function Profile() {
 
   return (
     <main
-      className="flex flex-col items-center w-full mt-2 min-h-full shadow-md shadow-black mx-auto rounded-lg
+      className="flex flex-col items-center w-full mt-24 min-h-full shadow-md shadow-black mx-auto rounded-lg
     smm:w-[70%] sm:w-[60%] md:w-[55%] lg:w-[40%]"
     >
       {!isLoading ? (

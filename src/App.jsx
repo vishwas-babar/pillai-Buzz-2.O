@@ -15,9 +15,9 @@ import {
   Profile,
   Login,
 } from "./components/index.js";
-import { PostEditor, EditPost } from "./pages/index.js";
+import { PostEditor, EditPost, Search } from "./pages/index.js";
 import { removeAllPosts, addArrOfPosts } from "./store/PostsSlice.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import userService from "./services/UserService.js";
 import {
   loginUser,
@@ -38,6 +38,12 @@ function App() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+
+  const userData = useSelector((state) => state?.user?.userData);
+
+  useEffect(() => {
+    console.log("this is state of user: ", userData);
+  }, [userData]);
 
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -60,6 +66,7 @@ function App() {
           <Route path="/user/:user_id" element={<Profile />} />
           <Route path="/post/:id" element={<Post />} />
           <Route path="/edit-post/:id" element={<EditPost />} />
+          <Route path="/search" element={<Search />} />
         </Route>
         <Route path="/vishwas" element={<TopNavBar />} />
         <Route path="/login" element={<Login />} />
