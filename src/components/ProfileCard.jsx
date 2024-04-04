@@ -13,10 +13,9 @@ function ProfileCard({
   subscribers = [],
   loadStatus,
 }) {
-
-  const userData = useSelector(state => state.user.userData);
+  const userData = useSelector((state) => state.user.userData);
   const [isAuthor, setIsAuthor] = useState(false);
-  const [isSubscriber, setIsSubscriber] = useState(false)
+  const [isSubscriber, setIsSubscriber] = useState(false);
 
   useEffect(() => {
     if (userData._id === _id) {
@@ -26,18 +25,19 @@ function ProfileCard({
     if (subscribers.includes(userData._id)) {
       setIsSubscriber(true);
     }
-  }, [_id, userData])
+  }, [_id, userData]);
 
   const toggleNotification = () => {
-    setIsSubscriber(prev => !prev);
-    userService.notificationToggle(_id)
-      .then(res => {
-        // 
+    setIsSubscriber((prev) => !prev);
+    userService
+      .notificationToggle(_id)
+      .then((res) => {
+        //
       })
-      .catch(error => {
-        setIsSubscriber(prev => !prev)
-      })
-  }
+      .catch((error) => {
+        setIsSubscriber((prev) => !prev);
+      });
+  };
 
   return (
     <>
@@ -72,18 +72,19 @@ function ProfileCard({
           </div>
           <div>
             <div>
-              {
-                isAuthor ? (
-                  <button className="btn-primary flex flex-nowrap items-center gap-1">
-                    <i className="bx bx-edit-alt text-[17px]" />
-                    <span className="hidden md:inline-block">Edit</span>
-                  </button>
-                ) : (
-                  <button onClick={toggleNotification} className={` flex-nowrap size-10 flex justify-center aspect-square rounded-full items-center gap-1 ${isSubscriber ? 'bg-custom-primary text-white' : 'border border-gray-500'}`}>
-                    <i className='bx bx-bell text-[23px]'></i>
-                  </button>
-                )
-              }
+              {isAuthor ? (
+                <button className="btn-primary flex flex-nowrap items-center gap-1">
+                  <i className="bx bx-edit-alt text-[17px]" />
+                  <span className="hidden md:inline-block">Edit</span>
+                </button>
+              ) : (
+                <button
+                  onClick={toggleNotification}
+                  className={` flex-nowrap size-10 flex justify-center aspect-square rounded-full items-center gap-1 ${isSubscriber ? "bg-custom-primary text-white" : "border border-gray-500"}`}
+                >
+                  <i className="bx bx-bell text-[23px]"></i>
+                </button>
+              )}
             </div>
           </div>
         </div>

@@ -4,10 +4,8 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import ProfileShowModal from "./ProfileShowModal";
 import SideNav from "./SideNav";
 import { useEffect, useState } from "react";
-import { NotificationComp } from "../index.js"
-import useDetectScroll, { Axis } from '@smakss/react-scroll-direction';
-
-
+import { NotificationComp } from "../index.js";
+import useDetectScroll, { Axis } from "@smakss/react-scroll-direction";
 
 function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
   const [isProfileModalOpen, setisProfileModalOpen] = useState(false);
@@ -15,20 +13,20 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
   const location = useLocation();
   const [navDisplay, setNavDisplay] = useState(true);
 
-  const { scrollDir, scrollPosition } = useDetectScroll({ axis: Axis.Y, thr: 100 });
+  const { scrollDir, scrollPosition } = useDetectScroll({
+    axis: Axis.Y,
+    thr: 100,
+  });
 
   useEffect(() => {
-
     console.log(scrollDir);
 
-    if (scrollDir === 'down') {
-      setNavDisplay(false)
-    } else if (scrollDir === 'up') {
+    if (scrollDir === "down") {
+      setNavDisplay(false);
+    } else if (scrollDir === "up") {
       setNavDisplay(true);
     }
-
-  }, [scrollPosition, scrollDir])
-
+  }, [scrollPosition, scrollDir]);
 
   function showProfileModal() {
     const profile_modal = document.querySelector("#profile-modal");
@@ -124,20 +122,26 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
         </div>
 
         <div className="flex items-center justify-center ml-[10px] gap-[10px]">
-          {location.pathname.includes('/post') || location.pathname.includes('/create') ? null : <NavLink to={'/search'}
-            id="search-ic"
-            className="sm:flex hidden cursor-pointer items-center justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1"
-          >
-            <i className="bx bx-search text-[25px]" />
-          </NavLink>}
-          {location.pathname.includes('/create') ? null : <Link
-            className="btn-primary flex items-center justify-center gap-1"
-            id="write-btn"
-            to="/create"
-          >
-            <i className="bx bx-edit-alt text-[20px]" />
-            <p>Write</p>
-          </Link>}
+          {location.pathname.includes("/post") ||
+          location.pathname.includes("/create") ? null : (
+            <NavLink
+              to={"/search"}
+              id="search-ic"
+              className="sm:flex hidden cursor-pointer items-center justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1"
+            >
+              <i className="bx bx-search text-[25px]" />
+            </NavLink>
+          )}
+          {location.pathname.includes("/create") ? null : (
+            <Link
+              className="btn-primary flex items-center justify-center gap-1"
+              id="write-btn"
+              to="/create"
+            >
+              <i className="bx bx-edit-alt text-[20px]" />
+              <p>Write</p>
+            </Link>
+          )}
           <div
             id="dark-mode-ic"
             className="flex items-center cursor-pointer justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1"
@@ -148,7 +152,6 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
             onClick={toggleNotificationComp}
             id="bell-ic"
             className={`sm:flex hidden cursor-pointer items-center justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1 ${isNotificationCompOpen ? "bg-custom-primary text-white" : ""}`}
-
           >
             <i className="bx bx-bell text-[25px]" />
           </div>
@@ -180,7 +183,11 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
         className="w-full h-full fixed left-0 top-0 bg-black opacity-50 z-20 hidden"
       ></div>
 
-      <NotificationComp isNotificationCompOpen={isNotificationCompOpen} toggleNotificationComp={toggleNotificationComp} className=" " />
+      <NotificationComp
+        isNotificationCompOpen={isNotificationCompOpen}
+        toggleNotificationComp={toggleNotificationComp}
+        className=" "
+      />
     </>
   );
 }

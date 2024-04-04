@@ -19,7 +19,6 @@ import CommentsModal from "./post compo/CommentsModal.jsx";
 import NotificationComp from "./NotificationComp.jsx";
 import SearchComp from "./SearchComp.jsx";
 
-
 export {
   Layout,
   TopNavBar,

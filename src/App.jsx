@@ -39,12 +39,11 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  const userData = useSelector(state => state?.user?.userData);
+  const userData = useSelector((state) => state?.user?.userData);
 
   useEffect(() => {
-    console.log('this is state of user: ', userData)
-  }, [userData])
-
+    console.log("this is state of user: ", userData);
+  }, [userData]);
 
   const router = createBrowserRouter(
     createRoutesFromElements(
