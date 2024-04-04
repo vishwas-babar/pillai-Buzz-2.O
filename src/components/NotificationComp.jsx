@@ -117,7 +117,7 @@ function NotificationComp({ isNotificationCompOpen, className = '', toggleNotifi
     const notifications = useSelector(state => state.user?.userData?.notifications)
 
     return (
-        <div className={`h-screen p-4 bg-gray-200 sm:w-1/2 w-full z-10 fixed right-0 overflow-auto ${isNotificationCompOpen ? '' : 'hidden'} ${className}`}>
+        <div className={`h-screen p-4 bg-gray-200 sm:w-1/2 w-full z-40 fixed right-0 overflow-auto ${isNotificationCompOpen ? '' : 'hidden'} ${className}`}>
             {notifications?.map(notification =>
                 <Notification
                     key={notification._id}

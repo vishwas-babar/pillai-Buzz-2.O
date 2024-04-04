@@ -17,6 +17,7 @@ import TmceEditor from "./TmceEditor.jsx";
 import PostForm from "./PostForm.jsx";
 import CommentsModal from "./post compo/CommentsModal.jsx";
 import NotificationComp from "./NotificationComp.jsx";
+import SearchComp from "./SearchComp.jsx";
 
 
 export {
@@ -39,4 +40,5 @@ export {
   PostForm,
   CommentsModal,
   NotificationComp,
+  SearchComp,
 };

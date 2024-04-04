@@ -127,7 +127,7 @@ function Post() {
   }
 
   return (
-    <>
+    <div className="mt-24">
       {userData?._id === post?.author?._id ? (
         <Button
           className="absolute mt-4 rounded-md right-6"
@@ -171,7 +171,7 @@ function Post() {
         }}
         className={`w-full h-full fixed left-0 top-0 bg-black opacity-50 z-20 ${overlay ? "" : "hidden"}`}
       ></div>
-    </>
+    </div>
   );
 }
 

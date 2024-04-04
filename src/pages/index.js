@@ -4,5 +4,6 @@ import Post from "./Post";
 import PostEditor from "./PostEditor";
 import Profile from "./profile";
 import EditPost from "./EditPost";
+import Search from "./Search";
 
-export { Home, Bookmarks, Post, PostEditor, Profile, EditPost };
+export { Home, Bookmarks, Post, PostEditor, Profile, EditPost, Search };
