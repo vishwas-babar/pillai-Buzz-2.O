@@ -18,6 +18,8 @@ import PostForm from "./PostForm.jsx";
 import CommentsModal from "./post compo/CommentsModal.jsx";
 import NotificationComp from "./NotificationComp.jsx";
 import SearchComp from "./SearchComp.jsx";
+import Loader from "./loaders/Loader.jsx";
+
 
 export {
   Layout,
@@ -40,4 +42,5 @@ export {
   CommentsModal,
   NotificationComp,
   SearchComp,
+  Loader,
 };

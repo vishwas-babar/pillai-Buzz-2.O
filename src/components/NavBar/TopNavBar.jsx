@@ -6,12 +6,16 @@ import SideNav from "./SideNav";
 import { useEffect, useState } from "react";
 import { NotificationComp } from "../index.js";
 import useDetectScroll, { Axis } from "@smakss/react-scroll-direction";
+import { useSelector } from "react-redux";
+
 
 function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
   const [isProfileModalOpen, setisProfileModalOpen] = useState(false);
   const [overlayStatus, setOverlayStatus] = useState("hidden");
   const location = useLocation();
   const [navDisplay, setNavDisplay] = useState(true);
+
+  const userData = useSelector((state) => state.user.userData);
 
   const { scrollDir, scrollPosition } = useDetectScroll({
     axis: Axis.Y,
@@ -162,7 +166,7 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
             <a id="profile-btn" className="overflow-hidden">
               <img
                 id="profile-photo-nav"
-                src={userpng}
+                src={userData?.profilePhoto}
                 className="rounded-full"
                 alt=""
               />

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { ErrorComp, PostForm } from "../components/index.js";
+import { ErrorComp, Loader, PostForm } from "../components/index.js";
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import postService from "../services/PostService.js";
 
+
 function EditPost() {
   const { id } = useParams();
+  const [uploadingPost, setUploadingPost] = useState(false)
 
   const { isLoading, data, isError, error } = useQuery({
     queryKey: ["post"],
@@ -34,7 +36,8 @@ function EditPost() {
 
   return (
     <div className=" mt-16">
-      <PostForm post={data?.postContent} />
+      <PostForm setUploadingPost={setUploadingPost} post={data?.postContent} />
+      {uploadingPost && <Loader children={"Creating post..."} />}
     </div>
   );
 }

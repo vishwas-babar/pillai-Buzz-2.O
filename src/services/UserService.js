@@ -18,6 +18,33 @@ class UserService {
     }
   };
 
+  signupUser = async ({ name, userId, email, password, profilePhoto }) => {
+
+    const formData = new FormData();
+
+    formData.append('name', name);
+    formData.append('userId', userId)
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('profilePhoto', profilePhoto[0]);
+
+    try {
+      const res = await axios.post('/api/user/signup', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+
+      if (!res.data) {
+        throw new Error("res.data is not defined or it not exist")
+      }
+
+      return res;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   getCurrentUser = async () => {
     //get the user details
     try {

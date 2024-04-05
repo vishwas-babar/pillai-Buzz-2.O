@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { BottomNav, TopNavBar } from "./index.js";
-import { useState } from "react";
-import { set } from "rsuite/esm/utils/dateUtils.js";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 function Layout() {
   const [isNotificationCompOpen, setIsNotificationCompOpen] = useState(false);
@@ -9,6 +9,12 @@ function Layout() {
   function toggleNotificationComp() {
     setIsNotificationCompOpen((prev) => !prev);
   }
+
+  // this is for solving the scroll problem
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <>

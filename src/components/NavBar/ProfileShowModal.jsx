@@ -32,7 +32,7 @@ function ProfileShowModal({ isProfileModalOpen }) {
           <div className="size-12 self-center rounded-full overflow-hidden shadow-sm">
             <img
               id="profile-photo-modal"
-              src={userpng}
+              src={userData?.profilePhoto}
               className="rounded-full"
               alt=""
             />
