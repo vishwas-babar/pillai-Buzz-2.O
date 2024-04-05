@@ -13,7 +13,7 @@ function TmceEditor({ className, ...props }) {
   return (
     <div className={className}>
       <Editor
-        apiKey={import.meta.env.VITE_APP_API_URL.toString()}
+        apiKey={import.meta.env.VITE_APP_TINYMCE_APIKEY}
         onInit={(evt, editor) => (editorRef.current = editor)}
         {...props}
         onChange={log}
