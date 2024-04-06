@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addArrOfPosts, removeAllPosts } from "../store/PostsSlice.js";
 import { ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
 
 
 function Home({ error, loading, isEnd, incrementPage }) {
@@ -37,6 +39,9 @@ function Home({ error, loading, isEnd, incrementPage }) {
 
   return (
     <>
+      <Helmet>
+        <meta name="google-site-verification" content="GCKchu9mr9qAr7zmmkJMih5uA76Near5qumbzLio1ws" />
+      </Helmet>
       <main
         className=" flex flex-col items-center mt-24 h-fit shadow-md shadow-black mx-auto rounded-lg
     smm:w-[70%] sm:w-[60%] md:w-[55%] lg:w-[40%]  px-6 "
