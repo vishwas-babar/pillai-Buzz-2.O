@@ -29,7 +29,6 @@ import {
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import postService from "./services/PostService.js";
-import { useLocation } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
@@ -154,7 +153,7 @@ function App({ setLoginCount }) {
     <>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={true} />
+        {/* <ReactQueryDevtools initialIsOpen={true} /> */}
       </QueryClientProvider>
     </>
   );

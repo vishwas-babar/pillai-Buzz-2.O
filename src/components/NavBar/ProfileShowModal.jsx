@@ -1,16 +1,30 @@
 import { motion } from "framer-motion";
 import userpng from "../../assets/user.png";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import userService from "../../services/UserService";
+import { logoutUser } from "../../store/userSlice";
 
 function ProfileShowModal({ isProfileModalOpen }) {
   const userData = useSelector((state) => state.user.userData);
+  const dispatch = useDispatch();
 
   const variants = {
     open: { x: 0, scale: 1, borderRadius: "6px", y: 0, opacity: 1 },
     closed: { x: 70, scale: 0.2, borderRadius: "100%", y: -200, opacity: 1 },
   };
+
+  function signoutUser() {
+    userService.signoutUser()
+      .then((res) => {
+        dispatch(logoutUser());
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        console.log("error occured in signoutUser");
+      })
+  }
   return (
     <>
       <motion.div
@@ -65,6 +79,7 @@ function ProfileShowModal({ isProfileModalOpen }) {
           <NavLink
             id="sign-out"
             className="hover:bg-slate-200 active:bg-custom-primary"
+            onClick={signoutUser}
           >
             <i className="bx bx-log-out text-[18px]" />
             <span>Sign out</span>

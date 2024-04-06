@@ -8,13 +8,26 @@ import { Button } from "../components/index.js";
 import { useDispatch, useSelector } from "react-redux";
 import { addArrOfPosts, removeAllPosts } from "../store/PostsSlice.js";
 import { ToastContainer } from "react-toastify";
+import { Link } from "react-router-dom";
+
 
 function Home({ error, loading, isEnd, incrementPage }) {
   const dispatch = useDispatch();
   // dispatch(removeAllPosts())
   const { posts } = useSelector((state) => state.post);
+  const authStatus = useSelector((state) => state.user.userData);
+  const authStatusLoading = useSelector((state) => state.user.loading);
 
-  if (error) {
+  if (!authStatusLoading && !authStatus) {
+    return (
+      <div className=" h-screen w-full flex items-center justify-center">
+        <h1 className=" text-2xl">You need to login first </h1>
+        <Link to={"/login"} type="button" className=" bg-custom-primary rounded-md ml-2 px-4 py-2 text-slate-200">Login</Link>
+      </div>
+    );
+  }
+
+  if (!authStatusLoading && error) {
     return (
       <div className=" h-screen w-full flex items-center justify-center">
         <ErrorComp statusCode={500} />

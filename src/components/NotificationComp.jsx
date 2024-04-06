@@ -129,7 +129,7 @@ function NotificationComp({
 
   return (
     <div
-      className={` p-4 no-scrollbar shadow-custom-shadow-2 bg-gray-200 lg:w-[500px] sm:w-1/2 w-full z-40 fixed bottom-16 top-20 right-0 sm:top-24 lg:right-6 sm:bottom-10 rounded-lg overflow-auto ${isNotificationCompOpen ? "" : "hidden"} ${className}`}
+      className={` p-4 no-scrollbar shadow-custom-shadow-2 bg-gray-200 lg:w-[500px] sm:w-1/2 w-full z-40 fixed bottom-16 top-20 right-0 sm:top-24 lg:right-6 sm:bottom-10 rounded-lg overflow-auto ${isNotificationCompOpen ? "flex flex-col" : "hidden opacity-0"} ${className}`}
     >
       {!isLoading
         ? notifications?.map((notification) => (

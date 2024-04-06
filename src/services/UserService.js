@@ -44,6 +44,19 @@ class UserService {
     }
   };
 
+  signoutUser = async () => {
+    try {
+      const res = await axios.post('/api/user/signout')
+  
+      if (!res) {
+        throw new Error("does not get response")
+      }
+      return res.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   getCurrentUser = async () => {
     //get the user details
     try {

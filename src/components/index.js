@@ -20,6 +20,8 @@ import NotificationComp from "./NotificationComp.jsx";
 import SearchComp from "./SearchComp.jsx";
 import Loader from "./loaders/Loader.jsx";
 import Protected from "./AuthLayout.jsx";
+import GuestLogin from "./GuestLogin.jsx";
+
 
 export {
   Layout,
@@ -44,4 +46,5 @@ export {
   SearchComp,
   Loader,
   Protected,
+  GuestLogin,
 };

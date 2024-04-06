@@ -5,20 +5,46 @@ import userService from "../services/UserService.js";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
+import { Loader, GuestLogin } from "../components/index.js";
+import { useEffect, useRef, useState } from "react";
 
 function Login({ setLoginCount }) {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
   const navigate = useNavigate();
+  const [loginProcessStarted, setLoginProcessStarted] = useState(false);
+  const [GuestLoginCompShow, setGuestLoginCompShow] = useState(false);
+  
+  const LoginFormRef = useRef();
+
+  const loginAsGuest = () => {
+    const email = "robert112@gmail.com";
+    const password = "robertrdj";
+
+    setValue("email", email);
+    setValue("password", password);
+
+    setGuestLoginCompShow(false);
+  }
+
+  // show guest login component after 3
+  useEffect(() => {
+    setTimeout(() => {
+      setGuestLoginCompShow(true);
+    }, 3000);
+  }, [])
 
   const loginSubmit = async (data) => {
+    console.log(data)
     try {
-      // console.log(response.status)
+      setLoginProcessStarted(true)
       const response = await userService.loginUserAccount(data);
       console.log("this is status code");
       console.log(response.status);
       setLoginCount((prev) => prev + 1);
+      setLoginProcessStarted(false)
       navigate("/", { refresh: true });
     } catch (error) {
+      setLoginProcessStarted(false)
       console.log("this is status code");
       console.log(error.response.status);
       console.log("error occured in login submit");
@@ -91,11 +117,11 @@ function Login({ setLoginCount }) {
                 </span>
               </div>
 
-              <form onSubmit={handleSubmit(loginSubmit)}>
+              <form ref={LoginFormRef} onSubmit={handleSubmit(loginSubmit)}>
                 <div className="flex flex-col gap-3">
                   <div>
                     <label
-                      for="website-admin"
+                      htmlFor="email"
                       className="block mb-0 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       email:
@@ -117,7 +143,7 @@ function Login({ setLoginCount }) {
                           required: true,
                         })}
                         type="text"
-                        id="website-admin"
+                        id="email"
                         required
                         className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="email"
@@ -127,21 +153,21 @@ function Login({ setLoginCount }) {
 
                   <div>
                     <label
-                      for="website-admin"
+                      htmlFor="password"
                       className="block mb-0 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       password:
                     </label>
                     <div className="flex">
                       <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                        <i class="bx bx-lock"></i>
+                        <i className="bx bx-lock"></i>
                       </span>
                       <input
                         {...register("password", {
                           required: true,
                         })}
                         type="password"
-                        id="website-admin"
+                        id="password"
                         required
                         className="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="password"
@@ -168,6 +194,9 @@ function Login({ setLoginCount }) {
           </div>
         </div>
       </main>
+
+      {GuestLoginCompShow && <GuestLogin loginAsAGuest={loginAsGuest} className={"absolute right-10 top-10"} />}
+
       <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -181,6 +210,7 @@ function Login({ setLoginCount }) {
         theme="light"
         transition="Bounce"
       />
+      {loginProcessStarted && <Loader children={"Logging in..."} />}
     </>
   );
 }

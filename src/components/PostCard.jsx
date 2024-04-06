@@ -18,7 +18,7 @@ function PostCard({
   const navigate = useNavigate();
   const userData = useSelector((state) => state.user.userData);
 
-  const [postBookmarked, setPostBookmarkd] = useState(true);
+  const [postBookmarked, setPostBookmarkd] = useState(false);
 
   useEffect(() => {
     if (userData?.bookmarks?.includes(_id)) {
