@@ -42,7 +42,7 @@ function App({ setLoginCount }) {
   const [loading, setLoading] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  
+
 
   const userData = useSelector((state) => state?.user?.userData);
 
@@ -53,7 +53,7 @@ function App({ setLoginCount }) {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        
+
         <Route path="/" element={<Layout />}>
           <Route
             path="/"
@@ -83,9 +83,7 @@ function App({ setLoginCount }) {
 
   useEffect(() => {
     setLoading(true);
-    setTimeout(() => {
-      loadMorePostForHomePage();
-    }, 2000); // :todo
+    loadMorePostForHomePage();
   }, [page]);
 
   function loadMorePostForHomePage() {
