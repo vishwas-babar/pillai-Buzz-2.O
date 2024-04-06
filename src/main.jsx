@@ -8,9 +8,7 @@ import store from "./store/store.js";
 function AppWrapper() {
   const [loginCount, setLoginCount] = useState(0);
 
-  useEffect(() => {
-    
-  }, [loginCount]); 
+  useEffect(() => {}, [loginCount]);
 
   return (
     <Provider store={store}>

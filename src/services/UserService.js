@@ -19,31 +19,30 @@ class UserService {
   };
 
   signupUser = async ({ name, userId, email, password, profilePhoto }) => {
-
     const formData = new FormData();
 
-    formData.append('name', name);
-    formData.append('userId', userId)
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('profilePhoto', profilePhoto[0]);
+    formData.append("name", name);
+    formData.append("userId", userId);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("profilePhoto", profilePhoto[0]);
 
     try {
-      const res = await axios.post('/api/user/signup', formData, {
+      const res = await axios.post("/api/user/signup", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       if (!res.data) {
-        throw new Error("res.data is not defined or it not exist")
+        throw new Error("res.data is not defined or it not exist");
       }
 
       return res;
     } catch (error) {
       throw error;
     }
-  }
+  };
 
   getCurrentUser = async () => {
     //get the user details
@@ -94,16 +93,16 @@ class UserService {
 
   getNotifications = async () => {
     try {
-      const res = await axios.get('/api/user/get-notifications')
+      const res = await axios.get("/api/user/get-notifications");
       if (!res) {
-        throw new Error("not get res")
+        throw new Error("not get res");
       }
       // console.log(res.data)
       return res.data;
     } catch (error) {
       throw error;
     }
-  }
+  };
 }
 
 const userService = new UserService();

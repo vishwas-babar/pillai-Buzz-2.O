@@ -29,8 +29,7 @@ import {
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import postService from "./services/PostService.js";
-import { useLocation } from 'react-router-dom';
-
+import { useLocation } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
@@ -42,8 +41,6 @@ function App({ setLoginCount }) {
   const [loading, setLoading] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-
-
   const userData = useSelector((state) => state?.user?.userData);
 
   useEffect(() => {
@@ -53,7 +50,6 @@ function App({ setLoginCount }) {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-
         <Route path="/" element={<Layout />}>
           <Route
             path="/"
@@ -67,16 +63,50 @@ function App({ setLoginCount }) {
             }
           />
           <Route path="/post" element={<Post />} />
-          <Route path="/create" element={<Protected authentication={true} ><PostEditor /></Protected>} />
-          <Route path="/bookmarks" element={<Protected authentication={true} ><Bookmarks /></Protected>} />
+          <Route
+            path="/create"
+            element={
+              <Protected authentication={true}>
+                <PostEditor />
+              </Protected>
+            }
+          />
+          <Route
+            path="/bookmarks"
+            element={
+              <Protected authentication={true}>
+                <Bookmarks />
+              </Protected>
+            }
+          />
           <Route path="/user/:user_id" element={<Profile />} />
           <Route path="/post/:id" element={<Post />} />
-          <Route path="/edit-post/:id" element={<Protected authentication={true} ><EditPost /></Protected>} />
+          <Route
+            path="/edit-post/:id"
+            element={
+              <Protected authentication={true}>
+                <EditPost />
+              </Protected>
+            }
+          />
           <Route path="/search" element={<Search />} />
         </Route>
-        <Route path="/vishwas" element={<Protected authentication={true}><TopNavBar /></Protected>} />
-        <Route path="/login" element={<Login setLoginCount={setLoginCount} />} />
-        <Route path="/signup" element={<Signup setLoginCount={setLoginCount} />} />
+        <Route
+          path="/vishwas"
+          element={
+            <Protected authentication={true}>
+              <TopNavBar />
+            </Protected>
+          }
+        />
+        <Route
+          path="/login"
+          element={<Login setLoginCount={setLoginCount} />}
+        />
+        <Route
+          path="/signup"
+          element={<Signup setLoginCount={setLoginCount} />}
+        />
       </>,
     ),
   );

@@ -24,7 +24,7 @@ function Login({ setLoginCount }) {
       console.log("error occured in login submit");
 
       if (error.response.status === 401) {
-        toast.error('wrong email or password!', {
+        toast.error("wrong email or password!", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: true,
@@ -38,7 +38,7 @@ function Login({ setLoginCount }) {
       }
 
       if (error.response.status === 500) {
-        toast.error('server issue! please try again later', {
+        toast.error("server issue! please try again later", {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: true,
@@ -80,9 +80,7 @@ function Login({ setLoginCount }) {
               <div className="flex w-full h-fit flex-col items-center justify-center mt-5">
                 <button className=" w-full h-10 cursor-pointer font-semibold text-base text-[black] bg-[white] shadow-[0_0_2px_1px_rgba(0,0,0,0.2)] transition-all duration-[0.2s] ease-[ease-in-out] flex items-center justify-center mb-2.5 rounded-[5px] border-[none] hover:bg-[#6358DC] hover:text-[white]">
                   <img src="/images/google-logo.png" alt="" />
-                  <span className="text-[0.9rem]">
-                    Login With Google
-                  </span>
+                  <span className="text-[0.9rem]">Login With Google</span>
                 </button>
               </div>
 
@@ -127,7 +125,6 @@ function Login({ setLoginCount }) {
                     </div>
                   </div>
 
-
                   <div>
                     <label
                       for="website-admin"
@@ -137,7 +134,7 @@ function Login({ setLoginCount }) {
                     </label>
                     <div className="flex">
                       <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                        <i class='bx bx-lock'></i>
+                        <i class="bx bx-lock"></i>
                       </span>
                       <input
                         {...register("password", {
@@ -151,13 +148,20 @@ function Login({ setLoginCount }) {
                       />
                     </div>
                   </div>
-
                 </div>
 
-                <Button type="submit" children="Login" className="w-full rounded-md mt-10" />
+                <Button
+                  type="submit"
+                  children="Login"
+                  className="w-full rounded-md mt-10"
+                />
               </form>
-              <span className=" text-sm text-gray-700">Don't have Account? <Link to={"/signup"} className=" text-blue-900">signup now</Link></span>
-
+              <span className=" text-sm text-gray-700">
+                Don't have Account?{" "}
+                <Link to={"/signup"} className=" text-blue-900">
+                  signup now
+                </Link>
+              </span>
             </div>
 
             <div className="signup-form-container absolute h-full w-full p-2.5"></div>

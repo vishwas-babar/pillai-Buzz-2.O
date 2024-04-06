@@ -15,9 +15,7 @@ function PostReadComp({ author, postContent }) {
     const year = date.getFullYear();
     const day = date.getDate();
     setPostcreatedat(`${day} ${month} ${year}`);
-  
-  }, [postContent])
-  
+  }, [postContent]);
 
   return (
     <main className="w-full h-fit pt-4 pb-20 px-3 mb-16 sm:w-3/4 sm:mx-auto md:w-3/5 lg:w-1/2 overflow-x-hidden">

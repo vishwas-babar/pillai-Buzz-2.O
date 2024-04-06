@@ -16,7 +16,7 @@ function PostCard({
   coverImage,
 }) {
   const navigate = useNavigate();
-  const userData = useSelector(state => state.user.userData)
+  const userData = useSelector((state) => state.user.userData);
 
   const [postBookmarked, setPostBookmarkd] = useState(true);
 

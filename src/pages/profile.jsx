@@ -56,7 +56,6 @@ function Profile() {
     // console.log("this is data from query: ", userPost);
   }, [userPost]);
 
-
   if (!userData)
     return (
       <div className=" text-center mt-36 text-lg w-full">

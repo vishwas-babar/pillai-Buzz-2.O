@@ -21,8 +21,6 @@ import SearchComp from "./SearchComp.jsx";
 import Loader from "./loaders/Loader.jsx";
 import Protected from "./AuthLayout.jsx";
 
-
-
 export {
   Layout,
   TopNavBar,

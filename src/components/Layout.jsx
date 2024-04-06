@@ -26,9 +26,13 @@ function Layout() {
         toggleNotificationComp={toggleNotificationComp}
         isNotificationCompOpen={isNotificationCompOpen}
       />
-      {(true)? <Outlet /> : (
+      {true ? (
+        <Outlet />
+      ) : (
         <div className=" h-screen w-full flex items-center justify-center">
-          <h1 className="text-center text-3xl mt-20">Please Login to see the content</h1>
+          <h1 className="text-center text-3xl mt-20">
+            Please Login to see the content
+          </h1>
         </div>
       )}
       {/* <Outlet /> */}

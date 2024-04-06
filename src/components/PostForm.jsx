@@ -9,8 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateThePost } from "../store/PostsSlice.js";
 
-
-
 function PostForm({ post, setUploadingPost }) {
   const { register, handleSubmit, watch, setValue, getValues, control } =
     useForm({
@@ -27,9 +25,8 @@ function PostForm({ post, setUploadingPost }) {
   const [imageBlob, setImageBlob] = useState(post?.coverImage);
   const navigate = useNavigate();
 
-
   const submit = async (data) => {
-    setUploadingPost(true)
+    setUploadingPost(true);
     if (post) {
       try {
         const res = await postService.updateThePost(post._id, data);
@@ -37,13 +34,13 @@ function PostForm({ post, setUploadingPost }) {
         if (res) {
           console.log("after update - ");
           console.log(res.data);
-          setUploadingPost(false)
+          setUploadingPost(false);
           dispatch(updateThePost(res.data)); // provided the post _id, title, coverImage
           navigate(`/post/${res.data._id}`);
         }
       } catch (error) {
         console.log("failed to update the post!", error);
-        setUploadingPost(false)
+        setUploadingPost(false);
       }
     } else {
       try {
@@ -54,7 +51,7 @@ function PostForm({ post, setUploadingPost }) {
           setUploadingPost(false);
         }
       } catch (error) {
-        setUploadingPost(false)
+        setUploadingPost(false);
       }
     }
   };
@@ -127,7 +124,6 @@ function PostForm({ post, setUploadingPost }) {
           </div>
         </div>
       </form>
-
     </div>
   );
 }
