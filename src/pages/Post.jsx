@@ -25,28 +25,11 @@ function Post() {
   const [overlay, setOverlay] = useState(false);
   const [postBookmarked, setPostBookmarkd] = useState(true);
 
-  // useEffect(() => {
-
-  //     ; (async () => {
-  //         try {
-  //             setError(false);
-  //             setIsLoading(true);
-  //             const response = await axios.get(`/api/post/${postId}`)
-
-  //             if (response) {
-  //                 console.log(response.data)
-  //                 setPost(response.data);
-  //                 setIsLoading(false);
-  //             }
-
-  //         } catch (error) {
-  //             console.log(error)
-  //             setError(true);
-  //             setIsLoading(false);
-  //         }
-  //     })()
-
-  // }, [postId])
+  useEffect(() => {
+    if (userData?.bookmarks?.includes(postId)) {
+      setPostBookmarkd(true);
+    }
+  }, [postId]);
 
   const {
     isError,
@@ -136,6 +119,7 @@ function Post() {
         />
       ) : null}
       <PostReadComp author={post?.author} postContent={post?.postContent} />
+
       <LikeCmtShrBkmr
         postContent={post?.postContent}
         likesCount={likesCount}
@@ -148,6 +132,7 @@ function Post() {
         bookmarkPost={() => setPostBookmarkd(!postBookmarked)}
         shareThePost={shareThePost}
       />
+
       <CommentsModal postId={postId} view={commentsModalOpen} />
 
       <ToastContainer

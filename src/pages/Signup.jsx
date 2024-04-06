@@ -8,7 +8,7 @@ import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Loader } from "../components/index.js";
 
-function Signup() {
+function Signup({ setLoginCount }) {
 
     const { register, handleSubmit } = useForm();
     const navigate = useNavigate();
@@ -33,7 +33,10 @@ function Signup() {
 
                 setLoginInProgress(true);
                 userService.loginUserAccount({ email: emailForLogin, password: passwordForLogin })
-                    .then(res => navigate("/"))
+                    .then(res => {
+                        setLoginCount((prev) => prev + 1);
+                        navigate("/");
+                    })
                     .catch(error => {
                         loginInProgress(false);
                         signupInProgress(false);

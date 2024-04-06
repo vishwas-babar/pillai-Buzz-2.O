@@ -6,6 +6,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100;0,200;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,700;1,800&display=swap'); */
 
 @layer components {
+
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
   .btn-primary {
     @apply bg-custom-primary text-white px-[20px] py-[10px] rounded-[20px];
     @apply transition-all duration-300 ease-in-out transform;
@@ -19,7 +34,7 @@
     @apply pb-[56.25%];
   }
 
-  .aspect-ratio-16-9 > * {
+  .aspect-ratio-16-9>* {
     @apply absolute;
     @apply w-full;
     @apply h-full;

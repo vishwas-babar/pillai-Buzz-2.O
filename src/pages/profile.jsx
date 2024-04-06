@@ -52,13 +52,10 @@ function Profile() {
 
   useEffect(() => {
     setPosts(userPost?.posts);
-    console.log("post are: ", userPost?.posts);
-    console.log("this is data from query: ", userPost);
+    // console.log("post are: ", userPost?.posts);
+    // console.log("this is data from query: ", userPost);
   }, [userPost]);
 
-  useEffect(() => {
-    console.log(posts);
-  }, [posts]);
 
   if (!userData)
     return (

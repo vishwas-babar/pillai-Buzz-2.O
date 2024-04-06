@@ -4,6 +4,7 @@ import userpng from "../assets/user.png";
 import { useEffect, useState } from "react";
 import postService from "../services/PostService";
 import { toast, Slide } from "react-toastify";
+import { useSelector } from "react-redux";
 
 function PostCard({
   authorDetails,
@@ -15,7 +16,15 @@ function PostCard({
   coverImage,
 }) {
   const navigate = useNavigate();
-  const [postBookmarked, setPostBookmarkd] = useState(false);
+  const userData = useSelector(state => state.user.userData)
+
+  const [postBookmarked, setPostBookmarkd] = useState(true);
+
+  useEffect(() => {
+    if (userData?.bookmarks?.includes(_id)) {
+      setPostBookmarkd(true);
+    }
+  }, [_id]);
 
   const bookmarkPost = async () => {
     setPostBookmarkd((prev) => !prev);

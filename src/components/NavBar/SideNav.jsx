@@ -7,7 +7,7 @@ function SideNav({ viewStatus, closeSideNav }) {
       {/* side nav for small screens */}
       <nav
         id="side-nav"
-        className={`flex ${viewStatus} fixed top-0 bottom-0 flex-col justify-start w-3/4 h-full z-30 bg-custom-gray shadow-md transition-all duration-450 ease-linear`}
+        className={`flex ${viewStatus} fixed top-0 bottom-0 flex-col justify-start w-3/4 h-full z-[500] bg-custom-gray shadow-md transition-all duration-450 ease-linear`}
       >
         <div className="flex justify-between w-full h-17 p-3">
           <div className="flex w-full h-full items-center p-2 relative">

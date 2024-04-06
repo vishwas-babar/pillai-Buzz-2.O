@@ -86,13 +86,13 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
         data-drawer-show="drawer-navigation"
         aria-controls="drawer-navigation"
       >
-        <Link
+        <div
           id="show-side-nav-btn"
           className="h-10 w-10  ml-3 p-2 border rounded-full flex md:hidden items-center justify-center cursor-pointer"
           onClick={showSideNav}
         >
           <i className="bx bx-menu h-10 w-10 text-[28px] flex items-center justify-center" />
-        </Link>
+        </div>
         <Link
           to="/"
           className="w-fit h-full ml-5 items-center md:flex hidden cursor-pointer"

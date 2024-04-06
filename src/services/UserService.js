@@ -91,6 +91,19 @@ class UserService {
       throw error;
     }
   };
+
+  getNotifications = async () => {
+    try {
+      const res = await axios.get('/api/user/get-notifications')
+      if (!res) {
+        throw new Error("not get res")
+      }
+      // console.log(res.data)
+      return res.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 const userService = new UserService();

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
 
-function Login() {
+function Login({ setLoginCount }) {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
@@ -16,7 +16,8 @@ function Login() {
       const response = await userService.loginUserAccount(data);
       console.log("this is status code");
       console.log(response.status);
-      navigate("/");
+      setLoginCount((prev) => prev + 1);
+      navigate("/", { refresh: true });
     } catch (error) {
       console.log("this is status code");
       console.log(error.response.status);
