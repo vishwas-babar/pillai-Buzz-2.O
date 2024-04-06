@@ -4,6 +4,13 @@
       "source": "/api/(.*)",
       "destination": "https://pillai-buzz-goo4.vercel.app/api/$1"
     },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/google2abc267d2dd58c16.html",
+      "destination": "/google2abc267d2dd58c16.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
