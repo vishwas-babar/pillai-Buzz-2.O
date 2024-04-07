@@ -15,7 +15,7 @@ function AppWrapper() {
   return (
     <Provider store={store}>
       {/* <StrictMode> */}
-      <GoogleOAuthProvider clientId="865108403314-eq8hrrqg8f7b2u2gn8sfnkrsta7lhp5m.apps.googleusercontent.com">
+      <GoogleOAuthProvider clientId={`${import.meta.env.VITE_APP_GOOGLE_CLIENT_ID}`}>
         <App key={loginCount} setLoginCount={setLoginCount} />
       </GoogleOAuthProvider>
       {/* </StrictMode> */}
