@@ -7,6 +7,7 @@ import { Bounce, toast, ToastContainer } from "react-toastify";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Loader } from "../components/index.js";
+import GoogleAuth from "../components/GoogleAuth.jsx";
 
 function Signup({ setLoginCount }) {
   const { register, handleSubmit } = useForm();
@@ -94,14 +95,19 @@ function Signup({ setLoginCount }) {
         <div className="form-container flex flex-col h-[500px] w-[400px] rounded-[5px]">
           <div className="inner-form-container relative h-full w-full transition-transform duration-[1s] bg-[white] shadow-[0px_0px_1px_1px] rounded-[5px]">
             <div className="login-form-container absolute h-full w-full p-2.5">
-              <div className="h-fit leading-[46px] mt-2.5 mx-2.5">
-                <h2 className="font-semibold leading-5">Welcome to</h2>
-                <h1
-                  id="pillai-buzz-logo-font"
-                  className="font-[bold] text-[#6358DC] text-xl mb-0"
-                >
-                  Pillai Buzz
-                </h1>
+              <div className="h-fit leading-[46px] mt-2.5 mx-2.5 flex justify-between">
+                <div>
+                  <h2 className="font-semibold leading-5">Welcome to</h2>
+                  <h1
+                    id="pillai-buzz-logo-font"
+                    className="font-[bold] text-[#6358DC] text-xl mb-0"
+                  >
+                    Pillai Buzz
+                  </h1>
+                </div>
+                <div>
+                  <GoogleAuth children={"Continue with google"} />
+                </div>
               </div>
 
               <div className="inline-flex items-center justify-center w-full">
@@ -129,7 +135,7 @@ function Signup({ setLoginCount }) {
                       accept="image/*"
                       className=" absolute w-40 h-10"
                       placeholder="profile photo"
-                      // ref={profilePhotoRef} // never use two ref on one element
+                    // ref={profilePhotoRef} // never use two ref on one element
                     />
                   </div>
                 </div>

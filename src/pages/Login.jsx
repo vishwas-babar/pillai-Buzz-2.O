@@ -7,13 +7,16 @@ import { Bounce, toast, ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
 import { Loader, GuestLogin } from "../components/index.js";
 import { useEffect, useRef, useState } from "react";
+import GoogleAuth from "../components/GoogleAuth.jsx";
+
 
 function Login({ setLoginCount }) {
   const { register, handleSubmit, setValue } = useForm();
+
   const navigate = useNavigate();
   const [loginProcessStarted, setLoginProcessStarted] = useState(false);
   const [GuestLoginCompShow, setGuestLoginCompShow] = useState(false);
-  
+
   const LoginFormRef = useRef();
 
   const loginAsGuest = () => {
@@ -79,6 +82,18 @@ function Login({ setLoginCount }) {
     }
   };
 
+  // function responseGoogle(response) {
+  //   console.log(response)
+  //   if (response.error) {
+  //     console.log("error occured in google login", error);
+
+  //   }else{
+  //     console.log("this is response from google login", response);
+
+  //     // send the response to the backend
+  //   }
+  // }
+
   return (
     <>
       <main className="lg:h-[80vh] lg:w-4/5 w-fit lg:p-8 bg-transparent absolute -translate-x-2/4 -translate-y-2/4 shadow-[0_0_10px_5px_rgba(0,0,0,0.2)] flex items-center justify-around lg:bg-[#eceaea] rounded-[10px] left-2/4 top-2/4">
@@ -104,10 +119,7 @@ function Login({ setLoginCount }) {
               </div>
 
               <div className="flex w-full h-fit flex-col items-center justify-center mt-5">
-                <button className=" w-full h-10 cursor-pointer font-semibold text-base text-[black] bg-[white] shadow-[0_0_2px_1px_rgba(0,0,0,0.2)] transition-all duration-[0.2s] ease-[ease-in-out] flex items-center justify-center mb-2.5 rounded-[5px] border-[none] hover:bg-[#6358DC] hover:text-[white]">
-                  <img src="/images/google-logo.png" alt="" />
-                  <span className="text-[0.9rem]">Login With Google</span>
-                </button>
+                <GoogleAuth children={"Continue with Google"} className="w-full py-3" />
               </div>
 
               <div className="inline-flex items-center justify-center w-full">

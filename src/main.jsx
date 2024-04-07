@@ -4,16 +4,20 @@ import App from "./App.jsx";
 import "./index.css";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 
 function AppWrapper() {
   const [loginCount, setLoginCount] = useState(0);
 
-  useEffect(() => {}, [loginCount]);
+  useEffect(() => { }, [loginCount]);
 
   return (
     <Provider store={store}>
       {/* <StrictMode> */}
-      <App key={loginCount} setLoginCount={setLoginCount} />
+      <GoogleOAuthProvider clientId="865108403314-eq8hrrqg8f7b2u2gn8sfnkrsta7lhp5m.apps.googleusercontent.com">
+        <App key={loginCount} setLoginCount={setLoginCount} />
+      </GoogleOAuthProvider>
       {/* </StrictMode> */}
     </Provider>
   );

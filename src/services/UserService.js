@@ -116,6 +116,20 @@ class UserService {
       throw error;
     }
   };
+
+  sendAccessTokenToServer = async (accessToken) => {
+    try {
+      const res = await axios.post('/api/user/Login', { access_token: accessToken })
+
+      if (!res.data) {
+        throw new Error("does not get any res.data for sending access token to server")
+      }
+      return res.data;
+    } catch (error) {
+      console.log("failed the google send access token to backend...: ", error)
+      throw error;
+    }
+  }
 }
 
 const userService = new UserService();
