@@ -205,7 +205,7 @@ function Notification1({
                         ? profilePhoto
                         : "https://www.shutterstock.com/image-photo/head-shot-portrait-close-smiling-600nw-1714666150.jpg"
                     }
-                    alt=""
+                    alt="profile photo"
                   />
                 </div>
               </div>

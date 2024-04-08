@@ -20,16 +20,12 @@ function Post() {
   const navigate = useNavigate();
   const userData = useSelector((state) => state.user.userData);
 
-  const [likesCount, setLikesCount] = useState(10);
+  const [likesCount, setLikesCount] = useState(0);
   const [commentsModalOpen, setCommentsModalOpen] = useState(false);
   const [overlay, setOverlay] = useState(false);
   const [postBookmarked, setPostBookmarkd] = useState(true);
+  const [isPostliked, setIsPostliked] = useState(true)
 
-  useEffect(() => {
-    if (userData?.bookmarks?.includes(postId)) {
-      setPostBookmarkd(true);
-    }
-  }, [postId]);
 
   const {
     isError,
@@ -50,11 +46,36 @@ function Post() {
         }),
   });
 
+  useEffect(() => {
+    if (userData?.bookmarks?.includes(postId)) {
+      setPostBookmarkd(true);
+    }
+
+    // check if the user already liked post or not
+    // console.log("this is post", post.postContent.likes.includes(userData._id));
+    if (post?.postContent?.likes?.includes(userData?._id)) {
+      setIsPostliked(true);
+    }else{
+      setIsPostliked(false);
+    }
+  }, [postId, post]);
+
+  
+
   const likePost = () => {
+
+    // if post is already liked then dont send any request to backend
+    if (isPostliked) {
+      return;
+    }
+
     setLikesCount((prev) => prev + 1);
-    postService.likeThePost(postId).catch((error) => {
+    setIsPostliked(true);
+    postService.likeThePost(postId)
+    .catch((error) => {
       console.log("error when liking the post: ", error);
       setLikesCount((prev) => prev - 1);
+      setIsPostliked(false);
     });
   };
 
@@ -131,6 +152,7 @@ function Post() {
         postBookmarked={postBookmarked}
         bookmarkPost={() => setPostBookmarkd(!postBookmarked)}
         shareThePost={shareThePost}
+        isPostLiked={isPostliked}
       />
 
       <CommentsModal postId={postId} view={commentsModalOpen} />

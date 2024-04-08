@@ -70,11 +70,11 @@ function PostCard({
     <>
       <div
         id="post"
-        className="h-fit flex flex-col w-full min-w-[90%] items-center rounded-md pt-0"
+        className="h-fit flex flex-col w-full min-w-[90%] items-center rounded-md mt-2 dark:border dark:border-gray-700 dark:bg-gray-800 bg-white shadow-md transition-all duration-300 ease-linear hover:shadow-lg sm:p-2 p-1 "
       >
         <div
           id="author-info"
-          className="flex justify-start self-start bg-transparent"
+          className="flex justify-start self-start bg-transparent w-full p-2 cursor-pointer"
           data-user_id={authorDetails._id}
           onClick={() => navigate(`/user/${authorDetails._id}`)}
         >
@@ -86,10 +86,10 @@ function PostCard({
             />
           </div>
           <div className="ml-2 mt-2">
-            <h2 className="md:text-[20px] text-[18px] font-serif leading-4 ">
+            <h2 className="md:text-[20px] text-[18px] font-serif leading-4 dark:text-slate-200 ">
               {authorDetails.name}
             </h2>
-            <span className="text-[14px] mt-0">@{authorDetails.userId}</span>
+            <span className="text-[14px] mt-0 dark:text-gray-400">@{authorDetails.userId}</span>
           </div>
         </div>
         <hr />
@@ -102,12 +102,12 @@ function PostCard({
           <div className="ml-0 w-full">
             <h1
               role="heading"
-              className="md:text-[22px] text-[20px] my-2 font-[500] leading-tight text-neutral-800"
+              className="md:text-[22px] text-[20px] my-2 font-[500] leading-tight text-neutral-800 dark:text-slate-100"
             >
               {title}
             </h1>
           </div>
-          <div className="border border-black aspect-video rounded-md w-full overflow-hidden flex items-center justify-center">
+          <div className="border border-black aspect-video rounded-md w-full overflow-hidden flex items-center justify-center dark:border dark:border-gray-600">
             <img
               className="w-full h-full object-cover"
               src={coverImage}

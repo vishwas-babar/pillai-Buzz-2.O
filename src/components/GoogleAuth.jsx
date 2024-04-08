@@ -23,7 +23,7 @@ function GoogleAuth({ children, className = "" }) {
 
     return (
         <button onClick={loginWithGoogle} className={`flex items-center justify-center gap-2 bg-white dark:bg-gray-900 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ${className}`}>
-            <img className=' size-6' src={googleIcon} alt="" />
+            <img className=' size-6' src={googleIcon} alt="google icon" />
             <span>{children}</span>
         </button>
     )

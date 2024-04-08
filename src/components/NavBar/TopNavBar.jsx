@@ -75,11 +75,18 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
     setViewStatus("ml-[-100%]");
   }
 
+  const toggleDarkMode = () => {
+    // turning on dark mode
+    console.log("turning on dark mode")
+    const html = document.querySelector("html");
+    html.classList.toggle("dark");
+  }
+
   return (
     <>
       <nav
         id="top-nav"
-        className={`flex items-center justify-between w-full h-20 overflow-hidden bg-custom-gray transition-all duration-500 ease-linear fixed top-0 z-30 ${navDisplay ? "" : "top-[-100%]"}`}
+        className={`flex items-center justify-between w-full h-20 overflow-hidden bg-custom-gray transition-all duration-500 ease-linear fixed top-0 z-30 ${navDisplay ? "" : "top-[-100%]"} dark:bg-gray-800 shadow-md dark:text-gray-300 dark:border-gray-600 `}
         type="button"
         data-drawer-target="drawer-navigation"
         data-drawer-show="drawer-navigation"
@@ -101,7 +108,7 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
             src={Pillaipo}
             alt=""
           />
-          <h2 id="pillaibuzz-logo" className="">
+          <h2 id="pillaibuzz-logo" className=" dark:text-slate-300">
             Pillai Buzz
           </h2>
         </Link>
@@ -109,7 +116,7 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `${isActive ? " bg-custom-primary text-white" : ""} rounded-[20px] hover:bg-custom-primary hover:text-white hover:shadow-md px-[20px] py-[10px] transition-all duration-[0.3s] ease-in-out`
+              `${isActive ? " bg-custom-primary text-white" : ""} rounded-[20px] hover:bg-custom-primary hover:text-white hover:shadow-md px-[20px] py-[10px] transition-all duration-[0.3s] ease-in-out dark:text-slate-100`
             }
           >
             My Feed
@@ -130,7 +137,7 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
             <NavLink
               to={"/search"}
               id="search-ic"
-              className="sm:flex hidden cursor-pointer items-center justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1"
+              className="sm:flex hidden cursor-pointer items-center justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1 dark:hover:bg-gray-700 dark:text-slate-200"
             >
               <i className="bx bx-search text-[25px]" />
             </NavLink>
@@ -146,15 +153,16 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
             </Link>
           )}
           <div
+            onClick={toggleDarkMode}
             id="dark-mode-ic"
-            className="flex items-center cursor-pointer justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1"
+            className="flex items-center cursor-pointer justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1 dark:hover:bg-gray-700 dark:text-slate-200"
           >
             <i className="bx bx-moon text-[25px]" />
           </div>
           <div
             onClick={toggleNotificationComp}
             id="bell-ic"
-            className={`sm:flex hidden cursor-pointer items-center justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1 ${isNotificationCompOpen ? "bg-custom-primary text-white" : ""}`}
+            className={`sm:flex hidden cursor-pointer items-center justify-center size-10 rounded-full transition-all duration-300 ease-in-out hover:shadow-custom-shadow-1 dark:hover:bg-gray-700 dark:text-slate-200 ${isNotificationCompOpen ? "bg-custom-primary text-white" : ""}`}
           >
             <i className="bx bx-bell text-[25px]" />
           </div>

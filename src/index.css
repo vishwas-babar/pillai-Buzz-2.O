@@ -92,9 +92,7 @@
 }
 
 #pillaibuzz-logo {
-  font-size: 25px;
-  color: black;
-  margin-left: 6px;
+  @apply text-[25px] text-[black] ml-1.5 dark:text-white;
   font-family: "Rubik Doodle Shadow", system-ui;
 }
 
