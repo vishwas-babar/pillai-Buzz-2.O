@@ -52,13 +52,9 @@ function Profile() {
 
   useEffect(() => {
     setPosts(userPost?.posts);
-    console.log("post are: ", userPost?.posts);
-    console.log("this is data from query: ", userPost);
+    // console.log("post are: ", userPost?.posts);
+    // console.log("this is data from query: ", userPost);
   }, [userPost]);
-
-  useEffect(() => {
-    console.log(posts);
-  }, [posts]);
 
   if (!userData)
     return (
@@ -91,11 +87,11 @@ function Profile() {
         <ProfileSkeleton />
       )}
 
-      <hr className="h-px my-1 bg-black border-0 dark:bg-gray-700" />
+      <hr className="h-px my-1 bg-black border-0 dark:bg-gray-800" />
 
       <div
         id="post-container"
-        class="sm:w-70% h-full rounded-sm mx-auto flex flex-col flex-grow items-center gap-4 
+        className="sm:w-70% h-full rounded-sm mx-auto flex flex-col flex-grow items-center gap-4 
         w-full px-6"
       >
         {isPostLoading ? (
@@ -104,18 +100,20 @@ function Profile() {
             <PostSkeleton />
             <PostSkeleton />
           </>
-        ) : (
+        ) : (posts?.length === 0 ? ( <h1 className=" h-10 flex items-start text-xl dark:text-gray-400">Don't have any posts!</h1> ) :
           posts?.map((post) => (
-            <PostCard
-              key={post?._id}
-              authorDetails={post?.authorDetails}
-              _id={post?._id}
-              commentsCount={post?.commentsCount}
-              likesCount={post?.likesCount}
-              reads={post?.reads}
-              title={post?.title}
-              coverImage={post?.coverImage}
-            />
+            <>
+              <PostCard
+                key={post?._id}
+                authorDetails={post?.authorDetails}
+                _id={post?._id}
+                commentsCount={post?.commentsCount}
+                likesCount={post?.likesCount}
+                reads={post?.reads}
+                title={post?.title}
+                coverImage={post?.coverImage}
+              />
+            </>
           ))
         )}
       </div>

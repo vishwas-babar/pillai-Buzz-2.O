@@ -18,6 +18,45 @@ class UserService {
     }
   };
 
+  signupUser = async ({ name, userId, email, password, profilePhoto }) => {
+    const formData = new FormData();
+
+    formData.append("name", name);
+    formData.append("userId", userId);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("profilePhoto", profilePhoto[0]);
+
+    try {
+      const res = await axios.post("/api/user/signup", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      if (!res.data) {
+        throw new Error("res.data is not defined or it not exist");
+      }
+
+      return res;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  signoutUser = async () => {
+    try {
+      const res = await axios.post('/api/user/signout')
+  
+      if (!res) {
+        throw new Error("does not get response")
+      }
+      return res.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   getCurrentUser = async () => {
     //get the user details
     try {
@@ -64,6 +103,33 @@ class UserService {
       throw error;
     }
   };
+
+  getNotifications = async () => {
+    try {
+      const res = await axios.get("/api/user/get-notifications");
+      if (!res) {
+        throw new Error("not get res");
+      }
+      // console.log(res.data)
+      return res.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  sendAccessTokenToServer = async (accessToken) => {
+    try {
+      const res = await axios.post('/api/user/Login', { access_token: accessToken })
+
+      if (!res.data) {
+        throw new Error("does not get any res.data for sending access token to server")
+      }
+      return res.data;
+    } catch (error) {
+      console.log("failed the google send access token to backend...: ", error)
+      throw error;
+    }
+  }
 }
 
 const userService = new UserService();

@@ -18,6 +18,10 @@ import PostForm from "./PostForm.jsx";
 import CommentsModal from "./post compo/CommentsModal.jsx";
 import NotificationComp from "./NotificationComp.jsx";
 import SearchComp from "./SearchComp.jsx";
+import Loader from "./loaders/Loader.jsx";
+import Protected from "./AuthLayout.jsx";
+import GuestLogin from "./GuestLogin.jsx";
+
 
 export {
   Layout,
@@ -40,4 +44,7 @@ export {
   CommentsModal,
   NotificationComp,
   SearchComp,
+  Loader,
+  Protected,
+  GuestLogin,
 };

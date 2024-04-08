@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   userData: null,
-  status: true, // this is user login status after some time make it false
-  loading: false,
+  status: false, // this is user login status after some time make it false
+  loading: true,
   error: false,
 };
 

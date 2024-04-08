@@ -2,16 +2,20 @@ import profilepng from "../../assets/user.png";
 import newsimg from "../../assets/news.jpeg";
 import { useState } from "react";
 import parse from "html-react-parser";
+import { useEffect } from "react";
 
 function PostReadComp({ author, postContent }) {
-  const [post, setPost] = useState({
-    name: "vishwas babar",
-    userid: "vishwas_vb9",
-    date: "22 feb 2024",
-    heading: "whats happening in pillai! the big secret",
-    description:
-      "in the pillai college nothing is happening as usual just attendig the reggural lectures and going to college this is my shedule and nothing else",
-  });
+  const [post, setPost] = useState();
+  const [postcreatedat, setPostcreatedat] = useState();
+
+  useEffect(() => {
+    // eg. 5 apr 2023
+    const date = new Date(postContent?.createdAt);
+    const month = date.toLocaleString("default", { month: "short" });
+    const year = date.getFullYear();
+    const day = date.getDate();
+    setPostcreatedat(`${day} ${month} ${year}`);
+  }, [postContent]);
 
   return (
     <main className="w-full h-fit pt-4 pb-20 px-3 mb-16 sm:w-3/4 sm:mx-auto md:w-3/5 lg:w-1/2 overflow-x-hidden">
@@ -36,7 +40,7 @@ function PostReadComp({ author, postContent }) {
         </span>
       </div>
       <div className="w-full flex items-center justify-center">
-        <span id="post-date">{postContent?.createdAt}</span>
+        <span id="post-date">{postcreatedat}</span>
       </div>
       <div className="w-full h-fit rounded-md overflow-hidden my-5 border border-black shadow-custom-shadow-1 flex justify-center">
         <img id="post-cover-image" src={postContent?.coverImage} alt="" />

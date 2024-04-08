@@ -14,8 +14,9 @@ import {
   Post,
   Profile,
   Login,
+  Protected,
 } from "./components/index.js";
-import { PostEditor, EditPost, Search } from "./pages/index.js";
+import { PostEditor, EditPost, Search, Signup } from "./pages/index.js";
 import { removeAllPosts, addArrOfPosts } from "./store/PostsSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import userService from "./services/UserService.js";
@@ -31,7 +32,7 @@ import postService from "./services/PostService.js";
 
 const queryClient = new QueryClient();
 
-function App() {
+function App({ setLoginCount }) {
   const dispatch = useDispatch();
 
   const [page, setPage] = useState(1);
@@ -61,24 +62,57 @@ function App() {
             }
           />
           <Route path="/post" element={<Post />} />
-          <Route path="/create" element={<PostEditor />} />
-          <Route path="/bookmarks" element={<Bookmarks />} />
+          <Route
+            path="/create"
+            element={
+              <Protected authentication={true}>
+                <PostEditor />
+              </Protected>
+            }
+          />
+          <Route
+            path="/bookmarks"
+            element={
+              <Protected authentication={true}>
+                <Bookmarks />
+              </Protected>
+            }
+          />
           <Route path="/user/:user_id" element={<Profile />} />
           <Route path="/post/:id" element={<Post />} />
-          <Route path="/edit-post/:id" element={<EditPost />} />
+          <Route
+            path="/edit-post/:id"
+            element={
+              <Protected authentication={true}>
+                <EditPost />
+              </Protected>
+            }
+          />
           <Route path="/search" element={<Search />} />
         </Route>
-        <Route path="/vishwas" element={<TopNavBar />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/vishwas"
+          element={
+            <Protected authentication={true}>
+              <TopNavBar />
+            </Protected>
+          }
+        />
+        <Route
+          path="/login"
+          element={<Login setLoginCount={setLoginCount} />}
+        />
+        <Route
+          path="/signup"
+          element={<Signup setLoginCount={setLoginCount} />}
+        />
       </>,
     ),
   );
 
   useEffect(() => {
     setLoading(true);
-    setTimeout(() => {
-      loadMorePostForHomePage();
-    }, 2000); // :todo
+    loadMorePostForHomePage();
   }, [page]);
 
   function loadMorePostForHomePage() {
@@ -119,7 +153,7 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
-        <ReactQueryDevtools initialIsOpen={true} />
+        {/* <ReactQueryDevtools initialIsOpen={true} /> */}
       </QueryClientProvider>
     </>
   );

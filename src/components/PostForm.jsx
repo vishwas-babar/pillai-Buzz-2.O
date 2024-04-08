@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateThePost } from "../store/PostsSlice.js";
 
-function PostForm({ post }) {
+function PostForm({ post, setUploadingPost }) {
   const { register, handleSubmit, watch, setValue, getValues, control } =
     useForm({
       defaultValues: {
@@ -26,6 +26,7 @@ function PostForm({ post }) {
   const navigate = useNavigate();
 
   const submit = async (data) => {
+    setUploadingPost(true);
     if (post) {
       try {
         const res = await postService.updateThePost(post._id, data);
@@ -33,11 +34,13 @@ function PostForm({ post }) {
         if (res) {
           console.log("after update - ");
           console.log(res.data);
+          setUploadingPost(false);
           dispatch(updateThePost(res.data)); // provided the post _id, title, coverImage
           navigate(`/post/${res.data._id}`);
         }
       } catch (error) {
         console.log("failed to update the post!", error);
+        setUploadingPost(false);
       }
     } else {
       try {
@@ -45,9 +48,11 @@ function PostForm({ post }) {
 
         if (res) {
           navigate(`/post/${res.postId}`);
-          // alert("post updated")
+          setUploadingPost(false);
         }
-      } catch (error) {}
+      } catch (error) {
+        setUploadingPost(false);
+      }
     }
   };
 
