@@ -5,6 +5,7 @@ import "./index.css";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 
 function AppWrapper() {
@@ -17,6 +18,7 @@ function AppWrapper() {
       {/* <StrictMode> */}
       <GoogleOAuthProvider clientId={`${import.meta.env.VITE_APP_GOOGLE_CLIENT_ID}`}>
         <App key={loginCount} setLoginCount={setLoginCount} />
+        <SpeedInsights />
       </GoogleOAuthProvider>
       {/* </StrictMode> */}
     </Provider>
