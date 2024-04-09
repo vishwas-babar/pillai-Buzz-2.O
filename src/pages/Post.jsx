@@ -124,14 +124,14 @@ function Post() {
 
   if (isLoading) {
     return (
-      <div className=" h-screen w-full flex items-center justify-center">
+      <div className=" h-screen w-full flex items-center justify-center dark:bg-gray-900 dark:text-slate-200">
         <h1 className="text-3xl">Loading...</h1>
       </div>
     );
   }
 
   return (
-    <div className="mt-24">
+    <div className="mt-24 dark:bg-gray-900">
       {userData?._id === post?.author?._id ? (
         <Button
           className="absolute mt-4 rounded-md right-6"

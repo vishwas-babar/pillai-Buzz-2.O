@@ -6,7 +6,7 @@ function ErrorComp({ statusCode }) {
     <motion.div
       initial={{ opacity: 0, y: -100 }}
       whileInView={{ opacity: 1, y: 0 }}
-      className="flex h-[calc(100vh-80px)] items-center justify-center p-5 w-full bg-white"
+      className="flex h-[calc(100vh-80px)] items-center justify-center p-5 w-full bg-white dark:bg-gray-900"
     >
       <div className="text-center">
         <div className="inline-flex rounded-full bg-sky-100 p-4">
@@ -26,10 +26,10 @@ function ErrorComp({ statusCode }) {
             </svg>
           </div>
         </div>
-        <h1 className="mt-5 text-[36px] font-bold text-slate-800 lg:text-[50px]">
+        <h1 className="mt-5 text-[36px] font-bold text-slate-800 lg:text-[50px] dark:text-slate-200">
           {statusCode} - Server error
         </h1>
-        <p className="text-slate-600 mt-5 lg:text-lg">
+        <p className="text-slate-600 mt-5 lg:text-lg dark:text-gray-400">
           Oops something went wrong. Try to refresh this page or <br /> feel
           free to contact us if the problem presists.
         </p>

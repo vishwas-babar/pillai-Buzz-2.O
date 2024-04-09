@@ -1,8 +1,21 @@
 import { Editor } from "@tinymce/tinymce-react";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 function TmceEditor({ className, ...props }) {
   const editorRef = useRef(null);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  useEffect(() => { // :todo 
+    const darkMode = document.documentElement.classList.contains("dark");
+
+    if (darkMode) {
+      setIsDarkMode(true);
+    } else {
+      setIsDarkMode(false);
+    }
+
+  }, [])
+  
 
   const log = () => {
     if (editorRef.current) {
@@ -45,6 +58,8 @@ function TmceEditor({ className, ...props }) {
             "link media | removeformat | help", // Removed 'image' from toolbar
           content_style:
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+            skin: isDarkMode ? 'oxide-dark' : 'oxide',
+            content_css: isDarkMode ? 'dark' : '',
           file_picker_types: "", // Removed 'image' from file picker types
         }}
       />

@@ -129,25 +129,25 @@ function NotificationComp({
 
   return (
     <div
-      className={` p-4 no-scrollbar shadow-custom-shadow-2 bg-gray-200 lg:w-[500px] sm:w-1/2 w-full z-40 fixed bottom-16 top-20 right-0 sm:top-24 lg:right-6 sm:bottom-10 rounded-lg overflow-auto ${isNotificationCompOpen ? "flex flex-col" : "hidden opacity-0"} ${className}`}
+      className={` p-4 no-scrollbar shadow-custom-shadow-2 bg-gray-200 lg:w-[500px] sm:w-1/2 w-full z-40 fixed bottom-16 top-20 right-0 sm:top-24 lg:right-6 sm:bottom-10 rounded-lg overflow-auto dark:bg-gray-900 dark:border dark:border-gray-600 ${isNotificationCompOpen ? "flex flex-col" : "hidden opacity-0"} ${className}`}
     >
-      {!isLoading
+      {notifications?.length > 0
         ? notifications?.map((notification) => (
-            <Notification
-              key={notification?.notifications?._id}
-              type={notification?.notifications?.notificationType}
-              userId={notification?.userDetails?.userId}
-              user_id={notification?.userDetails?._id}
-              userName={notification?.userDetails?.name}
-              post_id={notification?.notifications?.post_id}
-              message={notification?.notifications?.message}
-              readStatus={notification?.notifications?.readStatus}
-              createdAt={notification?.notifications?.createdAt}
-              profilePhoto={notification?.userDetails?.profilePhoto}
-              toggleNotificationComp={toggleNotificationComp}
-            />
-          ))
-        : "loading..."}
+          <Notification
+            key={notification?.notifications?._id}
+            type={notification?.notifications?.notificationType}
+            userId={notification?.userDetails?.userId}
+            user_id={notification?.userDetails?._id}
+            userName={notification?.userDetails?.name}
+            post_id={notification?.notifications?.post_id}
+            message={notification?.notifications?.message}
+            readStatus={notification?.notifications?.readStatus}
+            createdAt={notification?.notifications?.createdAt}
+            profilePhoto={notification?.userDetails?.profilePhoto}
+            toggleNotificationComp={toggleNotificationComp}
+          />
+        ))
+        : <div className="h-full w-full flex items-center justify-center dark:text-gray-400 text-gray-900 text-xl">You don't have notifications</div>}
     </div>
   );
 }
@@ -169,14 +169,14 @@ function Notification1({
   return (
     <div className="">
       <div className="flex flex-col">
-        {/* <div className="my-2 flex rounded-sm bg-transparent px-0 py-3 hover:bg-slate-50 md:px-4 dark:hover:bg-slate-900"> */}
+
         <div
           onClick={() => {
             navigate(`/post/${post_id}`);
 
             return toggleNotificationComp();
           }}
-          className="my-2 flex rounded-sm bg-transparent px-0 py-3 hover:bg-slate-50 md:px-4 transition-all duration-300"
+          className="my-2 flex rounded-sm bg-transparent px-0 py-3 transition-all duration-300  hover:bg-slate-50 md:px-4 dark:hover:bg-slate-800"
         >
           <div className="flex w-[calc(100%-32px)]">
             <div className="mr-4 flex h-8 w-8 flex-col items-center justify-center p-1 text-red-600">
@@ -209,8 +209,8 @@ function Notification1({
                   />
                 </div>
               </div>
-              <p className="text-slate-600 dark:text-slate-700">
-                <span className="text-base font-semibold text-slate-700 dark:text-slate-700">
+              <p className="text-slate-600 dark:text-slate-400">
+                <span className="text-base font-semibold text-slate-700 dark:text-slate-300">
                   <span>{userName}</span>
                 </span>{" "}
                 {message}
@@ -253,14 +253,13 @@ function Notification2({
   return (
     <div className="">
       <div className="flex flex-col">
-        {/* <div className="my-2 flex rounded-sm bg-transparent px-0 py-3 hover:bg-slate-50 md:px-4 dark:hover:bg-slate-900"> */}
         <div
           onClick={() => {
             navigate(`/post/${post_id}`);
 
             return toggleNotificationComp();
           }}
-          className="my-2 flex rounded-sm bg-transparent px-0 py-3 hover:bg-slate-50 md:px-4 transition-all duration-300"
+          className="my-2 flex rounded-sm bg-transparent px-0 py-3 transition-all duration-300  hover:bg-slate-50 md:px-4 dark:hover:bg-slate-800"
         >
           <div className="flex w-[calc(100%-32px)]">
             <div className="mr-4 flex h-8 w-8 flex-col items-center justify-center p-1 text-blue-600">
@@ -301,14 +300,14 @@ function Notification2({
 
                     return toggleNotificationComp();
                   }}
-                  className="text-base font-semibold text-slate-700 dark:text-slate-700"
+                  className="text-base font-semibold text-slate-700 dark:text-slate-400"
                 >
-                  <span>{userName}</span>
+                  <span className=" dark:text-slate-300">{userName}</span>
                 </span>{" "}
                 {message}
               </p>
               <p className="mt-3 text-sm text-slate-500 dark:text-slate-500">
-                3 Feb 2023, 3:17 pm
+                {date}
               </p>
             </div>
           </div>
@@ -353,7 +352,7 @@ function Notification3({
 
             return toggleNotificationComp();
           }}
-          className="my-2 flex rounded-sm bg-transparent px-0 py-3 hover:bg-slate-50 md:px-4 transition-all duration-300"
+          className="my-2 flex rounded-sm bg-transparent px-0 py-3 transition-all duration-300  hover:bg-slate-50 md:px-4 dark:hover:bg-slate-800"
         >
           <div className="flex w-[calc(100%-32px)]">
             <div className="mr-4 flex h-8 w-8 flex-col items-center justify-center p-1 text-gray-600">
@@ -397,10 +396,10 @@ function Notification3({
 
                     return toggleNotificationComp();
                   }}
-                  className="text-base font-semibold text-slate-700 dark:text-slate-700"
+                  className="text-base font-semibold text-slate-700 dark:text-slate-400"
                 >
-                  <span>{userName}</span>
-                </span>{" "}
+                  <span className=" dark:text-slate-300">{userName}</span>
+                </span>
                 {message}
               </p>
               <p className="mt-3 text-sm text-slate-500 dark:text-slate-500">

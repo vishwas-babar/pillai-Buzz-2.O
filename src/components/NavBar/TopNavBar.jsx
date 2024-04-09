@@ -75,12 +75,21 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
     setViewStatus("ml-[-100%]");
   }
 
+  // it will going to remember the theme of the user
   const toggleDarkMode = () => {
-    // turning on dark mode
-    console.log("turning on dark mode")
-    const html = document.querySelector("html");
-    html.classList.toggle("dark");
+  // get the theme from the localstorage
+  const theme = localStorage.getItem("theme");
+
+  const html = document.querySelector("html");
+
+  if (theme === "dark")  {
+    localStorage.setItem("theme", "light");
+    html.classList.remove("dark");
+  } else {
+    localStorage.setItem("theme", "dark");
+    html.classList.add("dark");
   }
+}
 
   return (
     <>

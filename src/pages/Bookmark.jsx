@@ -48,7 +48,7 @@ function Bookmarks(params) {
       >
         {bookmarkPosts.length < 1 ? (
           <div className=" h-screen w-full flex items-center justify-center">
-            <h1>You dont have any bookmarked posts</h1>
+            <h1 className=" dark:text-gray-400">You dont have any bookmarked posts</h1>
           </div>
         ) : (
           bookmarkPosts?.map((post) => (

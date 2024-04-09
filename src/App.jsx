@@ -148,6 +148,14 @@ function App({ setLoginCount }) {
         dispatch(getUserFailure(error.message));
       });
   }, []);
+  
+
+  // for the dark mode 
+  useEffect(() => {
+    const html = document.querySelector("html");
+    const theme = localStorage.getItem("theme");
+    html.classList.add(theme);
+  }, []);
 
   return (
     <>

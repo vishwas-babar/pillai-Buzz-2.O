@@ -6,7 +6,7 @@ function BottomNav({ toggleNotificationComp, isNotificationCompOpen }) {
     <div
       id="bottom-nav"
       className="fixed h-16 w-full bg-custom-gray bottom-0 flex items-center justify-around sm:hidden
-           *:size-10 *:rounded-md *:flex *:items-center *:justify-center *:transition-all *:duration-300 ease-in-out"
+           *:size-10 *:rounded-md *:flex *:items-center *:justify-center *:transition-all *:duration-300 ease-in-out dark:bg-gray-800 dark:text-slate-200"
     >
       <NavLink
         to="/"

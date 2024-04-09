@@ -31,7 +31,7 @@ function Home({ error, loading, isEnd, incrementPage }) {
 
   if (!authStatusLoading && error) {
     return (
-      <div className=" h-screen w-full flex items-center justify-center dark:bg-gray-600">
+      <div className=" h-screen w-full flex items-center justify-center dark:bg-gray-600 dark:bg-gray-900">
         <ErrorComp statusCode={500} />
       </div>
     );
