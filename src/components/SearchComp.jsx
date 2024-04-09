@@ -11,12 +11,6 @@ function SearchComp({
   return (
     <div className={`max-w-lg mx-auto ${className}`}>
       <div className="flex">
-        <label
-          htmlFor="search-dropdown"
-          className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-        >
-          Your Email
-        </label>
 
         {/* dropdown */}
         <select
@@ -24,7 +18,7 @@ function SearchComp({
           id="dropdown"
           defaultValue={searchType}
           className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-1 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
-          onChange={() => setSearchType(e.target.value)}
+          onChange={(e) => setSearchType(e.target.value)}
         >
           <option value="users">users</option>
           <option value="posts">posts</option>

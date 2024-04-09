@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react";
 import { SearchComp, PostCard } from "../components/index.js";
 import postService from "../services/PostService.js";
 import useDetectScroll, { Axis } from "@smakss/react-scroll-direction";
+import UserSearch from "../components/UserSearch.jsx";
+import userService from "../services/UserService.js";
+
 
 function Search() {
   const [searchText, setSearchText] = useState("");
   const [searchType, setSearchType] = useState("posts");
+
+  const [noSearchedItem, setNoSearchedItem] = useState(false);
 
   const [searchedPosts, setSearchedPosts] = useState(new Array());
   const [searchedUsers, setSearchedUsers] = useState(new Array());
@@ -26,7 +31,15 @@ function Search() {
   }, [scrollDir]);
 
   useEffect(() => {
+    console.log("search text: ", searchText);
+    console.log("search type: ", searchType);
     const timerId = setTimeout(() => {
+      if (searchType === "users") {
+        // perform search operation for users
+        performSearchOperationForUsers();
+      } else if (searchType === "posts") {
+        performSearchOperation();
+      }
       performSearchOperation();
     }, 1000);
 
@@ -35,8 +48,26 @@ function Search() {
     };
   }, [searchText, searchType]);
 
+  const performSearchOperationForUsers = () => {
+    const users = userService.searchUsers(searchText)
+      .then(res => {
+        console.log(res);
+        setSearchedUsers(res.users);
+
+        if (res.users.length === 0) {
+          setNoSearchedItem(true);
+        }
+        else {
+          setNoSearchedItem(false);
+        }
+      })
+      .catch(err => {
+        console.log("failed to search the users: ", err)
+      })
+  }
+
   const performSearchOperation = () => {
-    if (!searchText.trim()) {
+    if (!searchText.trim() || searchType === "users") {
       return;
     }
 
@@ -46,6 +77,11 @@ function Search() {
         console.log(res);
         setSearchedPosts(res.posts);
         // console.log(searchedPosts)
+        if (res.posts.length === 0) {
+          setNoSearchedItem(true);
+        }else {
+          setNoSearchedItem(false);
+        }
       })
       .catch((error) => {
         console.log("failed to search the posts: ", error);
@@ -71,8 +107,12 @@ function Search() {
         className="flex flex-col min-h-screen items-center h-fit shadow-md shadow-black mx-auto rounded-lg
     smm:w-[70%] sm:w-[60%] md:w-[55%] lg:w-[40%] mt-24  px-6"
       >
-        <div className="mt-28">
-          {searchedPosts.length !== 0 &&
+        {noSearchedItem ? (
+          <h1 className="h-full w-full mt-52 flex items-center justify-center dark:text-slate-300 text-gray-950">
+            No searched item found!
+          </h1>
+        ) : (<><div className="mt-28 w-full">
+          {(searchType === 'posts') && searchedPosts.length !== 0 &&
             searchedPosts?.map((post) => (
               <PostCard
                 key={post?._id}
@@ -86,6 +126,10 @@ function Search() {
               />
             ))}
         </div>
+
+        <div className="w-full">
+          {(searchType === 'users') && <UserSearch users={searchedUsers} />}
+        </div></>)}
       </main>
     </div>
   );
