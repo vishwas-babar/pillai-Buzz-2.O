@@ -90,7 +90,7 @@ function CommentsModal({ postId, view }) {
     <>
       <div
         id="comment-modal"
-        className={`fixed top-36 z-40 h-full w-full flex-col overflow-hidden scroll-smooth rounded-lg bg-white sm:left-1/2 sm:w-3/4 sm:translate-x-[-50%] md:w-2/3 lg:w-1/2 ${view ? "" : "hidden"} shadow-xl`}
+        className={`fixed top-36 z-40 h-full w-full flex-col overflow-hidden scroll-smooth rounded-lg bg-white sm:left-1/2 sm:w-3/4 sm:translate-x-[-50%] md:w-2/3 lg:w-1/2 dark:bg-gray-900 ${view ? "" : "hidden"} shadow-xl`}
       >
         {/* take comment input */}
         <form
@@ -102,7 +102,7 @@ function CommentsModal({ postId, view }) {
             id="comment-input"
             role="text"
             type="text"
-            className="w-full rounded-md border p-2 text-[16px]"
+            className="w-full rounded-md border p-2 text-[16px] dark:bg-gray-800 dark:text-slate-200 dark:border-gray-700 dark:placeholder-slate-500"
             placeholder="add your thoughts here"
             {...register("content", {
               required: true,
@@ -112,7 +112,7 @@ function CommentsModal({ postId, view }) {
           />
           <button
             id="add-comment-btn"
-            className="btn-primary flex items-center justify-center"
+            className="btn-primary flex items-center justify-center w-12 h-12 rounded-md dark:bg-gray-800 dark:text-slate-200 dark:border-gray-700 dark:hover:bg-gray-700 dark:hover:text-slate-300 dark:hover:border-gray-800"
             type="submit"
           >
             <i className="bx bx-send text-[20px]" />
@@ -121,7 +121,7 @@ function CommentsModal({ postId, view }) {
 
         <div
           id="comment-section"
-          className="h-fit w-full border-t p-2 flex flex-col gap-2"
+          className="h-fit w-full border-t dark:border-gray-500 p-2 flex flex-col gap-2"
         >
           {postComments.length > 0 ? (
             postComments?.map((comment) => (
@@ -139,7 +139,7 @@ function CommentsModal({ postId, view }) {
             ))
           ) : (
             <div className="h-full w-2/3 flex items-center mx-auto mt-5 justify-center">
-              <h1 className="text-center w-full">
+              <h1 className="text-center w-full dark:text-slate-400">
                 No comments yet? Your opinion matters! Start the discussion now.
               </h1>
             </div>

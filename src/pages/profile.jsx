@@ -87,7 +87,7 @@ function Profile() {
         <ProfileSkeleton />
       )}
 
-      <hr className="h-px my-1 bg-black border-0 dark:bg-gray-700" />
+      <hr className="h-px my-1 bg-black border-0 dark:bg-gray-800" />
 
       <div
         id="post-container"
@@ -100,7 +100,7 @@ function Profile() {
             <PostSkeleton />
             <PostSkeleton />
           </>
-        ) : (posts?.length === 0 ? ( <h1 className=" h-10 flex items-start text-xl">Don't have any posts!</h1> ) :
+        ) : (posts?.length === 0 ? ( <h1 className=" h-10 flex items-start text-xl dark:text-gray-400">Don't have any posts!</h1> ) :
           posts?.map((post) => (
             <>
               <PostCard

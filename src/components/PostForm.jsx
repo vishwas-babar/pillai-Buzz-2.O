@@ -67,7 +67,7 @@ function PostForm({ post, setUploadingPost }) {
   return (
     <div className="w-full ">
       <form
-        className="flex flex-nowrap justify-around"
+        className="flex flex-nowrap justify-around dark:bg-gray-900 p-4 gap-2"
         onSubmit={handleSubmit(submit)}
       >
         <div className="w-[50%]">
@@ -85,19 +85,19 @@ function PostForm({ post, setUploadingPost }) {
           />
         </div>
         <div className="w-[30%] overflow-hidden">
-          <label htmlFor="title">title:</label>
+          <label htmlFor="title" className=" dark:text-gray-300">Title:</label>
           <Input
             {...register("title", { required: true })}
             id="title"
             as="textarea"
-            className="w-full"
+            className="w-full bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700 p-2 rounded-md"
             rows={3}
             placeholder="add your title here"
           />
 
           <div className="w-full mt-4">
-            <label htmlFor="coverImage">coverImage: </label>
-            <div className="aspect-video border border-spacing-1 overflow-hidden flex justify-center items-center">
+            <label htmlFor="coverImage" className="dark:text-gray-300">CoverImage: </label>
+            <div className="aspect-video border border-spacing-1 overflow-hidden flex justify-center items-center dark:border-gray-600">
               <img
                 id="coverImage"
                 className="object-contain max-w-full max-h-full"
@@ -111,16 +111,16 @@ function PostForm({ post, setUploadingPost }) {
               name="coverImage"
               onChange={handleImageChange}
               type="file"
+              className="w-full mt-2 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600"
             />
           </div>
 
           <div className="w-full display flex justify-end">
             <Button
-              className="mt-4 "
+              className="mt-4 rounded-md dark:text-gray-300"
               type="submit"
-              children={post ? "UPDATE POST" : "CREATE POST"}
+              children={post ? "Update" : "Create"}
             />
-            {/* <button type='submit'>submit</button> */}
           </div>
         </div>
       </form>

@@ -83,7 +83,7 @@ function Signup({ setLoginCount }) {
 
   return (
     <>
-      <main className="lg:h-[80vh] lg:w-4/5 w-fit lg:p-8 bg-transparent absolute -translate-x-2/4 -translate-y-2/4 shadow-[0_0_10px_5px_rgba(0,0,0,0.2)] flex items-center justify-around lg:bg-[#eceaea] rounded-[10px] left-2/4 top-2/4">
+      <main className="lg:h-[80vh] lg:w-4/5 w-fit lg:p-8 bg-transparent absolute -translate-x-2/4 -translate-y-2/4 shadow-[0_0_10px_5px_rgba(0,0,0,0.2)] flex items-center justify-around lg:bg-[#eceaea] rounded-[10px] left-2/4 top-2/4 dark:bg-gray-900 dark:border dark:border-gray-500">
         <div className="h-full md:hidden lg:flex xl:flex w-6/12 hidden items-center justify-center rounded-tl-[10px] rounded-bl-[10px]">
           <img
             className="h-[400px] w-auto object-contain"
@@ -92,21 +92,21 @@ function Signup({ setLoginCount }) {
           />
         </div>
 
-        <div className="form-container flex flex-col h-[500px] w-[400px] rounded-[5px]">
+        <div className="form-container flex flex-col h-[550px] w-[400px] rounded-[5px]">
           <div className="inner-form-container relative h-full w-full transition-transform duration-[1s] bg-[white] shadow-[0px_0px_1px_1px] rounded-[5px]">
-            <div className="login-form-container absolute h-full w-full p-2.5">
-              <div className="h-fit leading-[46px] mt-2.5 mx-2.5 flex justify-between">
+            <div className="login-form-container absolute h-full w-full p-2.5  dark:bg-gray-800">
+              <div className="h-fit leading-[46px] mt-2.5 mx-2.5 flex justify-between ">
                 <div>
-                  <h2 className="font-semibold leading-5">Welcome to</h2>
+                  <h2 className="font-semibold leading-5 dark:text-slate-200">Welcome to</h2>
                   <h1
                     id="pillai-buzz-logo-font"
-                    className="font-[bold] text-[#6358DC] text-xl mb-0"
+                    className="font-[bold] text-[#6358DC] text-xl mb-0 dark:text-[#d6d6f8]"
                   >
                     Pillai Buzz
                   </h1>
                 </div>
                 <div>
-                  <GoogleAuth children={"Continue with google"} />
+                  <GoogleAuth children={"Continue with google"} className="dark:text-slate-200 transition-all dark:hover:bg-gray-700 "/>
                 </div>
               </div>
 
@@ -114,7 +114,7 @@ function Signup({ setLoginCount }) {
                 <hr className="w-full h-px my-1 bg-gray-200 border-0 dark:bg-gray-700" />
               </div>
 
-              <form onSubmit={handleSubmit(signupSubmit)}>
+              <form className=" mt-3" onSubmit={handleSubmit(signupSubmit)}>
                 <div className="w-full flex justify-center">
                   <div className="relative">
                     <img
@@ -126,24 +126,24 @@ function Signup({ setLoginCount }) {
                       }
                       alt="profile Photo"
                     />
-                    <i className="bx bx-camera text-2xl absolute bottom-0 right-0 text-gray-500 dark:text-gray-400"></i>
+                    <i className="bx bx-camera text-2xl absolute bottom-0 right-0 text-gray-500 dark:text-gray-300"></i>
                     <input
                       {...register("profilePhoto", { required: true })}
                       onChange={handleProfilePhotoInputChange}
                       type="file"
                       required
                       accept="image/*"
-                      className=" absolute w-40 h-10"
+                      className=" absolute w-40 mt-1 h-fit dark:bg-gray-600"
                       placeholder="profile photo"
                     // ref={profilePhotoRef} // never use two ref on one element
                     />
                   </div>
                 </div>
 
-                <div className=" mt-10 flex flex-col gap-2">
+                <div className=" mt-16 flex flex-col gap-2 dark:text-slate-200">
                   <div className="flex">
                     <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                      <i className="bx bx-user"></i>
+                      <i className="bx bx-user dark:text-slate-200"></i>
                     </span>
                     <input
                       {...register("name", {
@@ -158,7 +158,7 @@ function Signup({ setLoginCount }) {
 
                   <div className="flex">
                     <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                      <i className="bx bx-user"></i>
+                      <i className="bx bx-user dark:text-slate-200"></i>
                     </span>
                     <input
                       {...register("userId", {
@@ -173,7 +173,7 @@ function Signup({ setLoginCount }) {
 
                   <div className="flex">
                     <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                      <i className="bx bx-mail-send"></i>
+                      <i className="bx bx-mail-send dark:text-slate-200"></i>
                     </span>
                     <input
                       {...register("email", {
@@ -189,7 +189,7 @@ function Signup({ setLoginCount }) {
 
                   <div className="flex">
                     <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                      <i className="bx bx-lock"></i>
+                      <i className="bx bx-lock dark:text-slate-200"></i>
                     </span>
                     <input
                       {...register("password", {
@@ -207,12 +207,12 @@ function Signup({ setLoginCount }) {
                 <Button
                   type="submit"
                   children="Signup"
-                  className="w-full rounded-md mt-2"
+                  className="w-full rounded-md mt-5"
                 />
               </form>
-              <span className=" text-sm text-gray-700">
+              <span className=" text-sm text-gray-700 dark:text-gray-400">
                 Already have Account?{" "}
-                <Link to={"/login"} className=" text-blue-900">
+                <Link to={"/login"} className=" text-blue-900 dark:text-blue-700">
                   login now
                 </Link>
               </span>

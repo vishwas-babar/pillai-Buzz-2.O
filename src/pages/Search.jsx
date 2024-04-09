@@ -36,7 +36,7 @@ function Search() {
   }, [searchText, searchType]);
 
   const performSearchOperation = () => {
-    if (!searchText) {
+    if (!searchText.trim()) {
       return;
     }
 
@@ -55,10 +55,10 @@ function Search() {
   return (
     <div className=" w-full">
       <div
-        className={`w-fit m-auto rounded-md px-12 bg-slate-300 py-5 fixed z-50 left-1/2 translate-x-[-50%] transition-all duration-500 ${searchCompDisplay ? "" : " opacity-0"}`}
+        className={`w-fit sm:w-fit  overflow-hidden m-auto rounded-md px-12 bg-slate-300 py-5 fixed z-50 left-1/2 translate-x-[-50%] transition-all duration-500 dark:bg-gray-900 dark:border dark:border-gray-600 ${searchCompDisplay ? "" : " opacity-0"}`}
       >
         <SearchComp
-          className=" w-[500px]"
+          className="w-[400px] sm:w-[500px] "
           searchText={searchText}
           searchType={searchType}
           setSearchType={setSearchType}
@@ -68,7 +68,7 @@ function Search() {
       </div>
 
       <main
-        className="flex flex-col items-center h-fit shadow-md shadow-black mx-auto rounded-lg
+        className="flex flex-col min-h-screen items-center h-fit shadow-md shadow-black mx-auto rounded-lg
     smm:w-[70%] sm:w-[60%] md:w-[55%] lg:w-[40%] mt-24  px-6"
       >
         <div className="mt-28">

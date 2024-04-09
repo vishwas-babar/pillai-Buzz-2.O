@@ -7,7 +7,7 @@ function SideNav({ viewStatus, closeSideNav }) {
       {/* side nav for small screens */}
       <nav
         id="side-nav"
-        className={`flex ${viewStatus} fixed top-0 bottom-0 flex-col justify-start w-3/4 h-full z-[500] bg-custom-gray shadow-md transition-all duration-450 ease-linear`}
+        className={`flex ${viewStatus} fixed top-0 bottom-0 flex-col justify-start w-3/4 h-full z-[500] bg-custom-gray shadow-md transition-all duration-450 ease-linear dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600`}
       >
         <div className="flex justify-between w-full h-17 p-3">
           <div className="flex w-full h-full items-center p-2 relative">
@@ -18,7 +18,7 @@ function SideNav({ viewStatus, closeSideNav }) {
                 alt=""
               />
             </Link>
-            <Link to={"/"} id="pillaibuzz-logo" className="text-[30px] ">
+            <Link to={"/"} id="pillaibuzz-logo" className="text-[30px] dark:text-gray-300 ">
               Pillai Buzz
             </Link>
             <a
@@ -33,11 +33,11 @@ function SideNav({ viewStatus, closeSideNav }) {
         <div className="side-nav-btns flex flex-col *:w-full *:h-11 *:flex *:items-center *:px-[10px] *:py-[20px] *:transition-all *:cursor-pointer duration-300 ease-in-out">
           <NavLink
             to="/"
-            className="hover:shadow-custom-shadow-1 active:scale-[1.01]"
+            className="hover:shadow-custom-shadow-1 text-[1.1rem] active:scale-[1.01] dark:text-slate-200 dark:hover:bg-gray-700 dark:border-gray-700 "
           >
             My Feed
           </NavLink>
-          <NavLink className="hover:shadow-custom-shadow-1 active:scale-[1.01]">
+          <NavLink className="hover:shadow-custom-shadow-1 text-[1.1rem] active:scale-[1.01] dark:text-slate-200 dark:hover:bg-gray-700 dark:border-gray-700 ">
             More
           </NavLink>
         </div>
