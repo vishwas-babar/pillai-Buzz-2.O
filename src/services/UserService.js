@@ -130,6 +130,24 @@ class UserService {
       throw error;
     }
   }
+
+  searchUsers = async (text) => {
+    try {
+      const encodedText = encodeURIComponent(text);
+
+      console.log(encodedText);
+
+      const res = await axios.get(`/api/user/search?query=${encodedText}`);
+
+      if (!res.data) {
+        throw new Error("res.data dont have any data");
+      }
+
+      return res.data;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 const userService = new UserService();
