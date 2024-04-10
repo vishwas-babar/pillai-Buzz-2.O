@@ -58,7 +58,7 @@ function Profile() {
 
   if (!userData)
     return (
-      <div className=" text-center mt-36 text-lg w-full">
+      <div className=" text-center pt-64 text-2xl w-full dark:text-gray-400">
         You need to login first
       </div>
     );

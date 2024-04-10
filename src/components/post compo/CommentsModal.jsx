@@ -4,10 +4,16 @@ import { useForm } from "react-hook-form";
 import postService from "../../services/PostService";
 import Comment from "./Comment";
 import { Slide, toast, ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+
 
 function CommentsModal({ postId, view }) {
   const { register, handleSubmit, reset } = useForm();
   const [postComments, setPostComments] = useState(new Array());
+
+  const isUserLoggedIn = useSelector((state) => state.user.status);
+  const navigate = useNavigate();
 
   const {
     error,
@@ -31,6 +37,14 @@ function CommentsModal({ postId, view }) {
   });
 
   const addComment = (data) => {
+
+
+    if (!isUserLoggedIn) {
+      alert("You need to login first");
+      navigate("/login");
+      return;
+    }
+
     // passing the content
     postService
       .addCommentOnPost(postId, data)

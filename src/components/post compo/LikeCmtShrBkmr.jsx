@@ -42,7 +42,7 @@ function LikeCmtShrBkmr({
       <a
         onClick={bookmarkPost}
         id="bookmark-btn"
-        className={`size-10 rounded-md cursor-pointer  flex items-center justify-center transition-all duration-300 ease-in-out active:bg-custom-primary ${postBookmarked ? "text-white bg-custom-primary" : " text-gray-900"}`}
+        className={`size-10 rounded-md cursor-pointer  flex items-center justify-center transition-all duration-300 ease-in-out active:bg-custom-primary dark:text-slate-200 ${postBookmarked ? "text-white bg-custom-primary" : " text-gray-900"}`}
       >
         <i className="bx bx-bookmark text-[25px] transition-all duration-300 ease-in-out" />
       </a>

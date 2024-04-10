@@ -20,10 +20,12 @@ function Post() {
   const navigate = useNavigate();
   const userData = useSelector((state) => state.user.userData);
 
+  const userLoggedIn = useSelector((state) => state.user.status);
+
   const [likesCount, setLikesCount] = useState(0);
   const [commentsModalOpen, setCommentsModalOpen] = useState(false);
   const [overlay, setOverlay] = useState(false);
-  const [postBookmarked, setPostBookmarkd] = useState(true);
+  const [postBookmarked, setPostBookmarkd] = useState(false);
   const [isPostliked, setIsPostliked] = useState(true)
 
 
@@ -63,6 +65,12 @@ function Post() {
   
 
   const likePost = () => {
+
+    if (!userLoggedIn) {
+      // navigate("/login");
+      alert("to like the post you need to login first!");
+      navigate("/login");
+    }
 
     // if post is already liked then dont send any request to backend
     if (isPostliked) {

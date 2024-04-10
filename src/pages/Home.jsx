@@ -16,14 +16,15 @@ import { Helmet } from "react-helmet";
 function Home({ error, loading, isEnd, incrementPage }) {
   const dispatch = useDispatch();
   // dispatch(removeAllPosts())
+  // 
   const { posts } = useSelector((state) => state.post);
-  const authStatus = useSelector((state) => state.user.userData);
+  const authStatus = useSelector((state) => state.user.status);
   const authStatusLoading = useSelector((state) => state.user.loading);
 
   if (!authStatusLoading && !authStatus) {
     return (
       <div className=" h-screen w-full flex items-center justify-center">
-        <h1 className=" text-2xl">You need to login first </h1>
+        <h1 className=" text-2xl dark:text-gray-400 ">You need to login first </h1>
         <Link to={"/login"} type="button" className=" bg-custom-primary rounded-md ml-2 px-4 py-2 text-slate-200">Login</Link>
       </div>
     );
