@@ -9,11 +9,11 @@ class UserService {
         password,
       });
       if (response) {
-        console.log("this is status code: ", response.status);
+        //console.log("this is status code: ", response.status);
         return response;
       }
     } catch (error) {
-      console.log("error occured in loginuseraccount");
+      //console.log("error occured in loginuseraccount");
       throw error;
     }
   };
@@ -74,7 +74,7 @@ class UserService {
       const res = await axios.get(`/api/user/${_id}/get-details`);
 
       if (res) {
-        console.log(res.data);
+        //console.log(res.data);
         return res;
       }
     } catch (error) {
@@ -93,13 +93,13 @@ class UserService {
           "reponse for the notification toggle cant be null or undefined",
         );
       }
-      console.log(
-        "this is the response got from notification toggle: ",
-        res.data,
-      );
+      //console.log(
+      //   "this is the response got from notification toggle: ",
+      //   res.data,
+      // );
       return res.data;
     } catch (error) {
-      console.log("failed to toggle the notificaion for the user: ", error);
+      //console.log("failed to toggle the notificaion for the user: ", error);
       throw error;
     }
   };
@@ -110,7 +110,7 @@ class UserService {
       if (!res) {
         throw new Error("not get res");
       }
-      // console.log(res.data)
+      // //console.log(res.data)
       return res.data;
     } catch (error) {
       throw error;
@@ -126,7 +126,7 @@ class UserService {
       }
       return res.data;
     } catch (error) {
-      console.log("failed the google send access token to backend...: ", error)
+      //console.log("failed the google send access token to backend...: ", error)
       throw error;
     }
   }
@@ -135,7 +135,7 @@ class UserService {
     try {
       const encodedText = encodeURIComponent(text);
 
-      console.log(encodedText);
+      //console.log(encodedText);
 
       const res = await axios.get(`/api/user/search?query=${encodedText}`);
 

@@ -22,7 +22,7 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
   });
 
   useEffect(() => {
-    console.log(scrollDir);
+    // console.log(scrollDir);
 
     if (scrollDir === "down") {
       setNavDisplay(false);
@@ -71,7 +71,7 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
   }
 
   function closeSideNav() {
-    console.log("close side nav is called");
+    // console.log("close side nav is called");
     setViewStatus("ml-[-100%]");
   }
 

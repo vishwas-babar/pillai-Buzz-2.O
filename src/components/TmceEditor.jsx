@@ -19,7 +19,7 @@ function TmceEditor({ className, ...props }) {
 
   const log = () => {
     if (editorRef.current) {
-      console.log(editorRef.current.getContent());
+      // console.log(editorRef.current.getContent());
     }
   };
 

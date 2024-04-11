@@ -81,7 +81,7 @@ function Post() {
     setIsPostliked(true);
     postService.likeThePost(postId)
     .catch((error) => {
-      console.log("error when liking the post: ", error);
+      // console.log("error when liking the post: ", error);
       setLikesCount((prev) => prev - 1);
       setIsPostliked(false);
     });
@@ -89,7 +89,7 @@ function Post() {
 
   const shareThePost = () => {
     const postLink = window.location.href;
-    console.log(postLink);
+    // console.log(postLink);
 
     // Get the current page URL
     const currentUrl = window.location.href;
@@ -207,7 +207,7 @@ export const useCustomQuery = async (pathUrl) => {
         setIsLoading(false);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setError(true);
       setIsLoading(false);
     }

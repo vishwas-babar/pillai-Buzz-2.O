@@ -7,17 +7,19 @@ function GoogleAuth({ children, className = "" }) {
 
     const loginWithGoogle = useGoogleLogin({
         onSuccess: async (res) => {
-            console.log("this is response from google login", res);
+            // console.log("this is response from google login", res);
 
             // send the response to the backend 
             userService.sendAccessTokenToServer(res.access_token)
                 .then(res => {
                     window.location.href = '/'; // redirect to the home page
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+                    // console.log("error occured in sending the access token to the server", err);
+                })
         },
         onError: (error) => {
-            console.log("error occured in google login", error);
+            // console.log("error occured in google login", error);
         }
     })
 

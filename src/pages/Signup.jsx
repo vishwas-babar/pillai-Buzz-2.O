@@ -20,17 +20,17 @@ function Signup({ setLoginCount }) {
   const [loginInProgress, setLoginInProgress] = useState(false);
 
   function handleProfilePhotoInputChange(e) {
-    console.log(e.target.files);
+    // console.log(e.target.files);
     setProfilePhoto(URL.createObjectURL(e.target.files[0]));
   }
 
   function signupSubmit(data) {
-    console.log(data);
+    // console.log(data);
     setSignupInProgress(true);
     userService
       .signupUser(data)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
 
         setLoginInProgress(true);
         userService
@@ -48,7 +48,7 @@ function Signup({ setLoginCount }) {
           });
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         setSignupInProgress(false);
 
         if (error.response.status === 409) {

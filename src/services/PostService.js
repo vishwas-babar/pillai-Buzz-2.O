@@ -17,9 +17,9 @@ class PostService {
 
   getSinglePost = async (postId) => {
     try {
-      console.log("getting the single post");
+      // console.log("getting the single post");
       const response = await axios.get(`/api/post/${postId}`);
-      console.log(response.data);
+      // console.log(response.data);
       if (response && response.data) {
         return response.data;
       } else {
@@ -44,7 +44,7 @@ class PostService {
 
   createNewPost = async ({ title, content, coverImage }) => {
     const formData = new FormData();
-    console.log("the image is : ", coverImage[0]);
+    // console.log("the image is : ", coverImage[0]);
     formData.append("title", title);
     formData.append("content", content);
     formData.append("coverImage", coverImage[0]);
@@ -56,7 +56,7 @@ class PostService {
         },
       });
       if (res) {
-        console.log("post is created");
+        // console.log("post is created");
         return res.data;
       }
     } catch (error) {
@@ -65,8 +65,8 @@ class PostService {
   };
 
   updateThePost = async (id, { title, content, coverImage }) => {
-    console.log("updating the post...");
-    console.log(content, coverImage);
+    // console.log("updating the post...");
+    // console.log(content, coverImage);
 
     const formData = new FormData();
     formData.append("title", title);
@@ -84,13 +84,13 @@ class PostService {
         return res.data;
       }
     } catch (error) {
-      console.log("failed to update post!", error);
+      // console.log("failed to update post!", error);
       throw error;
     }
   };
 
   // uploadFileToCloudinary = async (coverImage) => {
-  //     console.log(coverImage)
+  //     // console.log(coverImage)
   //     const res = await axios.post('/api/images/add')
   // }
 
@@ -106,11 +106,11 @@ class PostService {
         },
       });
       if (res) {
-        console.log(res);
+        // console.log(res);
         return res.data;
       }
     } catch (error) {
-      console.log("failed to upload the iamge to cloudinary, ", error);
+      // console.log("failed to upload the iamge to cloudinary, ", error);
       throw error;
     }
   };
@@ -133,10 +133,10 @@ class PostService {
       if (!res.data) {
         throw new Error("not got any comments");
       }
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     } catch (error) {
-      console.log("failed to get the comments  - ", error);
+      // console.log("failed to get the comments  - ", error);
       throw error;
     }
   };
@@ -198,7 +198,7 @@ class PostService {
     try {
       const encodedText = encodeURIComponent(text);
 
-      console.log(encodedText);
+      // console.log(encodedText);
 
       const res = await axios.get(`/api/post/search?query=${encodedText}`);
 

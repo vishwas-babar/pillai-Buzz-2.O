@@ -31,7 +31,7 @@ function PostCard({
     postService
       .bookmarkThePost(_id)
       .then((res) => {
-        console.log(res.status);
+        // console.log(res.status);
         toast.success("added to bookmarks.", {
           position: "top-right",
           autoClose: 1000,
@@ -45,7 +45,7 @@ function PostCard({
         });
       })
       .catch((error) => {
-        console.log("failed to bookmark the post", error.response?.status);
+        // console.log("failed to bookmark the post", error.response?.status);
         if (error.response.status === 409) {
           // that means this post is already bookmarked
           setPostBookmarkd(true);

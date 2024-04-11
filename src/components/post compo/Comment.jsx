@@ -24,9 +24,9 @@ function Comment({
       if (!res) {
         throw new Error("failed to like the post!");
       }
-      console.log(res);
+      // console.log(res);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setLikesCount((prev) => prev - 1);
     }
   };

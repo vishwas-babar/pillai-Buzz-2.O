@@ -30,16 +30,16 @@ function PostForm({ post, setUploadingPost }) {
     if (post) {
       try {
         const res = await postService.updateThePost(post._id, data);
-        console.log(res._id);
+        // console.log(res._id);
         if (res) {
-          console.log("after update - ");
-          console.log(res.data);
+          // console.log("after update - ");
+          // console.log(res.data);
           setUploadingPost(false);
           dispatch(updateThePost(res.data)); // provided the post _id, title, coverImage
           navigate(`/post/${res.data._id}`);
         }
       } catch (error) {
-        console.log("failed to update the post!", error);
+        // console.log("failed to update the post!", error);
         setUploadingPost(false);
       }
     } else {
@@ -86,12 +86,12 @@ function PostForm({ post, setUploadingPost }) {
         </div>
         <div className="w-[30%] overflow-hidden">
           <label htmlFor="title" className=" dark:text-gray-300">Title:</label>
-          <Input
+          <input
             {...register("title", { required: true })}
             id="title"
             as="textarea"
             className="w-full bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700 p-2 rounded-md"
-            rows={3}
+           
             placeholder="add your title here"
           />
 

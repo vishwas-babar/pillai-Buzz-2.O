@@ -43,7 +43,7 @@ function App({ setLoginCount }) {
   const userData = useSelector((state) => state?.user?.userData);
 
   useEffect(() => {
-    console.log("this is state of user: ", userData);
+    // console.log("this is state of user: ", userData);
   }, [userData]);
 
   const router = createBrowserRouter(
@@ -144,7 +144,7 @@ function App({ setLoginCount }) {
         dispatch(getUserSuccess());
       })
       .catch((error) => {
-        console.log("error occured, ", error);
+        // console.log("error occured, ", error);
         dispatch(getUserFailure(error.message));
       });
   }, []);

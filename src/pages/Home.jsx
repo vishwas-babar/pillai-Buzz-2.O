@@ -32,7 +32,7 @@ function Home({ error, loading, isEnd, incrementPage }) {
 
   if (!authStatusLoading && error) {
     return (
-      <div className=" h-screen w-full flex items-center justify-center dark:bg-gray-600 dark:bg-gray-900">
+      <div className=" h-screen w-full flex items-center justify-cente dark:bg-gray-900">
         <ErrorComp statusCode={500} />
       </div>
     );
@@ -83,7 +83,7 @@ function Home({ error, loading, isEnd, incrementPage }) {
         ) : (
           <Button
             type="button"
-            className=" mb-20 sm:mb-12"
+            className=" mb-20 mt-8 sm:mb-12"
             onClick={incrementPage}
             children="load more"
           />

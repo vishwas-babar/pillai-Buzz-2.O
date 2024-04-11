@@ -16,7 +16,7 @@ function Profile() {
   const { userData, status } = useSelector((state) => state.user);
   const authStatus = useSelector((state) => state.user.status);
   const authStatusLoading = useSelector((state) => state.user.loading);
-  
+
   const { user_id } = useParams();
   const [profile, setProfile] = useState(null);
   const [posts, setPosts] = useState(null);
@@ -107,10 +107,10 @@ function Profile() {
             <PostSkeleton />
           </>
         ) : (posts?.length === 0 ? (<h1 className=" h-10 flex items-start text-xl dark:text-gray-400">Don't have any posts!</h1>) :
-          posts?.map((post) => (
+          posts?.map((post, index) => (
             <>
               <PostCard
-                key={post?._id}
+                key={index}
                 authorDetails={post?.authorDetails}
                 _id={post?._id}
                 commentsCount={post?.commentsCount}

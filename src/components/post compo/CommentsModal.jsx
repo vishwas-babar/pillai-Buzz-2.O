@@ -26,8 +26,8 @@ function CommentsModal({ postId, view }) {
       postService
         .getAllComments(postId)
         .then((res) => {
-          console.log("the comments is: ");
-          console.log(res.comments);
+          // console.log("the comments is: ");
+          // console.log(res.comments);
           setPostComments(res.comments?.reverse());
           return res;
         })
@@ -49,7 +49,7 @@ function CommentsModal({ postId, view }) {
     postService
       .addCommentOnPost(postId, data)
       .then((res) => {
-        console.log("comment added on post: ", res);
+        // console.log("comment added on post: ", res);
         toast.success("comment added", {
           position: "top-right",
           autoClose: 2000,
@@ -94,7 +94,7 @@ function CommentsModal({ postId, view }) {
           theme: "light",
           transition: Slide,
         });
-        console.log("error in posting a post: ", error);
+        // console.log("error in posting a post: ", error);
       });
 
     reset();

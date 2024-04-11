@@ -37,20 +37,20 @@ function Login({ setLoginCount }) {
   }, [])
 
   const loginSubmit = async (data) => {
-    console.log(data)
+    // console.log(data)
     try {
       setLoginProcessStarted(true)
       const response = await userService.loginUserAccount(data);
-      console.log("this is status code");
-      console.log(response.status);
+      // console.log("this is status code");
+      // console.log(response.status);
       setLoginCount((prev) => prev + 1);
       setLoginProcessStarted(false)
       navigate("/", { refresh: true });
     } catch (error) {
       setLoginProcessStarted(false)
-      console.log("this is status code");
-      console.log(error.response.status);
-      console.log("error occured in login submit");
+      // console.log("this is status code");
+      // console.log(error.response.status);
+      // console.log("error occured in login submit");
 
       if (error.response.status === 401) {
         toast.error("wrong email or password!", {

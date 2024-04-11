@@ -10,8 +10,8 @@ function Protected({ children, authentication = true }) {
   const [loader, setLoader] = useState(true);
 
   useEffect(() => {
-    console.log("this is authStatus: ", authStatus);
-    console.log("this is authLoading: ", authLoading);
+    // console.log("this is authStatus: ", authStatus);
+    // console.log("this is authLoading: ", authLoading);
 
     if (authLoading) {
       return;
@@ -25,7 +25,7 @@ function Protected({ children, authentication = true }) {
     setLoader(false);
   }, [authStatus, authLoading, navigate, authentication]);
 
-  return loader ? <h1>Loading...</h1> : <>{children}</>;
+  return loader ? <h1 className=" dark:text-gray-400">Loading...</h1> : <>{children}</>;
 }
 
 export default Protected;

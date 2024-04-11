@@ -31,8 +31,8 @@ function Search() {
   }, [scrollDir]);
 
   useEffect(() => {
-    console.log("search text: ", searchText);
-    console.log("search type: ", searchType);
+    // console.log("search text: ", searchText);
+    // console.log("search type: ", searchType);
     const timerId = setTimeout(() => {
       if (searchType === "users") {
         // perform search operation for users
@@ -51,7 +51,7 @@ function Search() {
   const performSearchOperationForUsers = () => {
     const users = userService.searchUsers(searchText)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         setSearchedUsers(res.users);
 
         if (res.users.length === 0) {
@@ -62,7 +62,7 @@ function Search() {
         }
       })
       .catch(err => {
-        console.log("failed to search the users: ", err)
+        // console.log("failed to search the users: ", err)
       })
   }
 
@@ -74,9 +74,9 @@ function Search() {
     postService
       .searchPosts(searchText)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setSearchedPosts(res.posts);
-        // console.log(searchedPosts)
+        // // console.log(searchedPosts)
         if (res.posts.length === 0) {
           setNoSearchedItem(true);
         }else {
@@ -84,7 +84,7 @@ function Search() {
         }
       })
       .catch((error) => {
-        console.log("failed to search the posts: ", error);
+        // console.log("failed to search the posts: ", error);
       });
   };
 

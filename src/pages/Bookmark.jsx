@@ -15,7 +15,7 @@ function Bookmarks(params) {
       postService
         .getAllBookmarks()
         .then((res) => {
-          console.log(res.data?.bookmarkPosts);
+          // console.log(res.data?.bookmarkPosts);
           return res.data?.bookmarkPosts;
         })
         .catch((error) => {

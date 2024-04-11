@@ -114,7 +114,7 @@ function NotificationComp({
       userService
         .getNotifications()
         .then((res) => {
-          console.log("notifications from query :: ", res);
+          // console.log("notifications from query :: ", res);
           return res.notifications;
         })
         .catch((error) => {
@@ -123,8 +123,8 @@ function NotificationComp({
   });
 
   useEffect(() => {
-    console.log("notifications from query :: ");
-    console.log(notifications);
+    // console.log("notifications from query :: ");
+    // console.log(notifications);
   }, [notifications]);
 
   return (

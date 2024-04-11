@@ -22,7 +22,7 @@ function ProfileShowModal({ isProfileModalOpen }) {
         window.location.href = "/";
       })
       .catch((error) => {
-        console.log("error occured in signoutUser");
+        // console.log("error occured in signoutUser");
       })
   }
   return (
