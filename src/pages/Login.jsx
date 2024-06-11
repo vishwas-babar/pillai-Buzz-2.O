@@ -140,7 +140,8 @@ function Login({ setLoginCount }) {
                       </span>
                       <input
                         {...register("email", {
-                          required: true,
+                          required: "email is required",
+                          pattern: { value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: "invalid email" },
                         })}
                         type="text"
                         id="email"
@@ -164,7 +165,9 @@ function Login({ setLoginCount }) {
                       </span>
                       <input
                         {...register("password", {
-                          required: true,
+                          required: "password is required",
+                          minLength: { value: 6, message: "minimum length is 6" },
+                          maxLength: { value: 20, message: "maximum length is 20" },
                         })}
                         type="password"
                         id="password"

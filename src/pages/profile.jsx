@@ -21,6 +21,13 @@ function Profile() {
   const [profile, setProfile] = useState(null);
   const [posts, setPosts] = useState(null);
 
+  useEffect(() => {
+    console.log("user_id: ", user_id);
+  
+    
+  }, [user_id])
+  
+
   const { isPending, error, data, isLoading, isError } = useQuery({
     queryKey: ["profile"],
     queryFn: () =>
@@ -77,7 +84,7 @@ function Profile() {
       className="flex flex-col items-center w-full mt-24 min-h-full shadow-md shadow-black mx-auto rounded-lg
     smm:w-[70%] sm:w-[60%] md:w-[55%] lg:w-[40%]"
     >
-      {!isLoading ? (
+      {profile ? (
         <ProfileCard
           key={profile?._id}
           name={profile?.name}

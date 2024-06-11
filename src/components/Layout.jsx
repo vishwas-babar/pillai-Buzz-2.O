@@ -6,9 +6,15 @@ import { useSelector } from "react-redux";
 
 function Layout() {
   const [isNotificationCompOpen, setIsNotificationCompOpen] = useState(false);
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
   function toggleNotificationComp() {
     setIsNotificationCompOpen((prev) => !prev);
+
+    if (isOverlayOpen) 
+      setIsOverlayOpen(false);
+    else 
+      setIsOverlayOpen(true);
   }
 
   const authStatus = useSelector((state) => state.user.status);
@@ -25,6 +31,8 @@ function Layout() {
       <TopNavBar
         toggleNotificationComp={toggleNotificationComp}
         isNotificationCompOpen={isNotificationCompOpen}
+        isOverlayOpen={isOverlayOpen}
+        setIsOverlayOpen={setIsOverlayOpen}
       />
       {true ? (
         <Outlet />

@@ -62,13 +62,13 @@ function ProfileCard({
             <span id="user-id" className="text-[14px] mt-0 text-nowrap dark:text-gray-300">
               @{userId}
             </span>
-            <p id="role" className="text-[18px] leading-7">
+            {/* <p id="role" className="text-[18px] leading-7">
               {role}
-            </p>
-            <div className="flex gap-5 mt-2 sm:mt-11">
+            </p> */}
+            {/* <div className="flex gap-5 mt-2 sm:mt-11">
               <p className=" text-nowrap">{followersCount} Followers</p>
               <p className=" text-nowrap">{followingCount} Following</p>
-            </div>
+            </div> */}
           </div>
           <div>
             <div>

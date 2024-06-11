@@ -102,6 +102,8 @@ function NotificationComp({
   isNotificationCompOpen,
   className = "",
   toggleNotificationComp,
+  isOverlayOpen,
+  setIsOverlayOpen,
 }) {
   const {
     isLoading,
@@ -128,27 +130,36 @@ function NotificationComp({
   }, [notifications]);
 
   return (
-    <div
-      className={` p-4 no-scrollbar shadow-custom-shadow-2 bg-gray-200 lg:w-[500px] sm:w-1/2 w-full z-40 fixed bottom-16 top-20 right-0 sm:top-24 lg:right-6 sm:bottom-10 rounded-lg overflow-auto dark:bg-gray-900 dark:border dark:border-gray-600 ${isNotificationCompOpen ? "flex flex-col" : "hidden opacity-0"} ${className}`}
-    >
-      {notifications?.length > 0
-        ? notifications?.map((notification) => (
-          <Notification
-            key={notification?.notifications?._id}
-            type={notification?.notifications?.notificationType}
-            userId={notification?.userDetails?.userId}
-            user_id={notification?.userDetails?._id}
-            userName={notification?.userDetails?.name}
-            post_id={notification?.notifications?.post_id}
-            message={notification?.notifications?.message}
-            readStatus={notification?.notifications?.readStatus}
-            createdAt={notification?.notifications?.createdAt}
-            profilePhoto={notification?.userDetails?.profilePhoto}
-            toggleNotificationComp={toggleNotificationComp}
-          />
-        ))
-        : <div className="h-full w-full flex items-center justify-center dark:text-gray-400 text-gray-900 text-xl">You don't have notifications</div>}
-    </div>
+    <>
+      <div
+        className={`p-4 no-scrollbar shadow-custom-shadow-2 bg-gray-200 lg:w-[500px] sm:w-1/2 w-full z-40 fixed bottom-16 top-20 right-0 sm:top-24 lg:right-6 sm:bottom-10 rounded-lg overflow-auto dark:bg-gray-900 dark:border dark:border-gray-600 ${isNotificationCompOpen ? "flex flex-col" : "hidden opacity-0"} ${className}`}
+      >
+        {notifications?.length > 0
+          ? notifications?.map((notification) => (
+            <Notification
+              key={notification?.notifications?._id}
+              type={notification?.notifications?.notificationType}
+              userId={notification?.userDetails?.userId}
+              user_id={notification?.userDetails?._id}
+              userName={notification?.userDetails?.name}
+              post_id={notification?.notifications?.post_id}
+              message={notification?.notifications?.message}
+              readStatus={notification?.notifications?.readStatus}
+              createdAt={notification?.notifications?.createdAt}
+              profilePhoto={notification?.userDetails?.profilePhoto}
+              toggleNotificationComp={toggleNotificationComp}
+            />
+          ))
+          : <div className="h-full w-full flex items-center justify-center dark:text-gray-400 text-gray-900 text-xl">You don't have notifications</div>}
+      </div>
+      <div
+        onClick={() => {
+          setIsOverlayOpen(prev => !prev);
+          toggleNotificationComp();
+        }}
+        className={`w-full h-full fixed left-0 top-0 bg-black opacity-50 z-20 ${isOverlayOpen ? "" : "hidden"}`}
+      ></div>
+    </>
   );
 }
 
@@ -172,7 +183,8 @@ function Notification1({
 
         <div
           onClick={() => {
-            navigate(`/post/${post_id}`);
+            // navigate(`/post/${post_id}`);
+            window.location.href = `/post/${post_id}`;
 
             return toggleNotificationComp();
           }}
@@ -192,7 +204,8 @@ function Notification1({
                 <div
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate(`/user/${user_id}`);
+                    // navigate(`/user/${user_id}`);
+                    window.location.href = `/user/${user_id}`;
 
                     return toggleNotificationComp();
                   }}
@@ -255,7 +268,8 @@ function Notification2({
       <div className="flex flex-col">
         <div
           onClick={() => {
-            navigate(`/post/${post_id}`);
+            // navigate(`/post/${post_id}`);
+            window.location.href = `/post/${post_id}`;
 
             return toggleNotificationComp();
           }}
@@ -275,7 +289,8 @@ function Notification2({
                 <div
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate(`/user/${user_id}`);
+                    // navigate(`/user/${user_id}`);
+                    window.location.href = `/user/${user_id}`;
 
                     return toggleNotificationComp();
                   }}
@@ -296,7 +311,8 @@ function Notification2({
                 <span
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate(`/user/${user_id}`);
+                    // navigate(`/user/${user_id}`);
+                    window.location.href = `/user/${user_id}`;
 
                     return toggleNotificationComp();
                   }}
@@ -348,8 +364,7 @@ function Notification3({
 
         <div
           onClick={() => {
-            navigate(`/post/${post_id}`);
-
+            window.location.href = `/post/${post_id}`;
             return toggleNotificationComp();
           }}
           className="my-2 flex rounded-sm bg-transparent px-0 py-3 transition-all duration-300  hover:bg-slate-50 md:px-4 dark:hover:bg-slate-800"
@@ -371,7 +386,8 @@ function Notification3({
                 <div
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate(`/user/${user_id}`);
+                    // navigate(`/user/${user_id}`);
+                    window.location.href = `/user/${user_id}`;
 
                     return toggleNotificationComp();
                   }}
@@ -392,14 +408,14 @@ function Notification3({
                 <span
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate(`/user/${user_id}`);
-
+                    // navigate(`/user/${user_id}`);
+                    window.location.href = `/user/${user_id}`;
                     return toggleNotificationComp();
                   }}
                   className="text-base font-semibold text-slate-700 dark:text-slate-400"
                 >
                   <span className=" dark:text-slate-300">{userName}</span>
-                </span>
+                </span>{" "}
                 {message}
               </p>
               <p className="mt-3 text-sm text-slate-500 dark:text-slate-500">

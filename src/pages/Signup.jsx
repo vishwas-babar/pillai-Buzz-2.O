@@ -4,13 +4,14 @@ import Button from "../components/Button.jsx";
 import userService from "../services/UserService.js";
 import { useNavigate } from "react-router-dom";
 import { Bounce, toast, ToastContainer } from "react-toastify";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Loader } from "../components/index.js";
+
 import GoogleAuth from "../components/GoogleAuth.jsx";
 
 function Signup({ setLoginCount }) {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
   const [profilePhoto, setProfilePhoto] = useState();
   const [emailForLogin, setEmailForLogin] = useState("");
@@ -23,6 +24,11 @@ function Signup({ setLoginCount }) {
     // console.log(e.target.files);
     setProfilePhoto(URL.createObjectURL(e.target.files[0]));
   }
+
+   useEffect(() => {
+     console.log("this is the error: ", errors);
+   }, [errors])
+   
 
   function signupSubmit(data) {
     // console.log(data);
@@ -147,7 +153,9 @@ function Signup({ setLoginCount }) {
                     </span>
                     <input
                       {...register("name", {
-                        required: true,
+                        required: "name is required",
+                        maxLength: { value: 20, message: "name should be less than 20 characters" },
+                        minLength: { value: 3, message: "name should be greater than 3 characters" },
                       })}
                       type="text"
                       required
@@ -155,6 +163,7 @@ function Signup({ setLoginCount }) {
                       placeholder="name"
                     />
                   </div>
+                  {errors.name && <span className="text-red-500 text-sm">{errors.name.message}</span>}
 
                   <div className="flex">
                     <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -162,7 +171,10 @@ function Signup({ setLoginCount }) {
                     </span>
                     <input
                       {...register("userId", {
-                        required: true,
+                        required: { value: true, message: "userId is required" },
+                        maxLength: { value: 20, message: "userId should be less than 20 characters" },
+                        minLength: { value: 3, message: "userId should be greater than 3 characters" },
+                        pattern: { value: /^[a-zA-Z0-9_]*$/, message: "only alphabets, numbers and underscore are allowed" },
                       })}
                       type="text"
                       required
@@ -170,6 +182,7 @@ function Signup({ setLoginCount }) {
                       placeholder="user id"
                     />
                   </div>
+                  {errors.userId && <span className="text-red-500 text-sm">{errors.userId.message}</span>}
 
                   <div className="flex">
                     <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -177,7 +190,8 @@ function Signup({ setLoginCount }) {
                     </span>
                     <input
                       {...register("email", {
-                        required: true,
+                        required: { value: true, message: "email is required"},
+                        pattern: { value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: "invalid email" },
                       })}
                       required
                       onChange={(e) => setEmailForLogin(e.target.value)}
@@ -186,6 +200,7 @@ function Signup({ setLoginCount }) {
                       placeholder="email"
                     />
                   </div>
+                  {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
 
                   <div className="flex">
                     <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -194,6 +209,8 @@ function Signup({ setLoginCount }) {
                     <input
                       {...register("password", {
                         required: true,
+                        maxLength: { value: 20, message: "password should be less than 20 characters" },
+                        minLength: { value: 6, message: "password should be greater than 6 characters" },
                       })}
                       required
                       onChange={(e) => setPasswordForLogin(e.target.value)}
@@ -202,6 +219,7 @@ function Signup({ setLoginCount }) {
                       placeholder="password"
                     />
                   </div>
+                  {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
                 </div>
 
                 <Button

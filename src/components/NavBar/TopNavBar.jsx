@@ -8,7 +8,7 @@ import { NotificationComp } from "../index.js";
 import useDetectScroll, { Axis } from "@smakss/react-scroll-direction";
 import { useSelector } from "react-redux";
 
-function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
+function TopNavBar({ toggleNotificationComp, isNotificationCompOpen, isOverlayOpen, setIsOverlayOpen }) {
   const [isProfileModalOpen, setisProfileModalOpen] = useState(false);
   const [overlayStatus, setOverlayStatus] = useState("hidden");
   const location = useLocation();
@@ -108,8 +108,8 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
         >
           <i className="bx bx-menu h-10 w-10 text-[28px] flex items-center justify-center" />
         </div>
-        <Link
-          to="/"
+        <a
+          href="/"
           className="w-fit h-full ml-5 items-center md:flex hidden cursor-pointer"
         >
           <img
@@ -120,10 +120,11 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
           <h2 id="pillaibuzz-logo" className=" dark:text-slate-300">
             Pillai Buzz
           </h2>
-        </Link>
+        </a>
         <div className="gap-[10px] items-center w-fit h-full hidden md:flex">
           <NavLink
             to="/"
+            onClick={() => window.location.href = "/"}
             className={({ isActive }) =>
               `${isActive ? " bg-custom-primary text-white" : ""} rounded-[20px] hover:bg-custom-primary hover:text-white hover:shadow-md px-[20px] py-[10px] transition-all duration-[0.3s] ease-in-out dark:text-slate-100`
             }
@@ -206,6 +207,8 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen }) {
       <NotificationComp
         isNotificationCompOpen={isNotificationCompOpen}
         toggleNotificationComp={toggleNotificationComp}
+        isOverlayOpen={isOverlayOpen}
+        setIsOverlayOpen={setIsOverlayOpen}
         className=" "
       />
     </>

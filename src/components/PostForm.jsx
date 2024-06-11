@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { updateThePost } from "../store/PostsSlice.js";
 
 function PostForm({ post, setUploadingPost }) {
-  const { register, handleSubmit, watch, setValue, getValues, control } =
+  const { register, handleSubmit, watch, setValue, getValues, control, error } =
     useForm({
       defaultValues: {
         title: post?.title || "",
@@ -18,6 +18,7 @@ function PostForm({ post, setUploadingPost }) {
         coverImage: post?.coverImage || "",
       },
     });
+  const [errorForDescription, setErrorForDescription] = useState("");
 
   const dispatch = useDispatch();
 
@@ -26,6 +27,12 @@ function PostForm({ post, setUploadingPost }) {
   const navigate = useNavigate();
 
   const submit = async (data) => {
+    
+    if (data.content === "") {
+      setErrorForDescription("Description is required!");
+      return;
+    }
+
     setUploadingPost(true);
     if (post) {
       try {
@@ -83,17 +90,20 @@ function PostForm({ post, setUploadingPost }) {
               />
             )}
           />
+          <span className=" text-red-500">{errorForDescription}</span>
         </div>
-        <div className="w-[30%] overflow-hidden">
+        <div className="w-[30%] ">
           <label htmlFor="title" className=" dark:text-gray-300">Title:</label>
           <input
-            {...register("title", { required: true })}
+            {...register("title", { required: { value: true, message: 'title is required for the post' } })}
             id="title"
             as="textarea"
+            required
             className="w-full bg-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700 p-2 rounded-md"
            
             placeholder="add your title here"
           />
+          {/* <span>{ error?.email?.message }</span> */}
 
           <div className="w-full mt-4">
             <label htmlFor="coverImage" className="dark:text-gray-300">CoverImage: </label>
@@ -106,8 +116,9 @@ function PostForm({ post, setUploadingPost }) {
               />
             </div>
             <input
-              {...register("coverImage", { required: post ? false : true })}
+              {...register("coverImage", { required: { value: post? false: true, message: "cover Image is required!" } })}
               accept="image/*"
+              required
               name="coverImage"
               onChange={handleImageChange}
               type="file"

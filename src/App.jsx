@@ -17,7 +17,7 @@ import {
   Protected,
 } from "./components/index.js";
 import { PostEditor, EditPost, Search, Signup } from "./pages/index.js";
-import { removeAllPosts, addArrOfPosts } from "./store/PostsSlice.js";
+import { addArrOfPosts } from "./store/PostsSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import userService from "./services/UserService.js";
 import {
@@ -27,7 +27,6 @@ import {
   getUserSuccess,
 } from "./store/userSlice.js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import postService from "./services/PostService.js";
 
 const queryClient = new QueryClient();
