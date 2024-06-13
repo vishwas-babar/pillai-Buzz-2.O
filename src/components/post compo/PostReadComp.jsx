@@ -48,7 +48,7 @@ function PostReadComp({ author, postContent }) {
       <div className="w-full h-fit rounded-md overflow-hidden my-5 border border-black shadow-custom-shadow-1 flex justify-center dark:border dark:border-gray-500">
         <img id="post-cover-image" src={postContent?.coverImage} alt="" />
       </div>
-      <div id="description" className=" Un-reset dark:text-gray-300 text-white">
+      <div id="description" className="Un-reset dark:text-gray-300 text-white">
         {postContent && postContent.discription
           ? parse(postContent.discription.toString())
           : ""}

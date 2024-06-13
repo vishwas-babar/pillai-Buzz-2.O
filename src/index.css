@@ -137,25 +137,6 @@ body {
   border-radius: 50%;
 }
 
-#description {
-  @apply w-full h-full flex flex-col text-[#333] dark:text-gray-200;
-}
-#description h1 {
-  @apply text-5xl font-medium text-[#333] dark:text-gray-200;
-}
-#description h2 {
-  @apply text-[2rem] font-normal text-[#333] dark:text-gray-200;
-}
-#description a {
-  @apply text-[blue] no-underline dark:text-gray-200;
-}
-#description p {
-  @apply text-lg leading-[30px] font-normal text-[#333] dark:text-gray-200;
-}
-#description strong {
-  @apply font-medium text-[#333] dark:text-gray-200;
-}
-
 #comment-modal {
   overflow: auto;
 }

@@ -57,6 +57,8 @@ function App({ setLoginCount }) {
                 error={error}
                 loading={loading}
                 isEnd={isEnd}
+                page={page}
+                loadMorePostForHomePage={loadMorePostForHomePage}
               />
             }
           />
@@ -110,9 +112,17 @@ function App({ setLoginCount }) {
   );
 
   useEffect(() => {
-    setLoading(true);
-    loadMorePostForHomePage();
+    if (page != 1) {
+      setLoading(true);
+      loadMorePostForHomePage();
+    }
   }, [page]);
+
+  useEffect(() => {
+    console.log("app component mounted again")
+    // setLoading(true)
+    // loadMorePostForHomePage()
+  }, [])
 
   function loadMorePostForHomePage() {
     setError(false);
@@ -154,6 +164,11 @@ function App({ setLoginCount }) {
     const html = document.querySelector("html");
     const theme = localStorage.getItem("theme");
     html.classList.add(theme);
+    if (theme === "dark") {
+      html.classList.add("dark-mode-for-description");
+    } else {
+      
+    }
   }, []);
 
   return (

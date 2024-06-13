@@ -13,10 +13,17 @@ import { Helmet } from "react-helmet";
 
 
 
-function Home({ error, loading, isEnd, incrementPage }) {
+function Home({ error, loading, isEnd, incrementPage, page, loadMorePostForHomePage }) {
   const dispatch = useDispatch();
   // dispatch(removeAllPosts())
-  // 
+
+  useEffect(() => {
+    if (page === 1) {
+      loadMorePostForHomePage()
+      incrementPage()
+    }
+  }, [])
+
   const { posts } = useSelector((state) => state.post);
   const authStatus = useSelector((state) => state.user.status);
   const authStatusLoading = useSelector((state) => state.user.loading);

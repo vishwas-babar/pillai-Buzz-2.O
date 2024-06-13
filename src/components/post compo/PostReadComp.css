@@ -1,66 +1,169 @@
-body {
-    font-family: sans-serif;
-   
+/* blog-styles.css */
+:root {
+    --background-color: #f8f9fa;
+    --text-color: #333;
+    --heading-color: #2c3e50;
+    --link-color: #3498db;
+    --blockquote-color: #7f8c8d;
+    --blockquote-border: #bdc3c7;
+    --table-border: #ddd;
+    --table-header-bg: #f4f4f4;
+    --table-row-even-bg: #f9f9f9;
+    --code-bg: #f4f4f4;
+    --code-color: #e74c3c;
+    --hr-border: #eee;
 }
 
-.vishwas{
-    font-size: 300px;
+.dark-mode-for-description {
+    --background-color: transperant;
+    --text-color: #ecf0f1;
+    --heading-color: #ecf0f1;
+    --link-color: #3498db;
+    --blockquote-color: #95a5a6;
+    --blockquote-border: #7f8c8d;
+    --table-border: #7f8c8d;
+    --table-header-bg: #34495e;
+    --table-row-even-bg: #3b4a5a;
+    --code-bg: #34495e;
+    --code-color: #e74c3c;
+    --hr-border: #7f8c8d;
 }
 
-h1,
-h2,
-h3 {
-    margin: 0 0 0.35em;
+/* Base Styles for #description */
+#description {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    padding: 20px;
 }
 
-h1 {
-    font-size: 40px;
+/* Headings */
+#description h1 {
+    font-size: 2.5em;
+    color: var(--heading-color);
+    margin-bottom: 20px;
 }
 
-h2 {
-    font-size: 28px;
+#description h2 {
+    font-size: 2em;
+    color: var(--heading-color);
+    margin-bottom: 15px;
 }
 
-h3 {
-    font-size: 20px;
+#description h3 {
+    font-size: 1.75em;
+    color: var(--heading-color);
+    margin-bottom: 10px;
 }
 
-p {
-    margin: 0 0 1.15em;
+#description h4 {
+    font-size: 1.5em;
+    color: var(--heading-color);
+    margin-bottom: 5px;
 }
 
-p+h2 {
-    margin-top: 1.5em;
+/* Paragraphs */
+#description p {
+    font-size: 1em;
+    color: var(--text-color);
+    margin-bottom: 15px;
 }
 
-.container {
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 24px;
+/* Links */
+#description a {
+    color: var(--link-color);
+    text-decoration: none;
 }
 
-header {
-    background-color: rebeccapurple;
-    color: #fff;
+#description a:hover {
+    text-decoration: underline;
 }
 
-body>footer {
-    border-top: 2px solid rebeccapurple;
+/* Span */
+#description span {
+    color: var(--text-color);
 }
 
-blockquote {
-    background: linear-gradient(45deg, #eddbff, transparent);
-    color: rebeccapurple;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 1em;
-    border-radius: 4px;
+/* Blockquotes */
+#description blockquote {
+    font-size: 1.25em;
+    font-style: italic;
+    color: var(--blockquote-color);
+    margin: 20px 0;
+    padding-left: 10px;
+    border-left: 5px solid var(--blockquote-border);
 }
 
-.img--align-left {
-    float: left;
-    /* replaces the style previously inherited by the browser */
-    margin: 0 16px 16px -20px;
-    border-radius: 50%;
+/* Lists */
+#description ul,
+#description ol {
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+
+#description ul li,
+#description ol li {
+    margin-bottom: 5px;
+}
+
+/* Tables */
+#description table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+#description th,
+#description td {
+    padding: 10px;
+    border: 1px solid var(--table-border);
+}
+
+#description th {
+    background-color: var(--table-header-bg);
+    color: var(--text-color);
+    text-align: left;
+}
+
+#description tr:nth-child(even) {
+    background-color: var(--table-row-even-bg);
+}
+
+/* Code blocks */
+#description pre,
+#description code {
+    font-family: 'Courier New', monospace;
+    background-color: var(--code-bg);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#description pre {
+    overflow: auto;
+}
+
+#description code {
+    color: var(--code-color);
+}
+
+/* Images */
+#description img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 15px;
+}
+
+/* Embedded Videos */
+#description iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Horizontal Rule */
+#description hr {
+    border: 0;
+    border-top: 1px solid var(--hr-border);
+    margin: 20px 0;
 }

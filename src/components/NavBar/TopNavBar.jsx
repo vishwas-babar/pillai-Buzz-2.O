@@ -77,19 +77,21 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen, isOverlayOp
 
   // it will going to remember the theme of the user
   const toggleDarkMode = () => {
-  // get the theme from the localstorage
-  const theme = localStorage.getItem("theme");
+    // get the theme from the localstorage
+    const theme = localStorage.getItem("theme");
 
-  const html = document.querySelector("html");
+    const html = document.querySelector("html");
 
-  if (theme === "dark")  {
-    localStorage.setItem("theme", "light");
-    html.classList.remove("dark");
-  } else {
-    localStorage.setItem("theme", "dark");
-    html.classList.add("dark");
+    if (theme === "dark") {
+      localStorage.setItem("theme", "light");
+      html.classList.remove("dark");
+      html.classList.remove("dark-mode-for-description");
+    } else {
+      localStorage.setItem("theme", "dark");
+      html.classList.add("dark");
+      html.classList.add("dark-mode-for-description");
+    }
   }
-}
 
   return (
     <>
@@ -124,7 +126,7 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen, isOverlayOp
         <div className="gap-[10px] items-center w-fit h-full hidden md:flex">
           <NavLink
             to="/"
-            onClick={() => window.location.href = "/"}
+            // onClick={() => window.location.href = "/"}
             className={({ isActive }) =>
               `${isActive ? " bg-custom-primary text-white" : ""} rounded-[20px] hover:bg-custom-primary hover:text-white hover:shadow-md px-[20px] py-[10px] transition-all duration-[0.3s] ease-in-out dark:text-slate-100`
             }
@@ -143,7 +145,7 @@ function TopNavBar({ toggleNotificationComp, isNotificationCompOpen, isOverlayOp
 
         <div className="flex items-center justify-center ml-[10px] gap-[10px]">
           {location.pathname.includes("/post") ||
-          location.pathname.includes("/create") ? null : (
+            location.pathname.includes("/create") ? null : (
             <NavLink
               to={"/search"}
               id="search-ic"
