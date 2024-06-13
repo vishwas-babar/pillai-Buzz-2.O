@@ -6,5 +6,6 @@ import Profile from "./profile";
 import EditPost from "./EditPost";
 import Search from "./Search";
 import Signup from "./Signup";
+import EditProfile from './EditProfile'
 
-export { Home, Bookmarks, Post, PostEditor, Profile, EditPost, Search, Signup };
+export { Home, Bookmarks, Post, PostEditor, Profile, EditPost, Search, Signup , EditProfile };

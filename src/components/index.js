@@ -21,6 +21,7 @@ import SearchComp from "./SearchComp.jsx";
 import Loader from "./loaders/Loader.jsx";
 import Protected from "./AuthLayout.jsx";
 import GuestLogin from "./GuestLogin.jsx";
+import EditProfileComp from './EditProfileComp.jsx'
 
 
 export {
@@ -47,4 +48,5 @@ export {
   Loader,
   Protected,
   GuestLogin,
+  EditProfileComp
 };

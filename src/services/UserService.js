@@ -148,6 +148,35 @@ class UserService {
       throw error;
     }
   }
+
+  editUserProfile = async ({ name, userId, profilePhoto, role }) => {
+    const formData = new FormData();
+
+    formData.append("name", name)
+    formData.append("userId", userId)
+    formData.append("role", role)
+    
+    if (profilePhoto) {
+      console.log("the profile photo is included")
+      formData.append("profilePhoto", profilePhoto[0])
+    }
+
+    try {
+      const res = await axios.post('/api/user/edit-profile', formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+
+      if (!res.data) {
+        throw new Error("failed to update the user profile")
+      }
+
+      return res;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 const userService = new UserService();

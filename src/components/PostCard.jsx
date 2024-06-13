@@ -86,7 +86,7 @@ function PostCard({
             />
           </div>
           <div className="ml-2 mt-2">
-            <h2 className="md:text-[20px] text-[18px] font-serif leading-4 dark:text-slate-200 ">
+            <h2 className="md:text-[20px] text-[18px]  leading-4 dark:text-slate-200 ">
               {authorDetails.name}
             </h2>
             <span className="text-[14px] mt-0 dark:text-gray-400">@{authorDetails.userId}</span>

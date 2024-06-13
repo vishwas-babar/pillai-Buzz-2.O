@@ -6,6 +6,7 @@ import {
   ProfileSkeleton,
   PostCard,
   ErrorComp,
+  EditProfileComp,
 } from "../components/index.js";
 import userService from "../services/UserService.js";
 import { useQuery } from "@tanstack/react-query";
@@ -21,12 +22,11 @@ function Profile() {
   const [profile, setProfile] = useState(null);
   const [posts, setPosts] = useState(null);
 
-  useEffect(() => {
-    console.log("user_id: ", user_id);
-  
-    
-  }, [user_id])
-  
+  const [editFormViewStatus, setEditFormViewStatus] = useState(false)
+
+  const toggleEditFormViewStatus = () => {
+    setEditFormViewStatus(prev => !prev)
+  }
 
   const { isPending, error, data, isLoading, isError } = useQuery({
     queryKey: ["profile"],
@@ -40,6 +40,10 @@ function Profile() {
           throw error;
         }),
   });
+
+  useEffect(() => {
+    setProfile(data);
+  }, [data]);
 
   const {
     isLoading: isPostLoading,
@@ -56,9 +60,7 @@ function Profile() {
         }),
   });
 
-  useEffect(() => {
-    setProfile(data);
-  }, [data]);
+
 
   useEffect(() => {
     setPosts(userPost?.posts);
@@ -79,45 +81,61 @@ function Profile() {
   }
 
 
+
+  // if (isLoading) {
+  //   return (
+  //     <div className="h-screen w-full flex items-center justify-center text-3xl">
+  //       Loading...
+  //     </div>
+  //   )
+  // }
+
+  useEffect(() => {
+    console.log(profile)
+  }, [profile])
+
   return (
-    <main
-      className="flex flex-col items-center w-full mt-24 min-h-full shadow-md shadow-black mx-auto rounded-lg
+    <>
+
+      <main
+        className="flex flex-col items-center w-full mt-24 min-h-full shadow-md shadow-black mx-auto rounded-lg
     smm:w-[70%] sm:w-[60%] md:w-[55%] lg:w-[40%]"
-    >
-      {profile ? (
-        <ProfileCard
-          key={profile?._id}
-          name={profile?.name}
-          userId={profile?.userId}
-          profilePhoto={profile?.profilePhoto}
-          _id={profile?._id}
-          role={"full stack developer"}
-          followersCount={profile?.followers.length}
-          followingCount={profile?.following.length}
-          subscribers={profile?.subscribers}
-        />
-      ) : (
-        <ProfileSkeleton />
-      )}
-
-      <hr className="h-px my-1 bg-black border-0 dark:bg-gray-800" />
-
-      <div
-        id="post-container"
-        className="sm:w-70% h-full rounded-sm mx-auto flex flex-col flex-grow items-center gap-4 
-        w-full px-6"
       >
-        {isPostLoading ? (
-          <>
-            <PostSkeleton />
-            <PostSkeleton />
-            <PostSkeleton />
-          </>
-        ) : (posts?.length === 0 ? (<h1 className=" h-10 flex items-start text-xl dark:text-gray-400">Don't have any posts!</h1>) :
-          posts?.map((post, index) => (
+        {profile ? (
+          <ProfileCard
+            key={profile?._id}
+            name={profile?.name}
+            userId={profile?.userId}
+            profilePhoto={profile?.profilePhoto}
+            _id={profile?._id}
+            role={profile?.role ? profile.role : "-"}
+            followersCount={profile?.followers.length}
+            followingCount={profile?.following.length}
+            subscribers={profile?.subscribers}
+            toggleEditFormViewStatus={toggleEditFormViewStatus}
+          />
+        ) : (
+          <ProfileSkeleton />
+        )}
+
+        <hr className="h-px my-1 bg-black border-0 dark:bg-gray-800" />
+
+        <div
+          id="post-container"
+          className="sm:w-70% h-full rounded-sm mx-auto flex flex-col flex-grow items-center gap-4 
+        w-full px-6"
+        >
+          {isPostLoading && isLoading ? (
             <>
+              <PostSkeleton />
+              <PostSkeleton />
+              <PostSkeleton />
+            </>
+          ) : (posts?.length === 0 ? (<h1 className=" h-10 flex items-start text-xl dark:text-gray-400">Don't have any posts!</h1>) :
+            posts?.map((post, index) => (
+
               <PostCard
-                key={index}
+                key={post?._id}
                 authorDetails={post?.authorDetails}
                 _id={post?._id}
                 commentsCount={post?.commentsCount}
@@ -126,11 +144,23 @@ function Profile() {
                 title={post?.title}
                 coverImage={post?.coverImage}
               />
-            </>
-          ))
-        )}
-      </div>
-    </main>
+
+            ))
+          )}
+        </div>
+
+      </main>
+      {!isLoading && <EditProfileComp
+        name={profile?.name}
+        userId={profile?.userId}
+        profilePhoto={profile?.profilePhoto}
+        _id={profile?._id}
+        role={profile?.role}
+        loadStatus={isLoading}
+        viewStatus={editFormViewStatus}
+        toggleEditFormViewStatus={toggleEditFormViewStatus}
+      />}
+    </>
   );
 }
 

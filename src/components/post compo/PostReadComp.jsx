@@ -1,5 +1,4 @@
-import profilepng from "../../assets/user.png";
-import newsimg from "../../assets/news.jpeg";
+import "./PostReadComp.css";
 import { useState } from "react";
 import parse from "html-react-parser";
 import { useEffect } from "react";
@@ -39,7 +38,7 @@ function PostReadComp({ author, postContent }) {
           src={author?.profilePhoto}
           alt=""
         />
-        <span id="author" className="text-[20px] dark:text-gray-300">
+        <span id="author" className="text-[20px] dark:text-gray-300 ">
           {author?.name}
         </span>
       </div>
@@ -49,7 +48,7 @@ function PostReadComp({ author, postContent }) {
       <div className="w-full h-fit rounded-md overflow-hidden my-5 border border-black shadow-custom-shadow-1 flex justify-center dark:border dark:border-gray-500">
         <img id="post-cover-image" src={postContent?.coverImage} alt="" />
       </div>
-      <div id="description" className=" dark:text-gray-300 text-white">
+      <div id="description" className=" Un-reset dark:text-gray-300 text-white">
         {postContent && postContent.discription
           ? parse(postContent.discription.toString())
           : ""}

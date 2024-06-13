@@ -89,14 +89,14 @@ function App({ setLoginCount }) {
           />
           <Route path="/search" element={<Search />} />
         </Route>
-        <Route
+        {/* <Route
           path="/vishwas"
           element={
             <Protected authentication={true}>
               <TopNavBar />
             </Protected>
           }
-        />
+        /> */}
         <Route
           path="/login"
           element={<Login setLoginCount={setLoginCount} />}

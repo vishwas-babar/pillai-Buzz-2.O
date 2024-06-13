@@ -25,10 +25,10 @@ function Signup({ setLoginCount }) {
     setProfilePhoto(URL.createObjectURL(e.target.files[0]));
   }
 
-   useEffect(() => {
-     console.log("this is the error: ", errors);
-   }, [errors])
-   
+  useEffect(() => {
+    console.log("this is the error: ", errors);
+  }, [errors])
+
 
   function signupSubmit(data) {
     // console.log(data);
@@ -112,7 +112,7 @@ function Signup({ setLoginCount }) {
                   </h1>
                 </div>
                 <div>
-                  <GoogleAuth children={"Continue with google"} className="dark:text-slate-200 transition-all dark:hover:bg-gray-700 "/>
+                  <GoogleAuth children={"Continue with google"} className="dark:text-slate-200 transition-all dark:hover:bg-gray-700 " />
                 </div>
               </div>
 
@@ -190,7 +190,7 @@ function Signup({ setLoginCount }) {
                     </span>
                     <input
                       {...register("email", {
-                        required: { value: true, message: "email is required"},
+                        required: { value: true, message: "email is required" },
                         pattern: { value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, message: "invalid email" },
                       })}
                       required
